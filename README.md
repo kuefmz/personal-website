@@ -1,2 +1,1 @@
-# personal-website
-My personal website
+# I am Jenifer and this is the repo for my website
