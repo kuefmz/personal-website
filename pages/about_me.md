@@ -6,4 +6,4 @@ image: "assets/images/me.jpg"
 nav-menu: true
 ---
 
-Bla bla bla
+I am Jenifer a data scientist living in Zurich.
