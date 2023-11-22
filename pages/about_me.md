@@ -7,3 +7,5 @@ nav-menu: true
 ---
 
 I am Jenifer a data scientist living in Zurich.
+
+My hobbies are running and travlling.
