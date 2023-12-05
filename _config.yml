@@ -1,10 +1,10 @@
 # site settings
 title: Jenifer's website
 subtitle:
-email: jenifertabitaciuciukiss@gmail.com
+email: jenifer.tabita.ciuciu.kiss@gmail.com
 description: Hi there! I'm Jenifer, a data enthusiast living in Zurich
 #baseurl: # the subpath of your site, e.g. /blog
-url: # the base hostname & protocol for your site
+url: http://jeniferciuciukiss.com
 author: Jenifer Tabita Ciuciu-Kiss
 street_address:
 city: Zurich

@@ -8,7 +8,7 @@ author: Jenier Tabita Ciuciu-Kiss
 show_tile: false
 ---
 
-Hey there. Tahank you for looking at me page. I hope you will find some interesting stuff here.
+Hey there. Thank you for looking at me page. I hope you will find some interesting stuff here.
 
 
 Here is a high level overview of my experiences so far.
