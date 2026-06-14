@@ -220,24 +220,21 @@ Open `src/data/site.ts` to update:
 
 ## Contact Form and Newsletter
 
-The site is hosted as static files on GitHub Pages. It has no server, database, or background
-process, so it cannot send email or store newsletter subscribers by itself.
+The static website submits both forms to the Google Apps Script URL configured as
+`formsEndpoint` in `src/data/site.ts`.
 
-Both forms therefore use a dependency-free email workflow:
+- Newsletter submissions send JSON with `type: "newsletter"`, `email`, and the `website` honeypot.
+- Project submissions send JSON with `type: "form"`, `name`, `email`, `company`,
+  `projectStage`, `automationGoal`, `currentTools`, `timeline`, and the `website` honeypot.
+- The JSON is sent with a `text/plain` content type so the cross-origin request works from GitHub
+  Pages without an Apps Script CORS preflight.
+- The Apps Script routes submissions based on `type`.
+- The website displays a success message after the browser completes the request.
 
-- The project form creates a prefilled email containing all entered fields.
-- The newsletter form creates a prefilled subscription request.
-- The visitor's default email application opens, and the visitor must press **Send**.
-- No form data is transmitted to the website or stored by GitHub Pages.
-
-Subscription requests arrive in the inbox configured as `email` in `src/data/site.ts`. Keep the
-subscriber list manually, for example in a private local spreadsheet. Sending a newsletter also
-has to be done through your own email account. Use BCC so subscribers cannot see each other's
-addresses.
-
-This approach has no form or newsletter service dependency, but it cannot provide automatic
-confirmation, unsubscribe processing, bounce handling, bulk delivery, or spam protection. Those
-features require a server or a dedicated mailing provider.
+The Google Sheet stores the subscriber list, but it does not send newsletters unless the Apps
+Script also implements sending. Newsletter delivery, unsubscribe handling, and address deletion
+must be handled by your Apps Script or manually. Keep the sheet private and restrict access because
+it contains personal data.
 
 ## Edit the Navigation
 

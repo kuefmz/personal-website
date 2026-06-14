@@ -1,30 +1,45 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { formatContentDate } from "../utils/contentDate";
 
 interface Props {
   project: CollectionEntry<"projects">;
 }
 
 const { project } = Astro.props;
-const websiteLink =
-  project.data.category === "Website"
-    ? project.data.links.find(({ href }) => href.startsWith("http"))
-    : undefined;
+const websiteLink = project.data.previewUrl
+  ? project.data.links.find(({ href }) => href === project.data.previewUrl)
+    ?? { label: "Visit live site", href: project.data.previewUrl }
+  : undefined;
 ---
 
-<article class="card project-card" data-category={project.data.category}>
-  <div class="project-art" aria-hidden="true">
-    <span class="node node-a"></span>
-    <span class="node node-b"></span>
-    <span class="node node-c"></span>
-    <span class="edge edge-a"></span>
-    <span class="edge edge-b"></span>
-    <span class="project-index">{String(project.data.order).padStart(2, "0")}</span>
-  </div>
+<article class:list={["card project-card", { "has-preview": Boolean(project.data.previewUrl) }]} data-category={project.data.category}>
+  {
+    project.data.previewUrl && (
+      <div class="project-preview">
+        <iframe
+          src={project.data.previewUrl}
+          title={`${project.data.title} website preview`}
+          loading="lazy"
+          tabindex="-1"
+          referrerpolicy="strict-origin-when-cross-origin"
+        />
+        <a
+          class="preview-link"
+          href={project.data.previewUrl}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Open ${project.data.title} website in a new tab`}
+        >
+          <span>Open website</span>
+        </a>
+      </div>
+    )
+  }
   <div class="card-body">
     <div class="card-meta">
       <span>{project.data.category}</span>
-      <span>{project.data.year}</span>
+      <span>{formatContentDate(project.data.date)}</span>
     </div>
     <h2><a href={`/projects/${project.id}/`}>{project.data.title}</a></h2>
     <p>{project.data.description}</p>
@@ -34,7 +49,7 @@ const websiteLink =
     {
       websiteLink && (
         <a class="website-link" href={websiteLink.href} target="_blank" rel="noreferrer">
-          Visit website <span aria-hidden="true">↗</span>
+          {websiteLink.label} <span aria-hidden="true">↗</span>
         </a>
       )
     }
@@ -57,85 +72,70 @@ const websiteLink =
     text-decoration: underline;
   }
 
-  .project-art {
+  .project-preview {
     position: relative;
-    height: 240px;
+    height: 210px;
     overflow: hidden;
     border-bottom: 1px solid var(--line);
-    background:
-      radial-gradient(circle at 72% 35%, rgba(228, 44, 171, 0.3), transparent 27%),
-      linear-gradient(135deg, #090d24, #151334);
+    background: var(--surface);
   }
 
-  .project-index {
+  .project-preview iframe {
     position: absolute;
-    right: 22px;
-    bottom: 12px;
-    color: rgba(255, 255, 255, 0.09);
-    font-family: var(--font-mono);
-    font-size: 4.5rem;
-    line-height: 1;
+    inset: 0;
+    width: 160%;
+    height: 160%;
+    border: 0;
+    pointer-events: none;
+    transform: scale(0.625);
+    transform-origin: top left;
   }
 
-  .node {
-    position: absolute;
-    z-index: 2;
-    width: 12px;
-    height: 12px;
-    border: 3px solid var(--surface);
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 0 1px var(--accent);
-  }
-
-  .node-a {
-    top: 38%;
-    left: 24%;
-  }
-
-  .node-b {
-    top: 25%;
-    left: 64%;
-  }
-
-  .node-c {
-    top: 68%;
-    left: 52%;
-  }
-
-  .edge {
+  .preview-link {
     position: absolute;
     z-index: 1;
-    height: 1px;
-    background: rgba(190, 181, 220, 0.5);
-    transform-origin: left center;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 14px;
+    text-decoration: none;
   }
 
-  .edge-a {
-    top: 40%;
-    left: 25%;
-    width: 40%;
-    transform: rotate(-11deg);
+  .preview-link span {
+    padding: 7px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    background: rgba(9, 13, 36, 0.82);
+    color: white;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 160ms ease,
+      transform 160ms ease;
   }
 
-  .edge-b {
-    top: 29%;
-    left: 65%;
-    width: 43%;
-    transform: rotate(120deg);
+  .preview-link:hover span,
+  .preview-link:focus-visible span {
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  :global([data-theme="light"]) .project-art {
-    background:
-      radial-gradient(circle at 72% 35%, rgba(192, 38, 109, 0.2), transparent 27%),
-      linear-gradient(135deg, #eee7eb, #fcf8fa);
+  .preview-link:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: -3px;
   }
 
-  :global([data-theme="light"]) .project-index {
-    color: rgba(21, 20, 17, 0.12);
+  .project-card:not(.has-preview) .card-body {
+    padding-top: clamp(28px, 4vw, 44px);
   }
 
-  :global([data-theme="light"]) .edge {
-    background: #8e8980;
+  @media (hover: none) {
+    .preview-link span {
+      opacity: 1;
+      transform: none;
+    }
   }
 </style>

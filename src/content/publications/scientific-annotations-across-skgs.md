@@ -1,8 +1,8 @@
 ---
 title: "Are Scientific Annotations Consistently Represented across Science Knowledge Graphs?"
-abstract: "An empirical comparison of how scientific annotations are represented across knowledge graphs and what those differences mean for interoperability."
+abstract: "Scientific Knowledge Graphs (SKGs) are increasingly used to annotate and interlink research outputs. However, little is known about how consistently they annotate the same publication. This paper presents a comparative analysis of category annotations across four major SKGs (ORKG, OpenAlex, OpenAIRE, and Papers with Code) using a manually curated gold-standard dataset of 70 AI-related papers. We examine differences in annotation coverage, granularity, and semantic alignment, highlighting frequent inconsistencies such as label mismatches, overly generic terms, and coverage gaps. Our analysis reveals that manual curation offers high-quality but sparse annotations, while automated systems achieve broader coverage at the cost of precision. This work contributes insights into the reliability of SKG metadata and outlines pathways for improving interoperability and annotation practices."
 authors: ["Jenifer Tabita Ciuciu-Kiss", "Daniel Garijo"]
-year: 2025
+date: "2025-10-13"
 venue: "Sci-K 2025 at ISWC, CEUR Workshop Proceedings 4065"
 type: "Workshop paper"
 keywords: ["Scientific Knowledge Graphs", "Annotations", "Interoperability", "Taxonomies"]
@@ -21,9 +21,6 @@ project: "scientific-knowledge-graph-analysis"
 links:
   - label: "DBLP record"
     href: "https://dblp.org/rec/conf/sci-k/Ciuciu-KissG25"
-order: 2
 ---
 
-Scientific knowledge graphs often use different concepts and structures to annotate similar research outputs.
-
-This paper examines whether those annotations are represented consistently enough to support comparison and integration. It extends the broader scientific knowledge graph analysis with a closer look at practical interoperability.
+This paper compares how scientific knowledge graphs annotate tasks and methods in shared AI publications. It identifies differences caused by classification schemas, editorial choices, and automated or manual curation.

@@ -1,13 +1,13 @@
 ---
 title: "Personal Research Website"
-description: "A static, content-led website connecting projects, publications, a personal story, and technical writing."
-year: 2026
+description: "A fast, accessible Astro website for projects, publications, and technical writing."
+date: "2026-06-13"
 status: "Live website"
 category: "Website"
 tags: ["Personal knowledge base", "Accessibility", "SEO", "Static site"]
 technologies: ["Astro", "TypeScript", "MDX", "CSS"]
 featured: false
-order: 8
+previewUrl: "https://jeniferciuciukiss.com/"
 links:
   - label: "Visit the website"
     href: "https://jeniferciuciukiss.com/"
@@ -15,6 +15,4 @@ links:
     href: "https://github.com/kuefmz/personal-website"
 ---
 
-This website is designed as an evolving professional record rather than a one-time portfolio. Typed content collections keep projects, publications, and essays consistent, while Astro produces fast static pages suitable for GitHub Pages.
-
-The information architecture connects research outputs to their implementations, source repositories, publications, and longer-form notes.
+This site uses typed content collections to keep projects, publications, and articles consistent. Astro generates static pages for GitHub Pages, with a focus on accessibility, search metadata, and low client-side JavaScript.

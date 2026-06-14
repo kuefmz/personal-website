@@ -31,18 +31,18 @@ const { title, description, eyebrow, meta, image, type = "article" } = Astro.pro
 
 <style>
   .content-header {
-    padding-bottom: 64px;
+    padding-bottom: 48px;
   }
 
   .content-description {
     max-width: 720px;
-    margin: 32px 0 0;
+    margin: 24px 0 0;
     color: var(--muted);
-    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    font-size: clamp(1.05rem, 1.7vw, 1.25rem);
   }
 
   .content-meta {
-    margin: 28px 0 0;
+    margin: 22px 0 0;
     color: var(--faint);
     font-family: var(--font-mono);
     font-size: 0.7rem;
@@ -50,6 +50,6 @@ const { title, description, eyebrow, meta, image, type = "article" } = Astro.pro
   }
 
   .content-body {
-    padding-bottom: clamp(80px, 12vw, 160px);
+    padding-bottom: clamp(64px, 8vw, 112px);
   }
 </style>

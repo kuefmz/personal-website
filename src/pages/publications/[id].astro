@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import ContentLayout from "../../layouts/ContentLayout.astro";
 import Icon from "../../components/Icon.astro";
 import { researchProfiles } from "../../data/site";
+import { formatContentDate } from "../../utils/contentDate";
 
 export async function getStaticPaths() {
   const publications = await getCollection("publications");
@@ -19,7 +20,7 @@ const { Content } = await render(publication);
 <ContentLayout
   title={publication.data.title}
   description={publication.data.abstract}
-  eyebrow={`${publication.data.type} · ${publication.data.year}`}
+  eyebrow={`${publication.data.type} · ${formatContentDate(publication.data.date, true)}`}
   meta={`${publication.data.authors.join(", ")} · ${publication.data.venue}`}
 >
   <div class="resource-links">

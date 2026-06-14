@@ -137,27 +137,27 @@ select {
 }
 
 .section {
-  padding-block: clamp(72px, 10vw, 144px);
+  padding-block: clamp(56px, 7vw, 104px);
 }
 
 .section-compact {
-  padding-block: clamp(48px, 7vw, 96px);
+  padding-block: clamp(40px, 5vw, 72px);
 }
 
 .eyebrow {
-  margin: 0 0 20px;
+  margin: 0 0 14px;
   color: var(--accent-dark);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.66rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .display {
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0;
-  font-size: clamp(3.15rem, 8.5vw, 7.8rem);
+  font-size: clamp(2.8rem, 7vw, 6.4rem);
   font-weight: 500;
   letter-spacing: -0.065em;
   line-height: 0.93;
@@ -169,9 +169,9 @@ select {
 }
 
 .page-title {
-  max-width: 960px;
+  max-width: 880px;
   margin: 0;
-  font-size: clamp(2.8rem, 7vw, 6.2rem);
+  font-size: clamp(2.45rem, 5.6vw, 5.1rem);
   font-weight: 500;
   letter-spacing: -0.06em;
   line-height: 0.98;
@@ -179,7 +179,7 @@ select {
 
 .section-title {
   margin: 0;
-  font-size: clamp(2rem, 4vw, 4rem);
+  font-size: clamp(1.8rem, 3.2vw, 3.25rem);
   font-weight: 500;
   letter-spacing: -0.045em;
   line-height: 1.05;
@@ -189,27 +189,27 @@ select {
   max-width: 760px;
   margin: 0;
   color: var(--muted);
-  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-  line-height: 1.6;
+  font-size: clamp(1rem, 1.5vw, 1.22rem);
+  line-height: 1.55;
 }
 
 .button-row {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 36px;
+  margin-top: 28px;
 }
 
 .button {
   display: inline-flex;
-  min-height: 48px;
+  min-height: 44px;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 0 20px;
+  padding: 0 17px;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 600;
   text-decoration: none;
   transition: background 160ms ease, color 160ms ease, transform 160ms ease;
@@ -286,7 +286,7 @@ select {
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(32px, 6vw, 88px);
+  gap: clamp(24px, 4vw, 56px);
 }
 
 .grid-3 {
@@ -298,9 +298,9 @@ select {
 .section-heading {
   display: grid;
   grid-template-columns: minmax(220px, 0.7fr) 1.3fr;
-  gap: 40px;
+  gap: 32px;
   align-items: start;
-  margin-bottom: clamp(44px, 7vw, 88px);
+  margin-bottom: clamp(32px, 4.5vw, 60px);
 }
 
 .card {
@@ -326,17 +326,17 @@ select {
 }
 
 .card-body {
-  padding: clamp(24px, 3vw, 36px);
+  padding: clamp(22px, 2.4vw, 30px);
 }
 
 .card-meta {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 52px;
+  margin-bottom: 34px;
   color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.63rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -344,21 +344,21 @@ select {
 .card h2,
 .card h3 {
   margin: 0 0 14px;
-  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  font-size: clamp(1.25rem, 1.7vw, 1.6rem);
   font-weight: 600;
   letter-spacing: -0.035em;
   line-height: 1.15;
 }
 
 .card p {
-  margin: 0 0 24px;
+  margin: 0 0 20px;
   color: var(--muted);
 }
 
 .prose {
   color: var(--muted);
-  font-size: 1.06rem;
-  line-height: 1.85;
+  font-size: 1.01rem;
+  line-height: 1.78;
 }
 
 .prose > * + * {
@@ -374,7 +374,7 @@ select {
 
 .prose h2 {
   margin-top: 2.6em;
-  font-size: 2rem;
+  font-size: 1.75rem;
 }
 
 .prose h3 {
@@ -434,7 +434,7 @@ select {
   }
 
   .display {
-    font-size: clamp(3rem, 17vw, 5rem);
+    font-size: clamp(2.55rem, 14vw, 4.25rem);
   }
 }
 

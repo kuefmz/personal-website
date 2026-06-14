@@ -1,8 +1,8 @@
 ---
-title: "Attributes, Taxonomies and Semantic Alignment for Automated Research Software Classification"
-abstract: "Research on scalable, interpretable classification of software repositories through textual attributes, metadata, machine learning, and alignment with scientific knowledge graphs."
+title: "Attributes, Taxonomies and Semantic alignment for Automated Research Software Classification"
+abstract: "Research software (RS) plays a critical role in computational science, yet remains poorly categorized and difficult to discover or reuse. This research explores RS classification by investigating how textual and metadata attributes can be leveraged to develop scalable, interpretable classification methodologies. Existing taxonomies are evaluated through alignment with scientific knowledge graphs to identify redundancies and structural gaps. Labeled datasets are constructed by linking publications to software repositories, and RS attributes, such as README files, abstracts, and source code features are benchmarked using multiple machine learning models and embedding strategies. A methodology that integrates semantic enrichment and transformer-based models is proposed for robust RS classification. Preliminary findings highlight the informativeness of publication abstracts for classification tasks and expose limitations in current community-defined taxonomies."
 authors: ["Jenifer Tabita Ciuciu-Kiss"]
-year: 2025
+date: "2025-10-26"
 venue: "ISWC 2025 Companion Volume, Nara, Japan"
 type: "Conference paper"
 keywords: ["Research Software", "FAIR", "Software Metadata", "Scientific Knowledge Graphs"]
@@ -20,11 +20,8 @@ project: "research-software-classification"
 links:
   - label: "Research repository"
     href: "https://github.com/kuefmz/rolf"
-order: 1
 ---
 
-Research software plays a critical role in computational science, but remains poorly categorized and difficult to discover or reuse.
+This paper evaluates textual and metadata attributes for classifying research software. It connects publications to repositories, compares models and embedding strategies, and examines how existing software taxonomies align with scientific knowledge graphs.
 
-This paper investigates how textual and metadata attributes can support scalable, interpretable classification. It evaluates existing taxonomies through alignment with scientific knowledge graphs, constructs labeled datasets by connecting publications to software repositories, and benchmarks repository attributes with multiple models and embedding strategies.
-
-Preliminary findings show that publication abstracts are particularly informative for classification and expose limitations in current community-defined taxonomies.
+The findings identify publication abstracts as a useful classification signal and highlight limitations in current community taxonomies.

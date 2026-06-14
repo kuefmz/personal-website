@@ -1,24 +1,32 @@
 ---
 title: "PDF Processing Platform"
-description: "Production document intelligence that transforms complex, semi-structured PDFs into dependable business data."
-year: 2024
+description: "An end-to-end document processing platform for extracting, validating, and managing structured information from complex PDF documents."
+date: "2026-02-16"
 status: "Production system"
 category: "Data"
-tags: ["Document AI", "Data extraction", "MLOps", "Production"]
+tags: ["Document AI", "Information Extraction", "MLOps", "Automation"]
 technologies: ["Python", "Machine Learning", "MongoDB", "Docker", "Jenkins"]
 featured: true
-order: 3
-links: []
+previewUrl: "https://kuefmz.github.io/process_pdfs/"
+links:
+  - label: "View project website"
+    href: "https://kuefmz.github.io/process_pdfs/"
+  - label: "View source on GitHub"
+    href: "https://github.com/kuefmz/process_pdfs"
 ---
 
-Business documents rarely arrive in clean, predictable formats. Tables shift, labels change, and visually similar values carry different meanings. This platform combines machine learning with targeted heuristics to extract structured information from difficult PDFs.
+A production-ready platform for automating the extraction of structured information from complex business documents. The system combines machine-learning models, rule-based validation, and configurable processing pipelines to process large volumes of semi-structured PDF data.
 
-## Engineering for reliability
+Rather than focusing on a single document type, the platform was designed as a reusable framework for document processing. It provides a consistent architecture for extraction, validation, storage, and review workflows while supporting multiple document formats and use cases.
 
-The work spans model-assisted extraction, rule-based validation, test design, containerized deployment, database maintenance, and continuous delivery.
+The project includes automated testing, containerized deployment, database integration, monitoring, and continuous delivery pipelines to ensure reliability in production environments. By combining machine learning with targeted validation rules, the platform improves extraction quality while reducing manual effort and operational overhead.
 
-The resulting system doubled extraction accuracy in key workflows and improved data retrieval speed while making deployments more repeatable. It supports multiple client-specific solutions without turning each one into an isolated codebase.
+Key contributions included:
 
-## Product thinking
-
-The technical goal is not simply to parse documents. It is to provide trusted, decision-ready information with clear failure modes, maintainable workflows, and an operating model that can evolve with client needs.
+* Designing and implementing document extraction pipelines
+* Building validation and quality-control mechanisms
+* Developing reusable processing components
+* Maintaining MongoDB-based data storage and retrieval
+* Containerization and deployment with Docker
+* CI/CD automation using Jenkins
+* Testing, monitoring, and production support

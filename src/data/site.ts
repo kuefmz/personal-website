@@ -3,7 +3,7 @@ export const site = {
   shortName: "Jenifer Tabita Ciuciu-Kiss",
   title: "AI Engineer, Knowledge Graph & Ontology Specialist",
   description:
-    "Building intelligent systems through AI, knowledge graphs, and ontology engineering.",
+    "AI engineer and PhD researcher working on knowledge graphs, ontology engineering, data engineering, research software, and intelligent systems.",
   url: "https://jeniferciuciukiss.com",
   email: "jenifer.tabita.ciuciu.kiss@gmail.com",
   location: "Zurich, Switzerland",
@@ -13,6 +13,8 @@ export const site = {
   googleScholar: "https://scholar.google.com/citations?user=G86xVZ0AAAAJ&hl=en",
   researchGate: "https://www.researchgate.net/profile/Jenifer-Ciuciu-Kiss",
   cv: "/assets/jenifer_tabita_ciuciu_kiss_cv.pdf",
+  formsEndpoint:
+    "https://script.google.com/macros/s/AKfycbzCQhX3feFHTrNC-tqTxZ0P5hO2TdaTqY36rb-gK-Sv_q-3YkI-Jr_WKlfTKf2p_rOAhw/exec",
 } as const;
 
 export const navigation = [
@@ -105,19 +107,62 @@ export const education = [
 export const skillGroups = [
   {
     title: "AI & Machine Learning",
-    skills: ["NLP", "LLMs", "Computer Vision", "PyTorch", "TensorFlow", "Evaluation"],
+    skills: [
+      "Machine Learning",
+      "LLMs",
+      "Natural Language Processing",
+      "Computer Vision",
+      "Model Evaluation",
+    ],
   },
   {
     title: "Knowledge Systems",
-    skills: ["Knowledge Graphs", "Ontologies", "Semantic Alignment", "Taxonomies", "RDF"],
+    skills: [
+      "Knowledge Graphs",
+      "Ontology Engineering",
+      "RDF",
+      "SPARQL",
+      "SHACL",
+      "Semantic Alignment",
+    ],
   },
   {
-    title: "Data & Platforms",
-    skills: ["Python", "SQL", "PostgreSQL", "MongoDB", "GCP", "dbt", "Docker", "CI/CD"],
+    title: "Data & Platform Engineering",
+    skills: [
+      "Python",
+      "SQL",
+      "PostgreSQL",
+      "MongoDB",
+      "Docker",
+      "GCP",
+      "CI/CD",
+      "dbt",
+    ],
   },
   {
-    title: "Product & Leadership",
-    skills: ["Product Discovery", "Technical Strategy", "Teaching", "Public Speaking", "Agile Delivery"],
+    title: "Research & Communication",
+    skills: [
+      "Research Software",
+      "Technical Writing",
+      "Teaching",
+      "Public Speaking",
+      "Workshop Organization",
+    ],
+  },
+] as const;
+
+export const interestGroups = [
+  {
+    title: "Running",
+    description: "Endurance training, half marathons, and exploring new places on foot.",
+  },
+  {
+    title: "Tennis",
+    description: "Recreational tennis, friendly matches, and learning through practice.",
+  },
+  {
+    title: "Languages",
+    description: "Learning German and Spanish, and staying curious about how people communicate.",
   },
 ] as const;
 
@@ -130,8 +175,8 @@ export const projectCategories = [
 ] as const;
 
 export const researchProfiles = [
+  { label: "GitHub", href: site.github },
   { label: "Google Scholar", href: site.googleScholar },
   { label: "ORCID", href: site.orcid },
   { label: "ResearchGate", href: site.researchGate },
-  { label: "GitHub", href: site.github },
 ] as const;

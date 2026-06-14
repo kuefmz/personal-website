@@ -9,8 +9,8 @@ const pathname = Astro.url.pathname;
 <header class="site-header">
   <div class="shell header-inner">
     <a class="brand" href="/" aria-label="Jenifer Tabita Ciuciu-Kiss, home">
-      <BrandMark size={40} />
-      <span class="brand-name">Jenifer<br />Ciuciu-Kiss</span>
+      <BrandMark size={36} />
+      <span class="brand-name">Jenifer Tabita<br />Ciuciu-Kiss</span>
     </a>
 
     <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">
@@ -79,10 +79,10 @@ const pathname = Astro.url.pathname;
 
   .header-inner {
     display: flex;
-    min-height: 88px;
+    min-height: 76px;
     align-items: center;
     justify-content: space-between;
-    gap: 32px;
+    gap: 26px;
   }
 
   .brand {
@@ -108,12 +108,12 @@ const pathname = Astro.url.pathname;
   .site-nav {
     display: flex;
     align-items: center;
-    gap: clamp(16px, 2.4vw, 32px);
+    gap: clamp(14px, 2vw, 26px);
   }
 
   .site-nav > a {
     color: var(--muted);
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 600;
     text-decoration: none;
   }
@@ -125,8 +125,8 @@ const pathname = Astro.url.pathname;
 
   .theme-toggle {
     display: grid;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     place-items: center;
     padding: 0;
     border: 1px solid var(--line);
@@ -179,7 +179,7 @@ const pathname = Astro.url.pathname;
 
     .site-nav {
       position: absolute;
-      top: 88px;
+      top: 76px;
       right: 0;
       left: 0;
       display: none;
