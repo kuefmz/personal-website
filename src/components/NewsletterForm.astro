@@ -1,0 +1,174 @@
+---
+import { site } from "../data/site";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<form
+  class:list={["newsletter-form", { compact }]}
+  data-newsletter-form
+  data-recipient={site.email}
+>
+  {!compact && (
+    <>
+      <p class="eyebrow">Newsletter</p>
+      <h2>Occasional notes on AI, knowledge systems, and building products.</h2>
+      <p class="newsletter-intro">
+        No content treadmill. Just useful research notes, engineering lessons, and project updates.
+      </p>
+    </>
+  )}
+
+  <div class="newsletter-fields">
+    <label>
+      <span class="sr-only">Email address</span>
+      <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required />
+    </label>
+    <button class:list={["button", compact ? "button-light" : "button-primary"]} type="submit">
+      Join by email
+    </button>
+  </div>
+  <label class="consent">
+    <input type="checkbox" name="consent" value="Yes" required />
+    <span>
+      I would like to receive occasional emails. Submitting opens a prefilled message in my email app.
+    </span>
+  </label>
+  <p class="email-note" aria-live="polite">
+    No subscription service or website database is used.
+  </p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>("[data-newsletter-form]").forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const data = new FormData(form);
+      const email = String(data.get("email") ?? "").trim();
+      const recipient = form.dataset.recipient;
+      const subject = "Newsletter subscription request";
+      const body = [
+        "Hello Jenifer,",
+        "",
+        "I would like to subscribe to your newsletter.",
+        "",
+        `Subscriber email: ${email}`,
+        "",
+        "Please add me to your mailing list.",
+      ].join("\n");
+
+      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  });
+</script>
+
+<style>
+  .newsletter-form:not(.compact) {
+    max-width: 760px;
+    padding: clamp(32px, 5vw, 56px);
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+
+  h2 {
+    max-width: 680px;
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.8rem);
+    font-weight: 500;
+    letter-spacing: -0.05em;
+    line-height: 1.02;
+  }
+
+  .newsletter-intro {
+    max-width: 620px;
+    margin: 24px 0 0;
+    color: var(--muted);
+  }
+
+  .newsletter-fields {
+    display: flex;
+    gap: 10px;
+    margin-top: 32px;
+  }
+
+  .newsletter-fields label {
+    flex: 1;
+  }
+
+  .newsletter-fields input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--input-bg);
+    color: var(--ink);
+  }
+
+  .consent {
+    display: flex;
+    max-width: 620px;
+    align-items: flex-start;
+    gap: 9px;
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+
+  .consent input {
+    margin-top: 3px;
+    accent-color: var(--accent);
+  }
+
+  .email-note {
+    margin: 8px 0 0;
+    color: var(--faint);
+    font-size: 0.66rem;
+  }
+
+  .compact {
+    max-width: 440px;
+  }
+
+  .compact .newsletter-fields {
+    margin-top: 0;
+  }
+
+  .compact .newsletter-fields input {
+    border-color: rgba(220, 210, 245, 0.24);
+    background: rgba(255, 255, 255, 0.06);
+    color: #f8f7fc;
+  }
+
+  .compact .newsletter-fields input::placeholder {
+    color: #969189;
+  }
+
+  .button-light {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .compact .consent {
+    color: #918c84;
+  }
+
+  .compact .email-note {
+    color: #777280;
+  }
+
+  @media (max-width: 560px) {
+    .newsletter-fields {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+</style>

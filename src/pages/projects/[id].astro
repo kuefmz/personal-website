@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from "astro:content";
+import ContentLayout from "../../layouts/ContentLayout.astro";
+import Icon from "../../components/Icon.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<ContentLayout
+  title={project.data.title}
+  description={project.data.description}
+  eyebrow={`${project.data.category} project · ${project.data.status}`}
+  meta={`${project.data.year} · ${project.data.technologies.join(" · ")}`}
+>
+  <div class="project-links">
+    {
+      project.data.links.map((link: { label: string; href: string }) => (
+        <a class="button button-quiet" href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+          {link.label} <Icon name="arrow" size={16} />
+        </a>
+      ))
+    }
+  </div>
+  <Content />
+</ContentLayout>
+
+<style>
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+</style>

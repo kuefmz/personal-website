@@ -1,0 +1,141 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const websiteLink =
+  project.data.category === "Website"
+    ? project.data.links.find(({ href }) => href.startsWith("http"))
+    : undefined;
+---
+
+<article class="card project-card" data-category={project.data.category}>
+  <div class="project-art" aria-hidden="true">
+    <span class="node node-a"></span>
+    <span class="node node-b"></span>
+    <span class="node node-c"></span>
+    <span class="edge edge-a"></span>
+    <span class="edge edge-b"></span>
+    <span class="project-index">{String(project.data.order).padStart(2, "0")}</span>
+  </div>
+  <div class="card-body">
+    <div class="card-meta">
+      <span>{project.data.category}</span>
+      <span>{project.data.year}</span>
+    </div>
+    <h2><a href={`/projects/${project.id}/`}>{project.data.title}</a></h2>
+    <p>{project.data.description}</p>
+    <ul class="tag-list" aria-label="Technologies">
+      {project.data.technologies.slice(0, 4).map((technology) => <li class="tag">{technology}</li>)}
+    </ul>
+    {
+      websiteLink && (
+        <a class="website-link" href={websiteLink.href} target="_blank" rel="noreferrer">
+          Visit website <span aria-hidden="true">↗</span>
+        </a>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .website-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 24px;
+    color: var(--accent-dark);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .website-link:hover {
+    text-decoration: underline;
+  }
+
+  .project-art {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 72% 35%, rgba(228, 44, 171, 0.3), transparent 27%),
+      linear-gradient(135deg, #090d24, #151334);
+  }
+
+  .project-index {
+    position: absolute;
+    right: 22px;
+    bottom: 12px;
+    color: rgba(255, 255, 255, 0.09);
+    font-family: var(--font-mono);
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+
+  .node {
+    position: absolute;
+    z-index: 2;
+    width: 12px;
+    height: 12px;
+    border: 3px solid var(--surface);
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  .node-a {
+    top: 38%;
+    left: 24%;
+  }
+
+  .node-b {
+    top: 25%;
+    left: 64%;
+  }
+
+  .node-c {
+    top: 68%;
+    left: 52%;
+  }
+
+  .edge {
+    position: absolute;
+    z-index: 1;
+    height: 1px;
+    background: rgba(190, 181, 220, 0.5);
+    transform-origin: left center;
+  }
+
+  .edge-a {
+    top: 40%;
+    left: 25%;
+    width: 40%;
+    transform: rotate(-11deg);
+  }
+
+  .edge-b {
+    top: 29%;
+    left: 65%;
+    width: 43%;
+    transform: rotate(120deg);
+  }
+
+  :global([data-theme="light"]) .project-art {
+    background:
+      radial-gradient(circle at 72% 35%, rgba(192, 38, 109, 0.2), transparent 27%),
+      linear-gradient(135deg, #eee7eb, #fcf8fa);
+  }
+
+  :global([data-theme="light"]) .project-index {
+    color: rgba(21, 20, 17, 0.12);
+  }
+
+  :global([data-theme="light"]) .edge {
+    background: #8e8980;
+  }
+</style>

@@ -1,0 +1,89 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import { site } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description = site.description,
+  image = "/images/og-default.svg",
+  type = "website",
+  noindex = false,
+  structuredData,
+} = Astro.props;
+const pageTitle = title ? `${title} | ${site.shortName}` : `${site.name} | ${site.title}`;
+const canonical = new URL(Astro.url.pathname, site.url);
+const imageUrl = new URL(image, site.url);
+const defaultSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  url: site.url,
+  jobTitle: "AI Engineer and Researcher",
+  sameAs: [site.linkedin, site.github, site.orcid, site.googleScholar, site.researchGate],
+  knowsAbout: [
+    "Artificial Intelligence",
+    "Knowledge Graphs",
+    "Ontology Engineering",
+    "Research Software",
+    "Data Engineering",
+    "Machine Learning",
+    "Scientific Knowledge Graphs",
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <script is:inline>
+      (() => {
+        try {
+          const savedTheme = localStorage.getItem("site-theme-v2");
+          document.documentElement.dataset.theme = savedTheme === "dark" ? "dark" : "light";
+        } catch {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script>
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico?v=3" type="image/svg+xml" />
+    <meta name="theme-color" content="#f8f5f7" />
+    <link rel="alternate" type="application/rss+xml" title={`${site.shortName} RSS`} href="/rss.xml" />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={site.shortName} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData ?? defaultSchema)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

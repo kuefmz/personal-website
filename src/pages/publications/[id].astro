@@ -1,0 +1,76 @@
+---
+import { getCollection, render } from "astro:content";
+import ContentLayout from "../../layouts/ContentLayout.astro";
+import Icon from "../../components/Icon.astro";
+import { researchProfiles } from "../../data/site";
+
+export async function getStaticPaths() {
+  const publications = await getCollection("publications");
+  return publications.map((publication) => ({
+    params: { id: publication.id },
+    props: { publication },
+  }));
+}
+
+const { publication } = Astro.props;
+const { Content } = await render(publication);
+---
+
+<ContentLayout
+  title={publication.data.title}
+  description={publication.data.abstract}
+  eyebrow={`${publication.data.type} · ${publication.data.year}`}
+  meta={`${publication.data.authors.join(", ")} · ${publication.data.venue}`}
+>
+  <div class="resource-links">
+    {publication.data.pdf && <a class="button button-primary" href={publication.data.pdf} target="_blank" rel="noreferrer">Read PDF <Icon name="arrow" /></a>}
+    {publication.data.doi && <a class="button button-quiet" href={publication.data.doi} target="_blank" rel="noreferrer">DOI / record <Icon name="arrow" /></a>}
+    {publication.data.slides && <a class="button button-quiet" href={publication.data.slides} target="_blank" rel="noreferrer">View slides <Icon name="arrow" /></a>}
+    {publication.data.project && <a class="button button-quiet" href={`/projects/${publication.data.project}/`}>Related project <Icon name="arrow" /></a>}
+    {publication.data.links.map((link) => <a class="button button-quiet" href={link.href} target="_blank" rel="noreferrer">{link.label} <Icon name="arrow" /></a>)}
+  </div>
+  <Content />
+  <h2>Citation</h2>
+  <p>{publication.data.citation}</p>
+  <details>
+    <summary>BibTeX</summary>
+    <pre><code>{publication.data.bibtex}</code></pre>
+  </details>
+  <p class="profile-note">
+    Find citation updates on
+    {researchProfiles.slice(0, 3).map((profile, index) => (
+      <><a href={profile.href} target="_blank" rel="noreferrer">{profile.label}</a>{index < 2 ? ", " : "."}</>
+    ))}
+  </p>
+</ContentLayout>
+
+<style>
+  .resource-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+
+  details {
+    margin-top: 28px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .profile-note {
+    margin-top: 36px;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .profile-note a {
+    color: var(--accent-dark);
+  }
+
+  summary {
+    padding: 18px 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
+</style>
