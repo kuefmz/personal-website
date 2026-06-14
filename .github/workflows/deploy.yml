@@ -2,7 +2,7 @@ name: Build and deploy Astro site
 
 on:
   push:
-    branches: [dev]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
