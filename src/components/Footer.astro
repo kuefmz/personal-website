@@ -1,0 +1,144 @@
+---
+import Icon from "./Icon.astro";
+import NewsletterForm from "./NewsletterForm.astro";
+import { navigation, site } from "../data/site";
+---
+
+<footer class="footer">
+  <div class="shell footer-grid">
+    <div>
+      <p class="footer-kicker">AI. Knowledge graphs. Ontology engineering.</p>
+      <p class="footer-title">Building intelligent systems from complex knowledge.</p>
+    </div>
+    <div class="footer-nav">
+      <p class="footer-label">Explore</p>
+      {navigation.map(({ href, label }) => <a href={href}>{label}</a>)}
+    </div>
+    <div class="footer-nav">
+      <p class="footer-label">Connect</p>
+      <a href={site.linkedin} target="_blank" rel="noreferrer">LinkedIn <Icon name="arrow" size={14} /></a>
+      <a href={site.github} target="_blank" rel="noreferrer">GitHub <Icon name="arrow" size={14} /></a>
+      <a href={site.orcid} target="_blank" rel="noreferrer">ORCID <Icon name="arrow" size={14} /></a>
+      <a href={site.googleScholar} target="_blank" rel="noreferrer">Google Scholar <Icon name="arrow" size={14} /></a>
+      <a href={site.researchGate} target="_blank" rel="noreferrer">ResearchGate <Icon name="arrow" size={14} /></a>
+      <a href={`mailto:${site.email}`}>Email <Icon name="arrow" size={14} /></a>
+    </div>
+  </div>
+  <div class="shell footer-newsletter">
+    <div>
+      <p class="footer-label">Stay in the loop</p>
+      <p>Occasional notes. No noise.</p>
+    </div>
+    <NewsletterForm compact />
+  </div>
+  <div class="shell footer-bottom">
+    <span>© {new Date().getFullYear()} {site.shortName}</span>
+    <span>Designed and built with care in Zurich.</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: clamp(64px, 9vw, 120px) 0 28px;
+    border-top: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 80% 10%, rgba(228, 44, 171, 0.1), transparent 28rem),
+      var(--footer-bg);
+    color: #f8f7fc;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 0.7fr 0.7fr;
+    gap: 48px;
+  }
+
+  .footer-kicker,
+  .footer-label {
+    margin: 0 0 20px;
+    color: #9893a8;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .footer-title {
+    max-width: 680px;
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 4.6rem);
+    letter-spacing: -0.055em;
+    line-height: 1;
+  }
+
+  .footer-nav {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--footer-text);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .footer-nav a:hover {
+    color: #fff;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 72px;
+    margin-top: 72px;
+    border-top: 1px solid rgba(220, 210, 245, 0.16);
+    color: #8e899d;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+  }
+
+  .footer-newsletter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    padding-top: 56px;
+    margin-top: 64px;
+    border-top: 1px solid rgba(220, 210, 245, 0.16);
+  }
+
+  .footer-newsletter p {
+    margin: 0;
+    color: var(--footer-text);
+  }
+
+  .footer-newsletter .footer-label {
+    margin-bottom: 8px;
+    color: #9893a8;
+  }
+
+  @media (max-width: 720px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-grid > :first-child {
+      grid-column: 1 / -1;
+    }
+
+    .footer-bottom {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .footer-newsletter {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

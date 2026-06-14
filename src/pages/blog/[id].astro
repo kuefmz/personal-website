@@ -1,0 +1,86 @@
+---
+import { getCollection, render } from "astro:content";
+import ContentLayout from "../../layouts/ContentLayout.astro";
+import Icon from "../../components/Icon.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const words = (post.body ?? "").split(/\s+/).length;
+const readingTime = Math.max(1, Math.ceil(words / 220));
+const tocHeadings = headings.filter((heading) => heading.depth <= 3);
+const published = new Intl.DateTimeFormat("en", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(post.data.publishedAt);
+---
+
+<ContentLayout
+  title={post.data.title}
+  description={post.data.description}
+  eyebrow={post.data.category}
+  meta={`${published} · ${readingTime} min read`}
+  type="article"
+>
+  {headings.length > 1 && (
+    <nav class="toc" aria-label="Table of contents">
+      <p>On this page</p>
+      {tocHeadings.map((heading) => <a href={`#${heading.slug}`}>{heading.text}</a>)}
+    </nav>
+  )}
+  <Content />
+  {post.data.linkedin && (
+    <p class="original">
+      Originally shared on <a href={post.data.linkedin} target="_blank" rel="noreferrer">LinkedIn <Icon name="arrow" size={15} /></a>.
+    </p>
+  )}
+</ContentLayout>
+
+<style>
+  .toc {
+    display: flex;
+    padding: 20px 0;
+    margin-bottom: 48px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .toc p {
+    margin: 0 0 8px;
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+  }
+
+  .toc a {
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+
+  .toc a:hover {
+    color: var(--accent-dark);
+  }
+
+  .original {
+    padding-top: 28px;
+    margin-top: 64px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .original a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+</style>

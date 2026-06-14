@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Thank you" noindex>
+  <section class="thanks section">
+    <div class="narrow">
+      <p class="eyebrow">Message received</p>
+      <h1 class="page-title">Thank you for reaching out.</h1>
+      <p class="lead">
+        Your submission has been sent. I’ll review it and respond when a reply is appropriate.
+      </p>
+      <div class="button-row">
+        <a class="button button-primary" href="/">Return home</a>
+        <a class="button button-quiet" href="/projects/">Explore projects</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thanks {
+    min-height: 68vh;
+  }
+
+  .thanks .lead {
+    margin-top: 28px;
+  }
+</style>

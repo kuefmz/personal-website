@@ -1,0 +1,156 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import ContactCTA from "../../components/ContactCTA.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
+const categories = ["All", ...new Set(posts.map(({ data }) => data.category))];
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("en", { day: "numeric", month: "short", year: "numeric" }).format(date);
+---
+
+<BaseLayout
+  title="Blog"
+  description="Essays and notes by Jenifer Tabita Ciuciu-Kiss on AI, knowledge graphs, engineering, research, product development, and the PhD journey."
+>
+  <PageHero
+    eyebrow="Blog"
+    title="Notes from research, engineering, and building."
+    intro="Explanations, field notes, and reflections on artificial intelligence, semantic technologies, product development, teaching, and the work of doing a PhD."
+  />
+  <section class="section-compact blog-index">
+    <div class="shell">
+      <div class="filters" role="group" aria-label="Filter blog posts by category">
+        {categories.map((category) => <button class:list={["filter", { active: category === "All" }]} data-filter={category}>{category}</button>)}
+      </div>
+      <div class="post-list">
+        {
+          posts.map((post, index) => (
+            <article class="post" data-category={post.data.category}>
+              <span class="post-index">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <p class="post-meta">{formatDate(post.data.publishedAt)} · {post.data.category}</p>
+                <h2><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>
+                <p>{post.data.description}</p>
+                <ul class="tag-list">{post.data.tags.map((tag) => <li class="tag">{tag}</li>)}</ul>
+              </div>
+              <a class="post-arrow" href={`/blog/${post.id}/`} aria-label={`Read ${post.data.title}`}>↗</a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+  <ContactCTA />
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
+  const posts = document.querySelectorAll<HTMLElement>("[data-category]");
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter;
+      buttons.forEach((item) => item.classList.toggle("active", item === button));
+      posts.forEach((post) => {
+        post.hidden = filter !== "All" && post.dataset.category !== filter;
+      });
+    });
+  });
+</script>
+
+<style>
+  .blog-index {
+    border-top: 1px solid var(--line);
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 32px;
+  }
+
+  .filter {
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+  }
+
+  .filter.active,
+  .filter:hover {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: white;
+  }
+
+  .post {
+    display: grid;
+    grid-template-columns: 62px 1fr 24px;
+    gap: 32px;
+    padding: 42px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .post:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .post-index,
+  .post-meta {
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+  }
+
+  .post h2 {
+    max-width: 850px;
+    margin: 8px 0 14px;
+    font-size: clamp(1.7rem, 3.6vw, 3.4rem);
+    font-weight: 500;
+    letter-spacing: -0.05em;
+    line-height: 1.05;
+  }
+
+  .post h2 a {
+    text-decoration: none;
+  }
+
+  .post h2 a:hover {
+    color: var(--accent-dark);
+  }
+
+  .post div > p:not(.post-meta) {
+    max-width: 700px;
+    margin-bottom: 20px;
+    color: var(--muted);
+  }
+
+  .post-arrow {
+    color: var(--accent-dark);
+    font-size: 1.2rem;
+    text-decoration: none;
+  }
+
+  [hidden] {
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .post {
+      grid-template-columns: 1fr 20px;
+    }
+
+    .post-index {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

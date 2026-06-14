@@ -1,0 +1,187 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import PublicationItem from "../../components/PublicationItem.astro";
+import ContactCTA from "../../components/ContactCTA.astro";
+import Icon from "../../components/Icon.astro";
+import { researchProfiles } from "../../data/site";
+
+const publications = (await getCollection("publications")).sort(
+  (a, b) => b.data.year - a.data.year || a.data.order - b.data.order,
+);
+const types = ["All", ...new Set(publications.map(({ data }) => data.type))];
+---
+
+<BaseLayout
+  title="Publications"
+  description="Publications by Jenifer Tabita Ciuciu-Kiss on research software, scientific knowledge graphs, ontology engineering, NLP, and semantic program analysis."
+>
+  <PageHero
+    eyebrow="Publications"
+    title="Research for connected, reusable knowledge."
+    intro="Peer-reviewed papers, theses, and technical reports spanning scientific knowledge graphs, research software classification, semantic technologies, and source-code analysis."
+  />
+  <section class="section-compact publication-index">
+    <div class="shell">
+      <div class="profile-links" aria-label="Research profiles">
+        <span>Complete and independently maintained records:</span>
+        {researchProfiles.map((profile) => (
+          <a href={profile.href} target="_blank" rel="noreferrer">
+            {profile.label} <Icon name="arrow" size={14} />
+          </a>
+        ))}
+      </div>
+      <div class="publication-tools">
+        <label>
+          <span class="sr-only">Search publications</span>
+          <input type="search" id="publication-search" placeholder="Search title, author, keyword…" />
+        </label>
+        <div class="filters" role="group" aria-label="Filter publication type">
+          {types.map((type) => <button class:list={["filter", { active: type === "All" }]} data-filter={type}>{type}</button>)}
+        </div>
+      </div>
+      <p class="results" aria-live="polite">{publications.length} publications</p>
+      <div id="publication-list">
+        {
+          publications.map((publication) => (
+            <div
+              data-publication
+              data-type={publication.data.type}
+              data-search={`${publication.data.title} ${publication.data.authors.join(" ")} ${publication.data.keywords.join(" ")}`.toLowerCase()}
+            >
+              <PublicationItem {publication} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+  <ContactCTA />
+</BaseLayout>
+
+<script>
+  const search = document.querySelector<HTMLInputElement>("#publication-search");
+  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
+  const publications = document.querySelectorAll<HTMLElement>("[data-publication]");
+  const results = document.querySelector<HTMLElement>(".results");
+  let activeType = "All";
+
+  const update = () => {
+    const query = search?.value.trim().toLowerCase() ?? "";
+    let visible = 0;
+    publications.forEach((publication) => {
+      const matchesType = activeType === "All" || publication.dataset.type === activeType;
+      const matchesSearch = !query || publication.dataset.search?.includes(query);
+      const show = Boolean(matchesType && matchesSearch);
+      publication.hidden = !show;
+      if (show) visible += 1;
+    });
+    if (results) results.textContent = `${visible} publication${visible === 1 ? "" : "s"}`;
+  };
+
+  search?.addEventListener("input", update);
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      activeType = button.dataset.filter ?? "All";
+      buttons.forEach((item) => item.classList.toggle("active", item === button));
+      update();
+    });
+  });
+</script>
+
+<style>
+  .publication-index {
+    border-top: 1px solid var(--line);
+  }
+
+  .publication-tools {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  .profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+    align-items: center;
+    padding-bottom: 36px;
+    margin-bottom: 36px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .profile-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  input {
+    width: min(360px, 80vw);
+    padding: 12px 0;
+    border: 0;
+    border-bottom: 1px solid var(--line-strong);
+    outline: 0;
+    background: transparent;
+    color: var(--ink);
+  }
+
+  input:focus {
+    border-color: var(--accent);
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+
+  .filter {
+    padding: 7px 11px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+  }
+
+  .filter.active,
+  .filter:hover {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: white;
+  }
+
+  .results {
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    text-transform: uppercase;
+  }
+
+  [hidden] {
+    display: none;
+  }
+
+  @media (max-width: 720px) {
+    .publication-tools {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .filters {
+      justify-content: flex-start;
+    }
+  }
+</style>

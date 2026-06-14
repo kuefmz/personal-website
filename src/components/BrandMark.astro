@@ -1,0 +1,22 @@
+---
+interface Props {
+  size?: number;
+}
+
+const { size = 40 } = Astro.props;
+---
+
+<img
+  class="brand-symbol"
+  src="/images/logo.png"
+  alt="JK Logo"
+  width={size}
+  height={size}
+/>
+
+<style>
+  .brand-symbol {
+    color: var(--accent);
+    flex: 0 0 auto;
+  }
+</style>

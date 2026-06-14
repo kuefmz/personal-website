@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Page not found" noindex>
+  <section class="not-found section">
+    <div class="narrow">
+      <p class="eyebrow">404 · Not found</p>
+      <h1 class="page-title">This node is not connected.</h1>
+      <p class="lead">The page may have moved, or the link may be out of date.</p>
+      <div class="button-row">
+        <a class="button button-primary" href="/">Return home</a>
+        <a class="button button-quiet" href="/projects/">Explore projects</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 70vh;
+  }
+
+  .not-found .lead {
+    margin-top: 28px;
+  }
+</style>

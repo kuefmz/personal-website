@@ -1,0 +1,109 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import ContactCTA from "../../components/ContactCTA.astro";
+import { projectCategories } from "../../data/site";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => b.data.year - a.data.year || a.data.order - b.data.order,
+);
+---
+
+<BaseLayout
+  title="Projects"
+  description="Products, data and research systems, automation concepts, and websites by AI engineer and knowledge graph specialist Jenifer Tabita Ciuciu-Kiss."
+>
+  <PageHero
+    eyebrow="Projects"
+    title="From open questions to working systems."
+    intro="The working record: products, data and research systems, automation concepts, and websites. Projects are ordered from newest to oldest; use the filters to follow one strand."
+  />
+  <section class="section-compact project-index">
+    <div class="shell">
+      <div class="filters" role="group" aria-label="Filter projects">
+        {projectCategories.map((category) => <button class:list={["filter", { active: category.value === "All" }]} data-filter={category.value}>{category.label}</button>)}
+      </div>
+      <p class="results" aria-live="polite">{projects.length} projects</p>
+      <div class="grid-2 project-grid">
+        {projects.map((project) => <ProjectCard {project} />)}
+      </div>
+    </div>
+  </section>
+  <ContactCTA />
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
+  const cards = document.querySelectorAll<HTMLElement>("[data-category]");
+  const results = document.querySelector<HTMLElement>(".results");
+
+  const applyFilter = (filter = "All") => {
+    let visible = 0;
+    buttons.forEach((item) => item.classList.toggle("active", item.dataset.filter === filter));
+    cards.forEach((card) => {
+      const show = filter === "All" || card.dataset.category === filter;
+      card.hidden = !show;
+      if (show) visible += 1;
+    });
+    if (results) results.textContent = `${visible} project${visible === 1 ? "" : "s"}`;
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter ?? "All";
+      const url = new URL(window.location.href);
+      if (filter === "All") url.searchParams.delete("category");
+      else url.searchParams.set("category", filter);
+      history.replaceState({}, "", url);
+      applyFilter(filter);
+    });
+  });
+
+  const requestedFilter = new URLSearchParams(window.location.search).get("category") ?? "All";
+  const validFilter = Array.from(buttons).some((button) => button.dataset.filter === requestedFilter);
+  applyFilter(validFilter ? requestedFilter : "All");
+</script>
+
+<style>
+  .project-index {
+    border-top: 1px solid var(--line);
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filter {
+    padding: 9px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+  }
+
+  .filter:hover,
+  .filter.active {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: white;
+  }
+
+  .results {
+    margin: 28px 0 18px;
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+  }
+
+  [hidden] {
+    display: none;
+  }
+</style>

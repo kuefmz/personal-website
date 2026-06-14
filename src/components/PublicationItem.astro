@@ -1,0 +1,97 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  publication: CollectionEntry<"publications">;
+  compact?: boolean;
+}
+
+const { publication, compact = false } = Astro.props;
+---
+
+<article class:list={["publication", { compact }]} data-year={publication.data.year} data-type={publication.data.type}>
+  <div class="publication-year">{publication.data.year}</div>
+  <div>
+    <p class="publication-type">{publication.data.type} · {publication.data.venue}</p>
+    <h2><a href={`/publications/${publication.id}/`}>{publication.data.title}</a></h2>
+    {!compact && <p class="publication-abstract">{publication.data.abstract}</p>}
+    <p class="publication-authors">{publication.data.authors.join(", ")}</p>
+  </div>
+  <a class="publication-arrow" href={`/publications/${publication.id}/`} aria-label={`Read ${publication.data.title}`}>↗</a>
+</article>
+
+<style>
+  .publication {
+    position: relative;
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) 32px;
+    gap: clamp(20px, 4vw, 56px);
+    padding: 36px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .publication:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .publication-year,
+  .publication-type {
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+  }
+
+  .publication-type {
+    margin: 0 0 12px;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    max-width: 850px;
+    margin: 0;
+    font-size: clamp(1.25rem, 2.3vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.2;
+  }
+
+  h2 a {
+    text-decoration: none;
+  }
+
+  .publication-abstract {
+    max-width: 800px;
+    margin: 16px 0 0;
+    color: var(--muted);
+  }
+
+  .publication-authors {
+    margin: 14px 0 0;
+    color: var(--faint);
+    font-size: 0.78rem;
+  }
+
+  .publication-arrow {
+    color: var(--accent-dark);
+    font-size: 1.25rem;
+    text-decoration: none;
+  }
+
+  .publication:hover h2 {
+    color: var(--accent-dark);
+  }
+
+  .compact {
+    padding-block: 28px;
+  }
+
+  @media (max-width: 600px) {
+    .publication {
+      grid-template-columns: 1fr 24px;
+    }
+
+    .publication-year {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

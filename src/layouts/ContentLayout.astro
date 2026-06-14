@@ -1,0 +1,55 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow?: string;
+  meta?: string;
+  image?: string;
+  type?: "website" | "article";
+}
+
+const { title, description, eyebrow, meta, image, type = "article" } = Astro.props;
+---
+
+<BaseLayout {title} {description} {image} {type}>
+  <header class="content-header section">
+    <div class="narrow">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1 class="page-title">{title}</h1>
+      <p class="content-description">{description}</p>
+      {meta && <p class="content-meta">{meta}</p>}
+    </div>
+  </header>
+  <div class="narrow content-body">
+    <article class="prose">
+      <slot />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .content-header {
+    padding-bottom: 64px;
+  }
+
+  .content-description {
+    max-width: 720px;
+    margin: 32px 0 0;
+    color: var(--muted);
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+  }
+
+  .content-meta {
+    margin: 28px 0 0;
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+  }
+
+  .content-body {
+    padding-bottom: clamp(80px, 12vw, 160px);
+  }
+</style>

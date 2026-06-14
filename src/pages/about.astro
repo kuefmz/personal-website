@@ -1,0 +1,391 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import Icon from "../components/Icon.astro";
+import { education, experience, researchProfiles, site, skillGroups } from "../data/site";
+---
+
+<BaseLayout
+  title="About me"
+  description="The life, work, and experience of Jenifer Tabita Ciuciu-Kiss: AI and data engineer, researcher, educator, ontology specialist, and product builder."
+>
+  <!-- <PageHero
+    eyebrow="About me"
+    title="I never planned a straight career."
+    intro="I grew up in Transylvania, studied computer science in Budapest and Madrid, and eventually found myself working in AI and data engineering in Switzerland. Along the way I became interested in a simple question: how can we organize knowledge so that people and machines can use it more effectively? That question led me through research software, knowledge graphs, ontology engineering, machine learning, and data systems. Today I work as a Data Engineer at UBS while pursuing a PhD focused on intelligent knowledge systems."-
+  /> -->
+
+  <section class="section-compact bio">
+    <div class="shell bio-grid">
+      <figure class="portrait">
+        <img
+          src="/images/jenifer-ciuciu-kiss.jpg"
+          alt="Jenifer Tabita Ciuciu-Kiss at a technology conference"
+          width="900"
+          height="1200"
+          loading="eager"
+        />
+        <figcaption>Jenifer Tabita Ciuciu-Kiss · Zurich, Switzerland</figcaption>
+      </figure>
+      <div class="bio-copy">
+        <p class="eyebrow">My story</p>
+        <p>
+          I grew up and studied computer science in Hungary, where teaching algorithms and
+          theory of computation helped me discover how much I enjoy making difficult ideas
+          understandable. My early engineering work at Ericsson taught me that useful software
+          must also be dependable, maintainable, and considerate of the people working with it.
+        </p>
+        <p>
+          A joint Data Science master’s took me from Budapest to Madrid and into the Ontology
+          Engineering Group at the Universidad Politécnica de Madrid. I became interested in
+          research software, knowledge graphs, and the question of how scientific work can be
+          made easier to find and reuse. I now pursue that question as a PhD candidate,
+          supervised by <a href="https://dgarijo.com/" target="_blank" rel="noreferrer">Dr. Daniel Garijo</a>.
+        </p>
+        <p>
+          Moving to Zurich added startup and production experience in computer vision, document
+          intelligence, machine learning, data platforms, and technical delivery. Teaching more
+          than 100 data students through Le Wagon kept me close to a lesson I value: expertise is
+          most useful when it can be shared clearly and without making other people feel small.
+        </p>
+        <p>
+          I cannot promise to solve every problem. What I can offer is a broad technical
+          foundation, research discipline, product curiosity, and the patience to learn an
+          unfamiliar domain. I try to ask the right questions, make uncertainty visible, and
+          build the simplest solution that genuinely helps.
+        </p>
+        <div class="button-row">
+          <a class="button button-primary" href={site.cv} target="_blank" rel="noreferrer">
+            Download CV <Icon name="download" />
+          </a>
+          <a class="button button-quiet" href="/projects/">Explore my work</a>
+        </div>
+        <div class="research-links" aria-label="Research profiles">
+          {researchProfiles.map((profile) => <a href={profile.href} target="_blank" rel="noreferrer">{profile.label}</a>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section approach-section">
+    <div class="shell">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">How I approach problems</p>
+          <h2 class="section-title">Curiosity.</h2>
+        </div>
+        <p class="lead">
+          Working across research and industry has made me comfortable entering problems that
+          are not neatly defined. I do not begin by assuming AI is the answer.
+        </p>
+      </div>
+      <div class="approach-grid">
+        <article>
+          <span>01</span>
+          <h3>Understand the real need</h3>
+          <p>I listen to the people closest to the problem, examine the data and constraints, and separate symptoms from causes.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Connect different perspectives</h3>
+          <p>Research, engineering, data, semantics, teaching, and product thinking often reveal different parts of the same system.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Build and learn carefully</h3>
+          <p>I prefer small, testable steps, honest evaluation, and solutions that remain understandable after the first version ships.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section timeline-section">
+    <div class="shell">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Experience</p>
+          <h2 class="section-title">Data & AI</h2>
+        </div>
+        <p class="lead">
+          Each role added a layer: dependable software, applied machine learning, knowledge
+          representation, teaching, and the judgment to turn them into coherent products.
+        </p>
+      </div>
+      <div class="timeline">
+        {
+          experience.map((item) => (
+            <article class="timeline-item">
+              <p class="timeline-period">{item.period}</p>
+              <div>
+                <h3>{item.role}</h3>
+                <p class="timeline-org">{item.organization} · {item.location}</p>
+              </div>
+              <p class="timeline-summary">{item.summary}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section education-section">
+    <div class="shell grid-2">
+      <div>
+        <p class="eyebrow">Education</p>
+        <h2 class="section-title">Built across disciplines and countries.</h2>
+      </div>
+      <div>
+        {
+          education.map((item) => (
+            <article class="education-item">
+              <p>{item.period}</p>
+              <h3>{item.degree}</h3>
+              <strong>{item.institution}</strong>
+              <span>{item.detail}</span>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section skills-section">
+    <div class="shell">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Capabilities</p>
+          <h2 class="section-title">Broad enough to connect the system.</h2>
+        </div>
+        <p class="lead">
+          My strongest work happens across boundaries: between models and data, ontologies
+          and interfaces, research evidence and product decisions.
+        </p>
+      </div>
+      <div class="grid-2 skill-grid">
+        {
+          skillGroups.map((group) => (
+            <article class="skill-group">
+              <h3>{group.title}</h3>
+              <ul class="tag-list">
+                {group.skills.map((skill) => <li class="tag">{skill}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <ContactCTA />
+</BaseLayout>
+
+<style>
+  .bio {
+    border-top: 1px solid var(--line);
+  }
+
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: clamp(32px, 6vw, 80px);
+    align-items: start;
+  }
+
+  .portrait {
+    position: sticky;
+    top: 32px;
+    width: 180px;
+    margin: 0;
+  }
+
+  .portrait img {
+    width: 180px;
+    height: 180px;
+    border: 1px solid var(--line);
+    object-fit: cover;
+    object-position: 50% 24%;
+  }
+
+  .portrait figcaption {
+    margin-top: 12px;
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+  }
+
+  .bio-copy {
+    max-width: 850px;
+  }
+
+  .bio-copy > p {
+    margin: 0 0 1.2em;
+    font-size: clamp(1.12rem, 2.1vw, 1.65rem);
+    letter-spacing: -0.025em;
+    line-height: 1.45;
+  }
+
+  .bio-copy > p a {
+    color: var(--accent-dark);
+  }
+
+  .research-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin-top: 24px;
+  }
+
+  .research-links a {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  .timeline-section,
+  .skills-section,
+  .approach-section {
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--line);
+  }
+
+  .approach-grid article {
+    min-height: 280px;
+    padding: 30px;
+  }
+
+  .approach-grid article + article {
+    border-left: 1px solid var(--line);
+  }
+
+  .approach-grid span {
+    color: var(--accent-dark);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+  }
+
+  .approach-grid h3 {
+    margin: 64px 0 14px;
+    font-size: 1.35rem;
+  }
+
+  .approach-grid p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 160px 1fr 1.1fr;
+    gap: clamp(24px, 5vw, 72px);
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .timeline-item:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .timeline-period,
+  .timeline-org,
+  .education-item > p {
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 0.67rem;
+    text-transform: uppercase;
+  }
+
+  .timeline-item h3,
+  .timeline-item p {
+    margin: 0;
+  }
+
+  .timeline-item h3 {
+    font-size: 1.2rem;
+  }
+
+  .timeline-org {
+    margin-top: 7px !important;
+  }
+
+  .timeline-summary {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .education-section {
+    border-top: 1px solid var(--line);
+  }
+
+  .education-item {
+    display: flex;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+    flex-direction: column;
+  }
+
+  .education-item h3 {
+    margin: 10px 0 4px;
+    font-size: 1.35rem;
+  }
+
+  .education-item strong {
+    font-size: 0.88rem;
+  }
+
+  .education-item span {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .skill-grid {
+    gap: 20px;
+  }
+
+  .skill-group {
+    min-height: 210px;
+    padding: 28px;
+    border: 1px solid var(--line);
+  }
+
+  .skill-group h3 {
+    margin: 0 0 56px;
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 760px) {
+    .bio-grid,
+    .timeline-item,
+    .approach-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .portrait {
+      position: static;
+      width: 140px;
+    }
+
+    .portrait img {
+      width: 140px;
+      height: 140px;
+    }
+
+    .timeline-item {
+      gap: 12px;
+    }
+
+    .approach-grid article + article {
+      border-top: 1px solid var(--line);
+      border-left: 0;
+    }
+  }
+</style>
