@@ -6,9 +6,11 @@ import PublicationItem from "../../components/PublicationItem.astro";
 import ContactCTA from "../../components/ContactCTA.astro";
 import Icon from "../../components/Icon.astro";
 import { researchProfiles } from "../../data/site";
+import { contentDateSortValue } from "../../utils/contentDate";
 
 const publications = (await getCollection("publications")).sort(
-  (a, b) => b.data.year - a.data.year || a.data.order - b.data.order,
+  (a, b) => contentDateSortValue(b.data.date) - contentDateSortValue(a.data.date)
+    || a.data.title.localeCompare(b.data.title),
 );
 const types = ["All", ...new Set(publications.map(({ data }) => data.type))];
 ---
@@ -19,13 +21,13 @@ const types = ["All", ...new Set(publications.map(({ data }) => data.type))];
 >
   <PageHero
     eyebrow="Publications"
-    title="Research for connected, reusable knowledge."
-    intro="Peer-reviewed papers, theses, and technical reports spanning scientific knowledge graphs, research software classification, semantic technologies, and source-code analysis."
+    title="Research on software and scientific knowledge."
+    intro="Publications on research software, scientific knowledge graphs, ontology infrastructure, and semantic program analysis."
   />
   <section class="section-compact publication-index">
     <div class="shell">
       <div class="profile-links" aria-label="Research profiles">
-        <span>Complete and independently maintained records:</span>
+        <span>Research profiles:</span>
         {researchProfiles.map((profile) => (
           <a href={profile.href} target="_blank" rel="noreferrer">
             {profile.label} <Icon name="arrow" size={14} />

@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { formatContentDate } from "../utils/contentDate";
 
 interface Props {
   publication: CollectionEntry<"publications">;
@@ -9,8 +10,8 @@ interface Props {
 const { publication, compact = false } = Astro.props;
 ---
 
-<article class:list={["publication", { compact }]} data-year={publication.data.year} data-type={publication.data.type}>
-  <div class="publication-year">{publication.data.year}</div>
+<article class:list={["publication", { compact }]} data-date={publication.data.date} data-type={publication.data.type}>
+  <div class="publication-date">{formatContentDate(publication.data.date)}</div>
   <div>
     <p class="publication-type">{publication.data.type} · {publication.data.venue}</p>
     <h2><a href={`/publications/${publication.id}/`}>{publication.data.title}</a></h2>
@@ -26,7 +27,7 @@ const { publication, compact = false } = Astro.props;
     display: grid;
     grid-template-columns: 72px minmax(0, 1fr) 32px;
     gap: clamp(20px, 4vw, 56px);
-    padding: 36px 0;
+    padding: 30px 0;
     border-top: 1px solid var(--line);
   }
 
@@ -34,7 +35,7 @@ const { publication, compact = false } = Astro.props;
     border-bottom: 1px solid var(--line);
   }
 
-  .publication-year,
+  .publication-date,
   .publication-type {
     color: var(--faint);
     font-family: var(--font-mono);
@@ -49,7 +50,7 @@ const { publication, compact = false } = Astro.props;
   h2 {
     max-width: 850px;
     margin: 0;
-    font-size: clamp(1.25rem, 2.3vw, 2rem);
+    font-size: clamp(1.18rem, 1.9vw, 1.72rem);
     font-weight: 500;
     letter-spacing: -0.035em;
     line-height: 1.2;
@@ -90,7 +91,7 @@ const { publication, compact = false } = Astro.props;
       grid-template-columns: 1fr 24px;
     }
 
-    .publication-year {
+    .publication-date {
       grid-column: 1 / -1;
     }
   }

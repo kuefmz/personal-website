@@ -1,21 +1,20 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PageHero from "../components/PageHero.astro";
-import ContactCTA from "../components/ContactCTA.astro";
 import Icon from "../components/Icon.astro";
-import { education, experience, researchProfiles, site, skillGroups } from "../data/site";
+import {
+  education,
+  experience,
+  researchProfiles,
+  site,
+  skillGroups,
+  interestGroups,
+} from "../data/site";
 ---
 
 <BaseLayout
   title="About me"
-  description="The life, work, and experience of Jenifer Tabita Ciuciu-Kiss: AI and data engineer, researcher, educator, ontology specialist, and product builder."
+  description="About Jenifer Tabita Ciuciu-Kiss, an AI engineer and PhD researcher working on knowledge graphs, ontology engineering, data engineering, and research software."
 >
-  <!-- <PageHero
-    eyebrow="About me"
-    title="I never planned a straight career."
-    intro="I grew up in Transylvania, studied computer science in Budapest and Madrid, and eventually found myself working in AI and data engineering in Switzerland. Along the way I became interested in a simple question: how can we organize knowledge so that people and machines can use it more effectively? That question led me through research software, knowledge graphs, ontology engineering, machine learning, and data systems. Today I work as a Data Engineer at UBS while pursuing a PhD focused on intelligent knowledge systems."-
-  /> -->
-
   <section class="section-compact bio">
     <div class="shell bio-grid">
       <figure class="portrait">
@@ -26,76 +25,65 @@ import { education, experience, researchProfiles, site, skillGroups } from "../d
           height="1200"
           loading="eager"
         />
-        <figcaption>Jenifer Tabita Ciuciu-Kiss · Zurich, Switzerland</figcaption>
+        <figcaption>
+          Jenifer Tabita Ciuciu-Kiss · Zurich, Switzerland
+        </figcaption>
       </figure>
       <div class="bio-copy">
-        <p class="eyebrow">My story</p>
+        <p class="eyebrow">About me</p>
+        <h1 class="section-title">
+          AI engineer, researcher, and product builder.
+        </h1>
+        <h2>Who I am</h2>
         <p>
-          I grew up and studied computer science in Hungary, where teaching algorithms and
-          theory of computation helped me discover how much I enjoy making difficult ideas
-          understandable. My early engineering work at Ericsson taught me that useful software
-          must also be dependable, maintainable, and considerate of the people working with it.
+          I am an AI and data engineer based in Zurich and a PhD candidate in
+          Artificial Intelligence at the Universidad Politécnica de Madrid. My
+          research is supervised by
+          <a href="https://dgarijo.com/" target="_blank" rel="noreferrer"
+            >Dr. Daniel Garijo</a
+          >
+          in the Ontology Engineering Group.
         </p>
+        <h2>What I work on</h2>
         <p>
-          A joint Data Science master’s took me from Budapest to Madrid and into the Ontology
-          Engineering Group at the Universidad Politécnica de Madrid. I became interested in
-          research software, knowledge graphs, and the question of how scientific work can be
-          made easier to find and reuse. I now pursue that question as a PhD candidate,
-          supervised by <a href="https://dgarijo.com/" target="_blank" rel="noreferrer">Dr. Daniel Garijo</a>.
+          I build systems that turn complex or unstructured information into
+          data people and software can use. My work includes knowledge graphs,
+          ontology engineering, research software classification, document
+          processing, machine learning, and data platforms.
         </p>
+        <h2>Research and practical systems</h2>
         <p>
-          Moving to Zurich added startup and production experience in computer vision, document
-          intelligence, machine learning, data platforms, and technical delivery. Teaching more
-          than 100 data students through Le Wagon kept me close to a lesson I value: expertise is
-          most useful when it can be shared clearly and without making other people feel small.
+          My research asks how software and scientific knowledge can be
+          classified, aligned, and reused. My engineering work tests those ideas
+          against production constraints: imperfect data, reliability,
+          maintainability, and the needs of the people using the system.
         </p>
+        <h2>What I am interested in now</h2>
         <p>
-          I cannot promise to solve every problem. What I can offer is a broad technical
-          foundation, research discipline, product curiosity, and the patience to learn an
-          unfamiliar domain. I try to ask the right questions, make uncertainty visible, and
-          build the simplest solution that genuinely helps.
+          I am currently focused on intelligent knowledge systems, research
+          software, document AI, semantic technologies, and products that
+          combine structured knowledge with useful interfaces.
         </p>
         <div class="button-row">
-          <a class="button button-primary" href={site.cv} target="_blank" rel="noreferrer">
+          <a
+            class="button button-primary"
+            href={site.cv}
+            target="_blank"
+            rel="noreferrer"
+          >
             Download CV <Icon name="download" />
           </a>
           <a class="button button-quiet" href="/projects/">Explore my work</a>
         </div>
         <div class="research-links" aria-label="Research profiles">
-          {researchProfiles.map((profile) => <a href={profile.href} target="_blank" rel="noreferrer">{profile.label}</a>)}
+          {
+            researchProfiles.map((profile) => (
+              <a href={profile.href} target="_blank" rel="noreferrer">
+                {profile.label}
+              </a>
+            ))
+          }
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section approach-section">
-    <div class="shell">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">How I approach problems</p>
-          <h2 class="section-title">Curiosity.</h2>
-        </div>
-        <p class="lead">
-          Working across research and industry has made me comfortable entering problems that
-          are not neatly defined. I do not begin by assuming AI is the answer.
-        </p>
-      </div>
-      <div class="approach-grid">
-        <article>
-          <span>01</span>
-          <h3>Understand the real need</h3>
-          <p>I listen to the people closest to the problem, examine the data and constraints, and separate symptoms from causes.</p>
-        </article>
-        <article>
-          <span>02</span>
-          <h3>Connect different perspectives</h3>
-          <p>Research, engineering, data, semantics, teaching, and product thinking often reveal different parts of the same system.</p>
-        </article>
-        <article>
-          <span>03</span>
-          <h3>Build and learn carefully</h3>
-          <p>I prefer small, testable steps, honest evaluation, and solutions that remain understandable after the first version ships.</p>
-        </article>
       </div>
     </div>
   </section>
@@ -105,11 +93,11 @@ import { education, experience, researchProfiles, site, skillGroups } from "../d
       <div class="section-heading">
         <div>
           <p class="eyebrow">Experience</p>
-          <h2 class="section-title">Data & AI</h2>
+          <h2 class="section-title">Engineering, research, and teaching.</h2>
         </div>
         <p class="lead">
-          Each role added a layer: dependable software, applied machine learning, knowledge
-          representation, teaching, and the judgment to turn them into coherent products.
+          Experience across production software, machine learning, data systems,
+          ontology engineering, and technical education.
         </p>
       </div>
       <div class="timeline">
@@ -119,7 +107,9 @@ import { education, experience, researchProfiles, site, skillGroups } from "../d
               <p class="timeline-period">{item.period}</p>
               <div>
                 <h3>{item.role}</h3>
-                <p class="timeline-org">{item.organization} · {item.location}</p>
+                <p class="timeline-org">
+                  {item.organization} · {item.location}
+                </p>
               </div>
               <p class="timeline-summary">{item.summary}</p>
             </article>
@@ -133,7 +123,7 @@ import { education, experience, researchProfiles, site, skillGroups } from "../d
     <div class="shell grid-2">
       <div>
         <p class="eyebrow">Education</p>
-        <h2 class="section-title">Built across disciplines and countries.</h2>
+        <h2 class="section-title">Computer science, data science, and AI.</h2>
       </div>
       <div>
         {
@@ -150,25 +140,21 @@ import { education, experience, researchProfiles, site, skillGroups } from "../d
     </div>
   </section>
 
-  <section class="section skills-section">
+  <section class="section-compact skills-section">
     <div class="shell">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Capabilities</p>
-          <h2 class="section-title">Broad enough to connect the system.</h2>
-        </div>
-        <p class="lead">
-          My strongest work happens across boundaries: between models and data, ontologies
-          and interfaces, research evidence and product decisions.
-        </p>
+      <div class="skills-heading">
+        <p class="eyebrow">Expertise</p>
       </div>
+
       <div class="grid-2 skill-grid">
         {
           skillGroups.map((group) => (
             <article class="skill-group">
               <h3>{group.title}</h3>
               <ul class="tag-list">
-                {group.skills.map((skill) => <li class="tag">{skill}</li>)}
+                {group.skills.map((skill) => (
+                  <li class="tag">{skill}</li>
+                ))}
               </ul>
             </article>
           ))
@@ -177,7 +163,24 @@ import { education, experience, researchProfiles, site, skillGroups } from "../d
     </div>
   </section>
 
-  <ContactCTA />
+  <section class="section-compact interests-section">
+    <div class="shell">
+      <div class="skills-heading">
+        <p class="eyebrow">Beyond work</p>
+      </div>
+
+      <div class="grid-3 interest-grid">
+        {
+          interestGroups.map((interest) => (
+            <article class="interest-card">
+              <h3>{interest.title}</h3>
+              <p>{interest.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
@@ -219,11 +222,22 @@ import { education, experience, researchProfiles, site, skillGroups } from "../d
     max-width: 850px;
   }
 
+  .bio-copy > h1 {
+    margin-bottom: 48px;
+  }
+
+  .bio-copy > h2 {
+    margin: 32px 0 8px;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
   .bio-copy > p {
     margin: 0 0 1.2em;
-    font-size: clamp(1.12rem, 2.1vw, 1.65rem);
+    font-size: clamp(1.02rem, 1.6vw, 1.3rem);
     letter-spacing: -0.025em;
-    line-height: 1.45;
+    line-height: 1.55;
   }
 
   .bio-copy > p a {
@@ -244,42 +258,9 @@ import { education, experience, researchProfiles, site, skillGroups } from "../d
   }
 
   .timeline-section,
-  .skills-section,
-  .approach-section {
+  .skills-section {
     border-top: 1px solid var(--line);
     background: var(--surface);
-  }
-
-  .approach-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border: 1px solid var(--line);
-  }
-
-  .approach-grid article {
-    min-height: 280px;
-    padding: 30px;
-  }
-
-  .approach-grid article + article {
-    border-left: 1px solid var(--line);
-  }
-
-  .approach-grid span {
-    color: var(--accent-dark);
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-  }
-
-  .approach-grid h3 {
-    margin: 64px 0 14px;
-    font-size: 1.35rem;
-  }
-
-  .approach-grid p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.88rem;
   }
 
   .timeline-item {
@@ -348,24 +329,57 @@ import { education, experience, researchProfiles, site, skillGroups } from "../d
   }
 
   .skill-grid {
-    gap: 20px;
+    gap: 0 32px;
+    border-top: 1px solid var(--line);
+  }
+
+  .skills-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    align-items: baseline;
+    margin-bottom: 28px;
+  }
+
+  .skills-heading .eyebrow {
+    margin: 0;
+  }
+
+  .skills-heading h2 {
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
   }
 
   .skill-group {
-    min-height: 210px;
-    padding: 28px;
-    border: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: minmax(150px, 0.75fr) minmax(0, 1.25fr);
+    gap: 20px;
+    align-items: start;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
   }
 
   .skill-group h3 {
-    margin: 0 0 56px;
-    font-size: 1.3rem;
+    margin: 3px 0 0;
+    font-size: 0.92rem;
+    line-height: 1.35;
+  }
+
+  .skill-group :global(.tag-list) {
+    gap: 6px;
+  }
+
+  .skill-group :global(.tag) {
+    padding: 6px 9px;
+    font-size: 0.58rem;
   }
 
   @media (max-width: 760px) {
     .bio-grid,
-    .timeline-item,
-    .approach-grid {
+    .timeline-item {
       grid-template-columns: 1fr;
     }
 
@@ -383,9 +397,42 @@ import { education, experience, researchProfiles, site, skillGroups } from "../d
       gap: 12px;
     }
 
-    .approach-grid article + article {
+    .skills-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .skill-group {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .interests-section {
       border-top: 1px solid var(--line);
-      border-left: 0;
+    }
+
+    .interest-grid {
+      margin-top: 28px;
+    }
+
+    .interest-card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--panel);
+    }
+
+    .interest-card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+    }
+
+    .interest-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
     }
   }
 </style>

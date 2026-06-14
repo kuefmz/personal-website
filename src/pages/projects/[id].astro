@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import ContentLayout from "../../layouts/ContentLayout.astro";
 import Icon from "../../components/Icon.astro";
+import { formatContentDate } from "../../utils/contentDate";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -16,7 +17,7 @@ const { Content } = await render(project);
   title={project.data.title}
   description={project.data.description}
   eyebrow={`${project.data.category} project · ${project.data.status}`}
-  meta={`${project.data.year} · ${project.data.technologies.join(" · ")}`}
+  meta={`${formatContentDate(project.data.date, true)} · ${project.data.technologies.join(" · ")}`}
 >
   <div class="project-links">
     {

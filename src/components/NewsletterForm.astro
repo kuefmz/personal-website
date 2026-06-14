@@ -11,8 +11,14 @@ const { compact = false } = Astro.props;
 <form
   class:list={["newsletter-form", { compact }]}
   data-newsletter-form
-  data-recipient={site.email}
+  data-endpoint={site.formsEndpoint}
 >
+  <input type="hidden" name="type" value="newsletter" />
+  <label class="form-honeypot" aria-hidden="true">
+    <span>Website</span>
+    <input type="text" name="website" tabindex="-1" autocomplete="off" />
+  </label>
+
   {!compact && (
     <>
       <p class="eyebrow">Newsletter</p>
@@ -35,35 +41,55 @@ const { compact = false } = Astro.props;
   <label class="consent">
     <input type="checkbox" name="consent" value="Yes" required />
     <span>
-      I would like to receive occasional emails. Submitting opens a prefilled message in my email app.
+      I would like to receive occasional emails and agree that my address may be stored for this purpose.
     </span>
   </label>
-  <p class="email-note" aria-live="polite">
-    No subscription service or website database is used.
+  <p class="form-status email-note" aria-live="polite">
+    Your address will be added to the private newsletter list.
   </p>
 </form>
 
 <script>
   document.querySelectorAll<HTMLFormElement>("[data-newsletter-form]").forEach((form) => {
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (!form.reportValidity()) return;
 
-      const data = new FormData(form);
-      const email = String(data.get("email") ?? "").trim();
-      const recipient = form.dataset.recipient;
-      const subject = "Newsletter subscription request";
-      const body = [
-        "Hello Jenifer,",
-        "",
-        "I would like to subscribe to your newsletter.",
-        "",
-        `Subscriber email: ${email}`,
-        "",
-        "Please add me to your mailing list.",
-      ].join("\n");
+      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      const status = form.querySelector<HTMLElement>(".form-status");
+      const endpoint = form.dataset.endpoint;
+      const originalLabel = button?.textContent ?? "Join newsletter";
 
-      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      if (!endpoint || !button || !status) return;
+
+      button.disabled = true;
+      button.textContent = "Joining…";
+      status.textContent = "Submitting your email address…";
+
+      try {
+        const data = new FormData(form);
+        const payload = {
+          type: "newsletter",
+          email: String(data.get("email") ?? "").trim(),
+          website: String(data.get("website") ?? ""),
+        };
+
+        await fetch(endpoint, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain;charset=UTF-8",
+          },
+          body: JSON.stringify(payload),
+        });
+        form.reset();
+        status.textContent = "Thank you. Your subscription request has been received.";
+      } catch {
+        status.textContent = "The request could not be sent. Please try again.";
+      } finally {
+        button.disabled = false;
+        button.textContent = originalLabel;
+      }
     });
   });
 </script>
@@ -71,7 +97,7 @@ const { compact = false } = Astro.props;
 <style>
   .newsletter-form:not(.compact) {
     max-width: 760px;
-    padding: clamp(32px, 5vw, 56px);
+    padding: clamp(26px, 4vw, 42px);
     border: 1px solid var(--line);
     background: var(--panel);
   }
@@ -79,7 +105,7 @@ const { compact = false } = Astro.props;
   h2 {
     max-width: 680px;
     margin: 0;
-    font-size: clamp(2rem, 4vw, 3.8rem);
+    font-size: clamp(1.7rem, 3.2vw, 3rem);
     font-weight: 500;
     letter-spacing: -0.05em;
     line-height: 1.02;
@@ -87,14 +113,14 @@ const { compact = false } = Astro.props;
 
   .newsletter-intro {
     max-width: 620px;
-    margin: 24px 0 0;
+    margin: 18px 0 0;
     color: var(--muted);
   }
 
   .newsletter-fields {
     display: flex;
     gap: 10px;
-    margin-top: 32px;
+    margin-top: 24px;
   }
 
   .newsletter-fields label {
@@ -131,6 +157,16 @@ const { compact = false } = Astro.props;
     margin: 8px 0 0;
     color: var(--faint);
     font-size: 0.66rem;
+  }
+
+  .form-honeypot {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .newsletter-form button:disabled {
+    cursor: wait;
+    opacity: 0.7;
   }
 
   .compact {

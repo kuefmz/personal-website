@@ -5,9 +5,11 @@ import PageHero from "../../components/PageHero.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
 import ContactCTA from "../../components/ContactCTA.astro";
 import { projectCategories } from "../../data/site";
+import { contentDateSortValue } from "../../utils/contentDate";
 
 const projects = (await getCollection("projects")).sort(
-  (a, b) => b.data.year - a.data.year || a.data.order - b.data.order,
+  (a, b) => contentDateSortValue(b.data.date) - contentDateSortValue(a.data.date)
+    || a.data.title.localeCompare(b.data.title),
 );
 ---
 
@@ -17,8 +19,8 @@ const projects = (await getCollection("projects")).sort(
 >
   <PageHero
     eyebrow="Projects"
-    title="From open questions to working systems."
-    intro="The working record: products, data and research systems, automation concepts, and websites. Projects are ordered from newest to oldest; use the filters to follow one strand."
+    title="Research, engineering, and products."
+    intro="Selected work in knowledge graphs, ontology engineering, data systems, research software, automation, and web development."
   />
   <section class="section-compact project-index">
     <div class="shell">

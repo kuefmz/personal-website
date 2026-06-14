@@ -42,10 +42,8 @@ The custom domain is preserved through `public/CNAME`.
 
 ## Static forms
 
-Newsletter subscriptions and project requests use prefilled `mailto:` messages
-because GitHub Pages cannot process submissions. Submitting a form opens the
-visitor's default email application with the recipient, subject, and body
-already filled in. The visitor must press **Send**.
-
-No form provider, API, or website database is used. Newsletter requests must be
-managed manually from the inbox configured in `src/data/site.ts`.
+Newsletter subscriptions and project requests are posted from the static site
+to the Google Apps Script endpoint configured as `formsEndpoint` in
+`src/data/site.ts`. The endpoint is responsible for writing each submission to
+the appropriate Google Sheet. Requests contain JSON sent as `text/plain` to
+remain compatible with cross-origin submissions from GitHub Pages.
