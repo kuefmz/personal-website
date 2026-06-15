@@ -58,6 +58,20 @@ const defaultSchema = {
       gtag("js", new Date());
       gtag("config", "G-XRDRCV5VWZ");
     </script>
+    <!-- Google Tag Manager -->
+    <script is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        const f = d.getElementsByTagName(s)[0];
+        const j = d.createElement(s);
+        const dl = l != "dataLayer" ? `&l=${l}` : "";
+        j.async = true;
+        j.src = `https://www.googletagmanager.com/gtm.js?id=${i}${dl}`;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-MVM293DW");
+    </script>
+    <!-- End Google Tag Manager -->
     <script is:inline>
       (() => {
         try {
@@ -89,6 +103,16 @@ const defaultSchema = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData ?? defaultSchema)} />
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-MVM293DW"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <a class="skip-link" href="#main-content">Skip to content</a>
     <Header />
     <main id="main-content">
