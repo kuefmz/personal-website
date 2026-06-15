@@ -1,6 +1,6 @@
 export const site = {
   name: "Jenifer Tabita Ciuciu-Kiss",
-  shortName: "Jenifer Tabita Ciuciu-Kiss",
+  shortName: "Jenifer Ciuciu-Kiss",
   title: "AI Engineer, Knowledge Graph & Ontology Specialist",
   description:
     "AI engineer and PhD researcher working on knowledge graphs, ontology engineering, data engineering, research software, and intelligent systems.",
