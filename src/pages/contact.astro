@@ -139,6 +139,11 @@ import { site } from "../data/site";
       });
       projectForm.reset();
       status.textContent = "Thank you. Your project request has been received.";
+      const dataLayerWindow = window as Window & { dataLayer?: unknown[] };
+      dataLayerWindow.dataLayer = dataLayerWindow.dataLayer || [];
+      dataLayerWindow.dataLayer.push({
+        event: "contact_form_submit",
+      });
     } catch {
       status.textContent = "The request could not be sent. Please try again or email me directly.";
     } finally {

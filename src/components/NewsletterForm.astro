@@ -84,6 +84,11 @@ const { compact = false } = Astro.props;
         });
         form.reset();
         status.textContent = "Thank you. Your subscription request has been received.";
+        const dataLayerWindow = window as Window & { dataLayer?: unknown[] };
+        dataLayerWindow.dataLayer = dataLayerWindow.dataLayer || [];
+        dataLayerWindow.dataLayer.push({
+          event: "newsletter_signup",
+        });
       } catch {
         status.textContent = "The request could not be sent. Please try again.";
       } finally {
