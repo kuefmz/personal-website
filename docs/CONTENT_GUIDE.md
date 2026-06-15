@@ -131,7 +131,7 @@ Create `src/content/publications/publication-name.md`:
 ---
 title: "Publication title"
 abstract: "A short abstract for the publication list."
-authors: ["Jenifer Tabita Ciuciu-Kiss", "Co-author"]
+authors: ["Jenifer Ciuciu-Kiss", "Co-author"]
 year: 2026
 venue: "Conference or journal"
 type: "Conference paper"

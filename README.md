@@ -1,4 +1,4 @@
-# Jenifer Tabita Ciuciu-Kiss — Personal Website
+# Jenifer Ciuciu-Kiss — Personal Website
 
 A static, content-driven personal website built with Astro, TypeScript, and MDX.
 Node.js 22.12 or newer is required.
