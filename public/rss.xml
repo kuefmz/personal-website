@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>Jenifer Tabita Ciuciu-Kiss</title>
+    <link>https://jeniferciuciukiss.com</link>
+    <description>
+      AI Engineer, Data Scientist, PhD Researcher, and Builder.
+    </description>
+    <language>en-us</language>
+
+    <item>
+      <title>Website Launch</title>
+      <link>https://jeniferciuciukiss.com</link>
+      <guid>https://jeniferciuciukiss.com</guid>
+      <pubDate>Tue, 16 Jun 2026 00:00:00 GMT</pubDate>
+      <description>
+        Launch of the personal website showcasing projects,
+        publications, and professional experience.
+      </description>
+    </item>
+
+  </channel>
+</rss>

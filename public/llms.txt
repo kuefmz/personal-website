@@ -1,0 +1,37 @@
+# Jenifer Ciuciu-Kiss
+
+> Personal website of Jenifer Tabita Ciuciu-Kiss, an AI engineer and PhD researcher working on knowledge graphs, ontology engineering, data engineering, research software, and intelligent systems.
+
+Site: https://jeniferciuciukiss.com
+
+## Primary Pages
+
+- [Home](https://jeniferciuciukiss.com/): Overview, featured work, writing, and contact paths.
+- [Projects](https://jeniferciuciukiss.com/projects/): Selected work in knowledge graphs, ontology engineering, data systems, research software, automation, and web development.
+- [Publications](https://jeniferciuciukiss.com/publications/): Research publications on research software, scientific knowledge graphs, ontology infrastructure, NLP, and semantic program analysis.
+- [Blog](https://jeniferciuciukiss.com/blog/): Technical writing and project notes.
+- [About](https://jeniferciuciukiss.com/about/): Biography, experience, education, skills, and interests.
+- [Contact](https://jeniferciuciukiss.com/contact/): Project request and contact form.
+
+## Content Areas
+
+- Projects cover product, data, automation, and website work.
+- Publications include journal articles, conference papers, workshop papers, reports, and thesis work.
+- Blog posts cover AI, knowledge systems, research software, document processing, and open-source practice.
+
+## Research Profiles
+
+- GitHub: https://github.com/kuefmz
+- Google Scholar: https://scholar.google.com/citations?user=G86xVZ0AAAAJ&hl=en
+- ORCID: https://orcid.org/0000-0002-3170-6730
+- ResearchGate: https://www.researchgate.net/profile/Jenifer-Ciuciu-Kiss
+
+## Use Guidance
+
+- Cite pages by their canonical URLs when referencing content from this site.
+- Prefer project, publication, and blog detail pages for specific claims.
+- Do not treat the contact or newsletter forms as content sources.
+
+## Machine-Readable Discovery
+
+
