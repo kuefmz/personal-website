@@ -21,6 +21,7 @@ export const navigation = [
   { href: "/projects/", label: "Projects" },
   { href: "/publications/", label: "Publications" },
   { href: "/blog/", label: "Blog" },
+  { href: "/mindset/", label: "Mindset" },
   { href: "/about/", label: "About me" },
 ] as const;
 

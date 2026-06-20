@@ -10,6 +10,8 @@ interface Props {
   image?: string;
   type?: "website" | "article";
   noindex?: boolean;
+  titleSuffix?: boolean;
+  canonicalUrl?: string;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
@@ -19,10 +21,12 @@ const {
   image = "/images/og-default.svg",
   type = "website",
   noindex = false,
+  titleSuffix = true,
+  canonicalUrl,
   structuredData,
 } = Astro.props;
-const pageTitle = title ? `${title} | ${site.shortName}` : `${site.name} | ${site.title}`;
-const canonical = new URL(Astro.url.pathname, site.url);
+const pageTitle = title ? (titleSuffix ? `${title} | ${site.shortName}` : title) : `${site.name} | ${site.title}`;
+const canonical = canonicalUrl ?? new URL(Astro.url.pathname, site.url).toString();
 const imageUrl = new URL(image, site.url);
 const defaultSchema = {
   "@context": "https://schema.org",
