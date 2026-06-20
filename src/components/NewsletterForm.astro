@@ -3,17 +3,40 @@ import { site } from "../data/site";
 
 interface Props {
   compact?: boolean;
+  heading?: string;
+  intro?: string;
+  buttonLabel?: string;
+  source?: string;
+  audience?: string;
+  eventName?: string;
+  initialStatus?: string;
+  surface?: boolean;
 }
 
-const { compact = false } = Astro.props;
+const {
+  compact = false,
+  heading = "Occasional notes on AI, knowledge systems, and building products.",
+  intro = "No content treadmill. Just useful research notes, engineering lessons, and project updates.",
+  buttonLabel = "Join by email",
+  source = "",
+  audience = "",
+  eventName = "newsletter_signup",
+  initialStatus = "Your address will be added to the private newsletter list.",
+  surface = false,
+} = Astro.props;
 ---
 
 <form
-  class:list={["newsletter-form", { compact }]}
+  class:list={["newsletter-form", { compact, surface }]}
   data-newsletter-form
   data-endpoint={site.formsEndpoint}
+  data-event-name={eventName}
+  data-source={source}
+  data-audience={audience}
 >
   <input type="hidden" name="type" value="newsletter" />
+  {source && <input type="hidden" name="source" value={source} />}
+  {audience && <input type="hidden" name="audience" value={audience} />}
   <label class="form-honeypot" aria-hidden="true">
     <span>Website</span>
     <input type="text" name="website" tabindex="-1" autocomplete="off" />
@@ -22,9 +45,9 @@ const { compact = false } = Astro.props;
   {!compact && (
     <>
       <p class="eyebrow">Newsletter</p>
-      <h2>Occasional notes on AI, knowledge systems, and building products.</h2>
+      <h2>{heading}</h2>
       <p class="newsletter-intro">
-        No content treadmill. Just useful research notes, engineering lessons, and project updates.
+        {intro}
       </p>
     </>
   )}
@@ -35,7 +58,7 @@ const { compact = false } = Astro.props;
       <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required />
     </label>
     <button class:list={["button", compact ? "button-light" : "button-primary"]} type="submit">
-      Join by email
+      {buttonLabel}
     </button>
   </div>
   <label class="consent">
@@ -45,7 +68,7 @@ const { compact = false } = Astro.props;
     </span>
   </label>
   <p class="form-status email-note" aria-live="polite">
-    Your address will be added to the private newsletter list.
+    {initialStatus}
   </p>
 </form>
 
@@ -59,6 +82,9 @@ const { compact = false } = Astro.props;
       const status = form.querySelector<HTMLElement>(".form-status");
       const endpoint = form.dataset.endpoint;
       const originalLabel = button?.textContent ?? "Join newsletter";
+      const eventName = form.dataset.eventName || "newsletter_signup";
+      const source = form.dataset.source || "";
+      const audience = form.dataset.audience || "";
 
       if (!endpoint || !button || !status) return;
 
@@ -72,6 +98,8 @@ const { compact = false } = Astro.props;
           type: "newsletter",
           email: String(data.get("email") ?? "").trim(),
           website: String(data.get("website") ?? ""),
+          source: String(data.get("source") ?? source),
+          audience: String(data.get("audience") ?? audience),
         };
 
         await fetch(endpoint, {
@@ -87,7 +115,9 @@ const { compact = false } = Astro.props;
         const dataLayerWindow = window as Window & { dataLayer?: unknown[] };
         dataLayerWindow.dataLayer = dataLayerWindow.dataLayer || [];
         dataLayerWindow.dataLayer.push({
-          event: "newsletter_signup",
+          event: eventName,
+          source,
+          audience,
         });
       } catch {
         status.textContent = "The request could not be sent. Please try again.";
@@ -204,6 +234,29 @@ const { compact = false } = Astro.props;
 
   .compact .email-note {
     color: #777280;
+  }
+
+  .surface.compact {
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  .surface.compact .newsletter-fields input {
+    border-color: var(--line-strong);
+    background: #fff;
+    color: #181317;
+  }
+
+  .surface.compact .newsletter-fields input::placeholder {
+    color: #766b72;
+  }
+
+  .surface.compact .consent {
+    color: var(--muted);
+  }
+
+  .surface.compact .email-note {
+    color: var(--faint);
   }
 
   @media (max-width: 560px) {
