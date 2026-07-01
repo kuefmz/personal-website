@@ -6,16 +6,64 @@ interface Props {
   project: CollectionEntry<"projects">;
 }
 
+const withProjectUtm = (href: string, content: string) => {
+  if (!href.startsWith("http://") && !href.startsWith("https://")) return href;
+  try {
+    const url = new URL(href);
+    if (!url.searchParams.has("utm_source")) url.searchParams.set("utm_source", "jeniferciuciukiss.com");
+    if (!url.searchParams.has("utm_medium")) url.searchParams.set("utm_medium", "portfolio");
+    if (!url.searchParams.has("utm_campaign")) url.searchParams.set("utm_campaign", "projects");
+    if (!url.searchParams.has("utm_content")) url.searchParams.set("utm_content", content);
+    return url.toString();
+  } catch {
+    return href;
+  }
+};
+
 const { project } = Astro.props;
-const websiteLink = project.data.previewUrl
+const websiteLinkRaw = project.data.previewUrl
   ? project.data.links.find(({ href }) => href === project.data.previewUrl)
     ?? { label: "Visit live site", href: project.data.previewUrl }
   : undefined;
+const websiteLink = websiteLinkRaw
+  ? { ...websiteLinkRaw, href: withProjectUtm(websiteLinkRaw.href, "project-card-website") }
+  : undefined;
+const hasPreviewImage = Boolean(project.data.previewImage);
+const hasSitePreview = Boolean(project.data.previewUrl) && !hasPreviewImage;
+const previewLinkHref = project.data.previewUrl ? withProjectUtm(project.data.previewUrl, "project-card-preview") : undefined;
+const techChips = project.data.featured ? project.data.technologies.slice(0, 8) : project.data.technologies.slice(0, 4);
 ---
 
-<article class:list={["card project-card", { "has-preview": Boolean(project.data.previewUrl) }]} data-category={project.data.category}>
+<article class:list={["card project-card", { "has-preview": hasPreviewImage || hasSitePreview, featured: project.data.featured }]} data-category={project.data.category}>
   {
-    project.data.previewUrl && (
+    hasPreviewImage && (
+      <div class="project-preview image-preview">
+        <img
+          src={project.data.previewImage}
+          alt={project.data.previewImageAlt ?? `${project.data.title} project preview`}
+          loading="lazy"
+          decoding="async"
+          width="1280"
+          height="720"
+        />
+        {
+          previewLinkHref && (
+            <a
+              class="preview-link"
+              href={previewLinkHref}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Open ${project.data.title} website in a new tab`}
+            >
+              <span>Open website</span>
+            </a>
+          )
+        }
+      </div>
+    )
+  }
+  {
+    hasSitePreview && (
       <div class="project-preview">
         <iframe
           src={project.data.previewUrl}
@@ -26,7 +74,7 @@ const websiteLink = project.data.previewUrl
         />
         <a
           class="preview-link"
-          href={project.data.previewUrl}
+          href={previewLinkHref}
           target="_blank"
           rel="noreferrer"
           aria-label={`Open ${project.data.title} website in a new tab`}
@@ -38,13 +86,14 @@ const websiteLink = project.data.previewUrl
   }
   <div class="card-body">
     <div class="card-meta">
+      {project.data.featured && <span class="featured-badge">Featured Project</span>}
       <span>{project.data.category}</span>
       <span>{formatContentDate(project.data.date)}</span>
     </div>
     <h2><a href={`/projects/${project.id}/`}>{project.data.title}</a></h2>
     <p>{project.data.description}</p>
     <ul class="tag-list" aria-label="Technologies">
-      {project.data.technologies.slice(0, 4).map((technology) => <li class="tag">{technology}</li>)}
+      {techChips.map((technology, index) => <li class="tag" style={`--chip-index: ${index}`}>{technology}</li>)}
     </ul>
     {
       websiteLink && (
@@ -57,6 +106,43 @@ const websiteLink = project.data.previewUrl
 </article>
 
 <style>
+  .project-card {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: card-fade-in 420ms ease forwards;
+  }
+
+  .project-card.featured {
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+    box-shadow: 0 18px 46px color-mix(in srgb, var(--accent-soft) 42%, var(--shadow));
+  }
+
+  .featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 10px;
+    border: 1px solid color-mix(in srgb, var(--accent) 56%, var(--line));
+    border-radius: 999px;
+    color: var(--accent-dark);
+    background: color-mix(in srgb, var(--accent-soft) 72%, transparent);
+    font-size: 0.61rem;
+    letter-spacing: 0.08em;
+  }
+
+  .featured-badge::before {
+    content: "*";
+    font-size: 0.73rem;
+    line-height: 1;
+  }
+
+  .card-meta {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 12px;
+  }
+
   .website-link {
     display: inline-flex;
     align-items: center;
@@ -74,21 +160,51 @@ const websiteLink = project.data.previewUrl
 
   .project-preview {
     position: relative;
+    width: 100%;
     height: 210px;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     border-bottom: 1px solid var(--line);
     background: var(--surface);
   }
 
+  .project-preview::after {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(9, 13, 36, 0.35), transparent 35%);
+    content: "";
+  }
+
+  .image-preview img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 220ms ease;
+  }
+
   .project-preview iframe {
     position: absolute;
     inset: 0;
-    width: 160%;
-    height: 160%;
+    width: 100%;
+    height: 100%;
     border: 0;
     pointer-events: none;
-    transform: scale(0.625);
+    transform: none;
     transform-origin: top left;
+    transition: transform 220ms ease;
+  }
+
+  .project-card:hover .image-preview img,
+  .project-card:focus-within .image-preview img {
+    transform: scale(1.035);
+  }
+
+  .project-card:hover .project-preview iframe,
+  .project-card:focus-within .project-preview iframe {
+    transform: none;
   }
 
   .preview-link {
@@ -132,10 +248,57 @@ const websiteLink = project.data.previewUrl
     padding-top: clamp(28px, 4vw, 44px);
   }
 
+  .tag {
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease,
+      color 180ms ease;
+    animation: chip-fade-in 300ms ease both;
+    animation-delay: calc(var(--chip-index, 0) * 42ms);
+  }
+
+  .project-card:hover .tag,
+  .project-card:focus-within .tag {
+    border-color: color-mix(in srgb, var(--accent) 32%, var(--line));
+    background: color-mix(in srgb, var(--accent-soft) 65%, transparent);
+    color: var(--ink);
+    transform: translateY(-1px);
+  }
+
+  @keyframes card-fade-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes chip-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @media (hover: none) {
+    .project-card {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
     .preview-link span {
       opacity: 1;
       transform: none;
+    }
+
+    .tag {
+      animation: none;
     }
   }
 </style>

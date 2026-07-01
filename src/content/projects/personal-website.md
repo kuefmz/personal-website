@@ -7,6 +7,8 @@ category: "Website"
 tags: ["Personal knowledge base", "Accessibility", "SEO", "Static site"]
 technologies: ["Astro", "TypeScript", "MDX", "CSS"]
 featured: false
+previewImage: "/images/projects/personal-website-desktop.png"
+previewImageAlt: "Desktop screenshot of Jenifer Ciuciu-Kiss personal website"
 previewUrl: "https://jeniferciuciukiss.com/"
 links:
   - label: "Visit the website"

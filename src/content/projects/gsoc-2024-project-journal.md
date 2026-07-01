@@ -6,7 +6,9 @@ status: "Live website"
 category: "Website"
 tags: ["Google Summer of Code", "DBpedia", "Open source", "Technical writing"]
 technologies: ["Jekyll", "GitHub Pages", "HTML", "CSS"]
-featured: true
+featured: false
+previewImage: "/images/projects/gsoc-2024-project-journal-desktop.png"
+previewImageAlt: "Desktop screenshot of the GSoC 2024 project journal website"
 previewUrl: "https://kuefmz.github.io/gsoc24_blog/"
 links:
   - label: "Visit the GSoC 2024 journal"

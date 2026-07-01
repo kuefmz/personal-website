@@ -7,6 +7,8 @@ category: "Data"
 tags: ["DBpedia", "Ontology evolution", "Versioning", "Semantic Web"]
 technologies: ["Python", "RDF", "SPARQL", "Knowledge Graphs"]
 featured: false
+previewImage: "/images/projects/dbpedia-ontology-time-machine-desktop.png"
+previewImageAlt: "Desktop screenshot of the DBpedia website"
 previewUrl: "https://www.dbpedia.org/"
 links:
   - label: "View ontology time machine"

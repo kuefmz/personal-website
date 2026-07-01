@@ -7,6 +7,8 @@ category: "Website"
 tags: ["Semantic Web", "Conference", "Information architecture"]
 technologies: ["React", "JavaScript", "Flowbite", "GitHub Pages"]
 featured: true
+previewImage: "/images/projects/iswc-2025-website-desktop.png"
+previewImageAlt: "Desktop screenshot of the ISWC 2025 conference website"
 previewUrl: "https://iswc2025.semanticweb.org/"
 links:
   - label: "Visit the ISWC 2025 website"

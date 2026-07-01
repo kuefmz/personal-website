@@ -8,7 +8,8 @@ import { projectCategories } from "../../data/site";
 import { contentDateSortValue } from "../../utils/contentDate";
 
 const projects = (await getCollection("projects")).sort(
-  (a, b) => contentDateSortValue(b.data.date) - contentDateSortValue(a.data.date)
+  (a, b) => Number(b.data.featured) - Number(a.data.featured)
+    || contentDateSortValue(b.data.date) - contentDateSortValue(a.data.date)
     || a.data.title.localeCompare(b.data.title),
 );
 ---

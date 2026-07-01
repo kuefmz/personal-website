@@ -7,6 +7,8 @@ category: "Data"
 tags: ["Document AI", "Information Extraction", "MLOps", "Automation"]
 technologies: ["Python", "Machine Learning", "MongoDB", "Docker", "Jenkins"]
 featured: true
+previewImage: "/images/projects/pdf-processing-platform-desktop.png"
+previewImageAlt: "Desktop screenshot of the PDF processing platform website"
 previewUrl: "https://kuefmz.github.io/process_pdfs/"
 links:
   - label: "View project website"
@@ -23,10 +25,10 @@ The project includes automated testing, containerized deployment, database integ
 
 Key contributions included:
 
-* Designing and implementing document extraction pipelines
-* Building validation and quality-control mechanisms
-* Developing reusable processing components
-* Maintaining MongoDB-based data storage and retrieval
-* Containerization and deployment with Docker
-* CI/CD automation using Jenkins
-* Testing, monitoring, and production support
+- Designing and implementing document extraction pipelines
+- Building validation and quality-control mechanisms
+- Developing reusable processing components
+- Maintaining MongoDB-based data storage and retrieval
+- Containerization and deployment with Docker
+- CI/CD automation using Jenkins
+- Testing, monitoring, and production support

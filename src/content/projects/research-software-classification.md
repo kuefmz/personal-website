@@ -7,6 +7,8 @@ category: "Data"
 tags: ["Research software", "FAIR", "Taxonomies", "NLP"]
 technologies: ["Python", "Transformers", "Knowledge Graphs", "SOMEF"]
 featured: true
+previewImage: "/images/projects/research-software-classification-desktop.png"
+previewImageAlt: "Desktop screenshot of the SOMEF documentation website"
 previewUrl: "https://somef.readthedocs.io/en/latest/"
 links:
   - label: "View research repository"

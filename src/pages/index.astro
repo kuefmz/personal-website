@@ -178,6 +178,21 @@ const organizations = [
     </div>
   </section>
 
+  <section class="linkedin-feed section">
+    <div class="shell">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">LinkedIn</p>
+          <h2 class="section-title">Recent updates.</h2>
+        </div>
+      </div>
+
+      <div class="linkedin-widget" aria-label="LinkedIn page posts">
+        <div class="sk-ww-linkedin-page-post" data-embed-id="25693692"></div>
+      </div>
+    </div>
+  </section>
+  <script is:inline src="https://widgets.sociablekit.com/linkedin-page-posts/widget.js" defer></script>
 </BaseLayout>
 
 <style>
@@ -419,6 +434,31 @@ const organizations = [
 
   :global([data-theme="light"]) .latest {
     background: var(--surface);
+  }
+
+  .linkedin-feed {
+    border-top: 1px solid var(--line);
+  }
+
+  .linkedin-feed.section {
+    padding-block: clamp(44px, 5vw, 72px);
+  }
+
+  .linkedin-feed .section-heading {
+    margin-bottom: clamp(22px, 3vw, 34px);
+  }
+
+  .linkedin-widget {
+    width: min(100%, 860px);
+    min-height: 360px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+
+  .linkedin-widget :global(.sk-ww-linkedin-page-post) {
+    width: 100%;
   }
 
   .latest-grid {
