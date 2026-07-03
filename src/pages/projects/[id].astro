@@ -4,6 +4,20 @@ import ContentLayout from "../../layouts/ContentLayout.astro";
 import Icon from "../../components/Icon.astro";
 import { formatContentDate } from "../../utils/contentDate";
 
+const withProjectUtm = (href: string, content: string) => {
+  if (!href.startsWith("http://") && !href.startsWith("https://")) return href;
+  try {
+    const url = new URL(href);
+    if (!url.searchParams.has("utm_source")) url.searchParams.set("utm_source", "jeniferciuciukiss.com");
+    if (!url.searchParams.has("utm_medium")) url.searchParams.set("utm_medium", "portfolio");
+    if (!url.searchParams.has("utm_campaign")) url.searchParams.set("utm_campaign", "projects");
+    if (!url.searchParams.has("utm_content")) url.searchParams.set("utm_content", content);
+    return url.toString();
+  } catch {
+    return href;
+  }
+};
+
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
   return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
@@ -11,6 +25,29 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
+const websiteLink = project.data.previewUrl
+  ? project.data.links.find(({ href }: { href: string }) => href === project.data.previewUrl)
+  : undefined;
+const links = websiteLink
+  ? [websiteLink, ...project.data.links.filter((link: { href: string }) => link.href !== websiteLink.href)]
+  : project.data.links;
+const linksWithUtm = links.map((link: { label: string; href: string }, index: number) => ({
+  ...link,
+  href: withProjectUtm(link.href, index === 0 ? "project-page-primary" : "project-page-secondary"),
+}));
+const canonicalUrl = new URL(`/projects/${project.id}/`, Astro.site ?? Astro.url).toString();
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  name: project.data.title,
+  description: project.data.description,
+  url: websiteLink?.href ?? canonicalUrl,
+  codeRepository: project.data.links.find((link: { href: string }) => link.href.includes("github.com"))?.href,
+  keywords: project.data.tags,
+  programmingLanguage: project.data.technologies,
+  datePublished: project.data.date,
+  dateModified: project.data.date,
+};
 ---
 
 <ContentLayout
@@ -18,11 +55,18 @@ const { Content } = await render(project);
   description={project.data.description}
   eyebrow={`${project.data.category} project · ${project.data.status}`}
   meta={`${formatContentDate(project.data.date, true)} · ${project.data.technologies.join(" · ")}`}
+  structuredData={structuredData}
 >
   <div class="project-links">
     {
-      project.data.links.map((link: { label: string; href: string }) => (
-        <a class="button button-quiet" href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+      linksWithUtm.map((link: { label: string; href: string }, index: number) => (
+        <a
+          class:list={["button", index === 0 ? "button-primary" : "button-quiet"]}
+          href={link.href}
+          target={link.href.startsWith("http") ? "_blank" : undefined}
+          rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+          aria-label={`Open ${link.label} for ${project.data.title}${link.href.startsWith("http") ? " in a new tab" : ""}`}
+        >
           {link.label} <Icon name="arrow" size={16} />
         </a>
       ))

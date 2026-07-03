@@ -7,6 +7,8 @@ category: "Product"
 tags: ["Ontology engineering", "Knowledge representation", "Inclusive design"]
 technologies: ["OWL", "RDF", "SHACL", "SPARQL"]
 featured: true
+previewImage: "/images/projects/sex-toy-ontology-desktop.png"
+previewImageAlt: "Desktop screenshot of the KISS AI demo website"
 previewUrl: "https://kiss-ai.fly.dev/"
 links:
   - label: "Explore the live KISS AI demo"
