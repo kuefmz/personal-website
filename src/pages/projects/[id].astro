@@ -2,7 +2,9 @@
 import { getCollection, render } from "astro:content";
 import ContentLayout from "../../layouts/ContentLayout.astro";
 import Icon from "../../components/Icon.astro";
+import { site } from "../../data/site";
 import { formatContentDate } from "../../utils/contentDate";
+import { absoluteUrl, breadcrumbSchema } from "../../utils/seo";
 
 const withProjectUtm = (href: string, content: string) => {
   if (!href.startsWith("http://") && !href.startsWith("https://")) return href;
@@ -25,6 +27,9 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
+const relatedPublications = (await getCollection("publications")).filter(
+  (publication) => publication.data.project === project.id,
+);
 const websiteLink = project.data.previewUrl
   ? project.data.links.find(({ href }: { href: string }) => href === project.data.previewUrl)
   : undefined;
@@ -35,19 +40,31 @@ const linksWithUtm = links.map((link: { label: string; href: string }, index: nu
   ...link,
   href: withProjectUtm(link.href, index === 0 ? "project-page-primary" : "project-page-secondary"),
 }));
-const canonicalUrl = new URL(`/projects/${project.id}/`, Astro.site ?? Astro.url).toString();
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareSourceCode",
+const canonicalUrl = absoluteUrl(`/projects/${project.id}/`);
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", url: site.url },
+    { name: "Projects", url: absoluteUrl("/projects/") },
+    { name: project.data.title, url: canonicalUrl },
+  ]),
+  {
+  "@type": "CreativeWork",
+  "@id": `${canonicalUrl}#project`,
   name: project.data.title,
+  headline: project.data.title,
   description: project.data.description,
-  url: websiteLink?.href ?? canonicalUrl,
+  url: canonicalUrl,
+  creator: { "@id": `${site.url}/#person` },
   codeRepository: project.data.links.find((link: { href: string }) => link.href.includes("github.com"))?.href,
   keywords: project.data.tags,
-  programmingLanguage: project.data.technologies,
-  datePublished: project.data.date,
+  genre: project.data.category,
+  about: project.data.tags,
+  sameAs: project.data.links.map((link: { href: string }) => link.href),
+  image: project.data.previewImage ? absoluteUrl(project.data.previewImage) : undefined,
+  dateCreated: project.data.date,
   dateModified: project.data.date,
-};
+  },
+];
 ---
 
 <ContentLayout
@@ -66,6 +83,8 @@ const structuredData = {
           target={link.href.startsWith("http") ? "_blank" : undefined}
           rel={link.href.startsWith("http") ? "noreferrer" : undefined}
           aria-label={`Open ${link.label} for ${project.data.title}${link.href.startsWith("http") ? " in a new tab" : ""}`}
+          data-analytics-event="project_click"
+          data-analytics-location="project_detail"
         >
           {link.label} <Icon name="arrow" size={16} />
         </a>
@@ -73,6 +92,28 @@ const structuredData = {
     }
   </div>
   <Content />
+  {
+    relatedPublications.length > 0 && (
+      <section class="related-publications" aria-labelledby="related-publications">
+        <h2 id="related-publications">Related publications</h2>
+        <ul>
+          {relatedPublications.map((publication) => (
+            <li>
+              <a href={`/publications/${publication.id}/`}>{publication.data.title}</a>
+              <span>{publication.data.venue}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+  <section class="project-next" aria-labelledby="project-next">
+    <h2 id="project-next">Explore related work</h2>
+    <p>
+      For broader context, see Jenifer's <a href="/research/">research overview</a>,
+      <a href="/skills/">technical skills</a>, and <a href="/contact/">contact page</a>.
+    </p>
+  </section>
 </ContentLayout>
 
 <style>
@@ -81,5 +122,31 @@ const structuredData = {
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 48px;
+  }
+
+  .related-publications,
+  .project-next {
+    padding-top: 28px;
+    margin-top: 54px;
+    border-top: 1px solid var(--line);
+  }
+
+  .related-publications ul {
+    padding: 0;
+    margin: 18px 0 0;
+    list-style: none;
+  }
+
+  .related-publications li {
+    display: flex;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+  }
+
+  .related-publications span {
+    color: var(--faint);
+    font-size: 0.78rem;
   }
 </style>

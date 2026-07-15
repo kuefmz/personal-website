@@ -9,13 +9,23 @@ import {
   skillGroups,
   interestGroups,
 } from "../data/site";
+import { absoluteUrl, breadcrumbSchema } from "../utils/seo";
+
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", url: site.url },
+    { name: "About", url: absoluteUrl("/about/") },
+  ]),
+];
 ---
 
 <BaseLayout
-  title="About me"
-  description="About Jenifer Ciuciu-Kiss, an AI engineer and PhD researcher working on knowledge graphs, ontology engineering, data engineering, and research software."
+  title="About Jenifer Ciuciu-Kiss"
+  description="About Jenifer Tabita Ciuciu-Kiss, an AI and Data Engineer in Zurich working on machine learning, LLMs, RAG, OCR, data engineering, knowledge graphs, semantic web, and applied AI research."
+  schemaType="AboutPage"
+  structuredData={structuredData}
 >
-  <section class="section-compact bio">
+  <section id="profile" class="section-compact bio">
     <div class="shell bio-grid">
       <figure class="portrait">
         <img
@@ -32,7 +42,7 @@ import {
       <div class="bio-copy">
         <p class="eyebrow">About me</p>
         <h1 class="section-title">
-          AI engineer, researcher, and product builder.
+          AI and data engineer, researcher, and technical teacher based in Zurich.
         </h1>
         <h2>Who I am</h2>
         <p>
@@ -48,8 +58,8 @@ import {
         <p>
           I build systems that turn complex or unstructured information into
           data people and software can use. My work includes knowledge graphs,
-          ontology engineering, research software classification, document
-          processing, machine learning, and data platforms.
+          ontology engineering, research software classification, document AI,
+          RAG, OCR, machine learning, and data platforms.
         </p>
         <h2>Research and practical systems</h2>
         <p>
@@ -70,15 +80,25 @@ import {
             href={site.cv}
             target="_blank"
             rel="noreferrer"
+            data-analytics-event="cv_download"
+            data-analytics-location="about"
           >
             Download CV <Icon name="download" />
           </a>
-          <a class="button button-quiet" href="/projects/">Explore my work</a>
+          <a class="button button-quiet" href="#experience">Explore experience</a>
+          <a class="button button-quiet" href="/contact/" data-analytics-event="contact_click" data-analytics-location="about">Contact me</a>
         </div>
+        <nav class="about-jump-nav" aria-label="About page sections">
+          <a href="#profile">Profile</a>
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+          <a href="#skills">Skills</a>
+          <a href="#cv">CV</a>
+        </nav>
         <div class="research-links" aria-label="Research profiles">
           {
             researchProfiles.map((profile) => (
-              <a href={profile.href} target="_blank" rel="noreferrer">
+              <a href={profile.href} target="_blank" rel="noreferrer" data-analytics-event="research_profile_click" data-analytics-location="about">
                 {profile.label}
               </a>
             ))
@@ -88,7 +108,7 @@ import {
     </div>
   </section>
 
-  <section class="section timeline-section">
+  <section id="experience" class="section timeline-section">
     <div class="shell">
       <div class="section-heading">
         <div>
@@ -97,7 +117,8 @@ import {
         </div>
         <p class="lead">
           Experience across production software, machine learning, data systems,
-          ontology engineering, and technical education.
+          ontology engineering, and technical education. The CV and recruiter summary
+          are included further down this page.
         </p>
       </div>
       <div class="timeline">
@@ -119,7 +140,7 @@ import {
     </div>
   </section>
 
-  <section class="section education-section">
+  <section id="education" class="section education-section">
     <div class="shell grid-2">
       <div>
         <p class="eyebrow">Education</p>
@@ -140,10 +161,11 @@ import {
     </div>
   </section>
 
-  <section class="section-compact skills-section">
+  <section id="skills" class="section-compact skills-section">
     <div class="shell">
       <div class="skills-heading">
         <p class="eyebrow">Expertise</p>
+        <a class="text-link" href="#cv">Jump to CV</a>
       </div>
 
       <div class="grid-2 skill-grid">
@@ -163,7 +185,41 @@ import {
     </div>
   </section>
 
-  <section class="section-compact interests-section">
+  <section id="cv" class="section-compact cv-section">
+    <div class="shell cv-layout">
+      <div>
+        <p class="eyebrow">CV</p>
+        <h2 class="section-title">Profile summary and downloadable CV.</h2>
+      </div>
+      <div class="cv-copy">
+        <p>
+          For recruiters and collaborators: Jenifer is relevant for AI engineering,
+          machine learning engineering, data engineering, NLP, LLM/RAG, OCR,
+          knowledge graph, semantic web, and applied AI research roles or projects.
+        </p>
+        <div class="button-row">
+          <a
+            class="button button-primary"
+            href={site.cv}
+            target="_blank"
+            rel="noreferrer"
+            data-analytics-event="cv_download"
+            data-analytics-location="about_cv"
+          >
+            Open PDF CV <Icon name="download" size={17} />
+          </a>
+          <a class="button button-quiet" href={site.linkedin} target="_blank" rel="noreferrer" data-analytics-event="linkedin_click" data-analytics-location="about_cv">
+            LinkedIn <Icon name="arrow" size={17} />
+          </a>
+          <a class="button button-quiet" href="/contact/" data-analytics-event="contact_click" data-analytics-location="about_cv">
+            Contact Jenifer <Icon name="arrow" size={17} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="beyond-work" class="section-compact interests-section">
     <div class="shell">
       <div class="skills-heading">
         <p class="eyebrow">Beyond work</p>
@@ -251,6 +307,29 @@ import {
     margin-top: 24px;
   }
 
+  .about-jump-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 26px;
+  }
+
+  .about-jump-nav a {
+    padding: 7px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .about-jump-nav a:hover {
+    border-color: var(--accent);
+    color: var(--accent-dark);
+  }
+
   .research-links a {
     color: var(--muted);
     font-size: 0.78rem;
@@ -304,6 +383,25 @@ import {
 
   .education-section {
     border-top: 1px solid var(--line);
+  }
+
+  .cv-section {
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .cv-layout {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(28px, 5vw, 68px);
+    align-items: start;
+  }
+
+  .cv-copy p {
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.4vw, 1.18rem);
+    line-height: 1.65;
   }
 
   .education-item {
@@ -379,7 +477,8 @@ import {
 
   @media (max-width: 760px) {
     .bio-grid,
-    .timeline-item {
+    .timeline-item,
+    .cv-layout {
       grid-template-columns: 1fr;
     }
 

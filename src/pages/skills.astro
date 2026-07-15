@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import Icon from "../components/Icon.astro";
+import { site, skillGroups } from "../data/site";
+import { absoluteUrl, breadcrumbSchema, itemListSchema } from "../utils/seo";
+
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", url: site.url },
+    { name: "Technical Skills", url: absoluteUrl("/skills/") },
+  ]),
+  itemListSchema({
+    name: "Technical skills",
+    items: skillGroups.flatMap((group) =>
+      group.skills.map((skill) => ({ name: `${group.title}: ${skill}`, url: absoluteUrl("/skills/") })),
+    ),
+  }),
+];
+---
+
+<BaseLayout
+  title="Technical Skills"
+  description="Technical skills of Jenifer Ciuciu-Kiss across AI engineering, machine learning, LLMs, RAG, NLP, OCR, data pipelines, Python, knowledge graphs, semantic web, and teaching."
+  schemaType="CollectionPage"
+  structuredData={structuredData}
+>
+  <PageHero
+    eyebrow="Technical skills"
+    title="AI engineering, data pipelines, LLM systems, and knowledge technologies."
+    intro="A structured view of the technical areas Jenifer works across, from Python data engineering and machine learning to knowledge graphs, semantic web standards, and research communication."
+  />
+
+  <section class="section-compact skills-page">
+    <div class="shell skill-grid">
+      {
+        skillGroups.map((group) => (
+          <article class="skill-group">
+            <h2>{group.title}</h2>
+            <ul class="tag-list">
+              {group.skills.map((skill) => <li class="tag">{skill}</li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-compact skills-links">
+    <div class="shell link-layout">
+      <div>
+        <p class="eyebrow">Proof points</p>
+        <h2 class="section-title">Skills connected to project and research pages.</h2>
+      </div>
+      <div class="link-list">
+        <a href="/projects/research-software-classification/">Research software classification with ML and NLP <Icon name="arrow" size={15} /></a>
+        <a href="/projects/rag-document-processing/">RAG and document processing architectures <Icon name="arrow" size={15} /></a>
+        <a href="/projects/knowledge-graphs/">Knowledge graphs and semantic web research <Icon name="arrow" size={15} /></a>
+        <a href="/publications/">Publications with BibTeX and related project links <Icon name="arrow" size={15} /></a>
+      </div>
+    </div>
+  </section>
+
+  <ContactCTA />
+</BaseLayout>
+
+<style>
+  .skills-page {
+    border-top: 1px solid var(--line);
+  }
+
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .skill-group {
+    padding: clamp(22px, 2.6vw, 32px);
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+
+  .skill-group h2 {
+    margin: 0 0 22px;
+    font-size: clamp(1.2rem, 1.8vw, 1.62rem);
+  }
+
+  .skills-links {
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .link-layout {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(28px, 5vw, 68px);
+  }
+
+  .link-list {
+    display: grid;
+    border-top: 1px solid var(--line);
+  }
+
+  .link-list a {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  @media (max-width: 820px) {
+    .skill-grid,
+    .link-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

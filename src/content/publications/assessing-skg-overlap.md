@@ -22,7 +22,7 @@ bibtex: |
     isbn="978-3-031-65794-8"
   }
 citation: "Ciuciu-Kiss, J. T., & Garijo, D. (2024). Assessing the Overlap of Science Knowledge Graphs: A Quantitative Analysis."
-project: "scientific-knowledge-graph-analysis"
+project: "knowledge-graphs"
 links:
   - label: "Springer Nature Link"
     href: "https://link.springer.com/chapter/10.1007/978-3-031-65794-8_11"

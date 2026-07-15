@@ -17,7 +17,7 @@ bibtex: |
     year={2025}
   }
 citation: "Ciuciu-Kiss, J. T., & Garijo, D. (2025). Are Scientific Annotations Consistently Represented across Science Knowledge Graphs? Sci-K 2025, 14–28."
-project: "scientific-knowledge-graph-analysis"
+project: "knowledge-graphs"
 links:
   - label: "DBLP record"
     href: "https://dblp.org/rec/conf/sci-k/Ciuciu-KissG25"

@@ -1,9 +1,9 @@
 export const site = {
   name: "Jenifer Tabita Ciuciu-Kiss",
   shortName: "Jenifer Ciuciu-Kiss",
-  title: "AI Engineer, Knowledge Graph & Ontology Specialist",
+  title: "AI & Data Engineer in Zurich",
   description:
-    "AI engineer and PhD researcher working on knowledge graphs, ontology engineering, data engineering, research software, and intelligent systems.",
+    "Jenifer Tabita Ciuciu-Kiss is an AI and Data Engineer in Zurich working on machine learning, LLM systems, RAG, data pipelines, knowledge graphs, and applied AI research.",
   url: "https://jeniferciuciukiss.com",
   email: "jenifer.tabita.ciuciu.kiss@gmail.com",
   location: "Zurich, Switzerland",
@@ -15,24 +15,48 @@ export const site = {
   cv: "/assets/jenifer_tabita_ciuciu_kiss_cv.pdf",
   formsEndpoint:
     "https://script.google.com/macros/s/AKfycbzCQhX3feFHTrNC-tqTxZ0P5hO2TdaTqY36rb-gK-Sv_q-3YkI-Jr_WKlfTKf2p_rOAhw/exec",
+  professionalRoles: [
+    "AI Engineer",
+    "Data Engineer",
+    "Machine Learning Engineer",
+    "PhD Candidate in Artificial Intelligence",
+  ],
+  expertise: [
+    "Artificial Intelligence",
+    "Data Engineering",
+    "Machine Learning",
+    "Natural Language Processing",
+    "Large Language Models",
+    "Retrieval-Augmented Generation",
+    "Document AI",
+    "OCR",
+    "Knowledge Graphs",
+    "Ontology Engineering",
+    "Semantic Web",
+    "Research Software Classification",
+    "Scientific Knowledge Graphs",
+    "Python",
+    "Data Pipelines",
+    "Technical Teaching",
+  ],
 } as const;
 
 export const navigation = [
+  { href: "/about/", label: "About" },
   { href: "/projects/", label: "Projects" },
+  { href: "/research/", label: "Research" },
   { href: "/publications/", label: "Publications" },
   { href: "/blog/", label: "Blog" },
-  { href: "/mindset/", label: "Mindset" },
-  { href: "/about/", label: "About me" },
 ] as const;
 
 export const experience = [
   {
-    period: "From July 2026",
-    role: "Incoming Data / AI Automation Engineer",
+    period: "2026 - Present",
+    role: "Data / AI Automation Engineer",
     organization: "UBS",
     location: "Zurich, Switzerland",
     summary:
-      "Joining UBS to work on data and AI automation for enterprise financial workflows.",
+      "Works on data engineering and AI automation for enterprise financial workflows, without publishing confidential system details.",
   },
   {
     period: "2023 - Present",
@@ -111,7 +135,10 @@ export const skillGroups = [
     skills: [
       "Machine Learning",
       "LLMs",
+      "RAG",
       "Natural Language Processing",
+      "OCR",
+      "Document AI",
       "Computer Vision",
       "Model Evaluation",
     ],
@@ -138,6 +165,8 @@ export const skillGroups = [
       "GCP",
       "CI/CD",
       "dbt",
+      "Data Pipelines",
+      "Workflow Automation",
     ],
   },
   {
@@ -181,3 +210,5 @@ export const researchProfiles = [
   { label: "ORCID", href: site.orcid },
   { label: "ResearchGate", href: site.researchGate },
 ] as const;
+
+export const profileLinks = researchProfiles;

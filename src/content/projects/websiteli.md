@@ -30,6 +30,14 @@ links:
 
 Websiteli is an AI-powered web development platform that helps businesses launch fast, modern, SEO-optimized websites.
 
+## Context
+
+Many small businesses need a website that is technically solid, easy to update, measurable, and search-friendly without becoming a long agency project. Websiteli explores how AI-assisted workflows can speed up production while preserving performance, accessibility, and conversion fundamentals.
+
+## My role
+
+I build the platform, content workflow, analytics setup, and production templates. The work connects web development, SEO, marketing automation, static-site performance, and practical AI assistance.
+
 ## Featured Capabilities
 
 - AI Website Generation
@@ -60,3 +68,9 @@ Websiteli is an AI-powered web development platform that helps businesses launch
 - Automation: GitHub Actions, Python
 - Marketing: Google Analytics 4, Google Tag Manager, Search Console
 - Deployment: GitHub Pages with Cloudflare edge support
+
+## Related pages
+
+- [Personal research website](/projects/personal-website/)
+- [Blog](/blog/)
+- [Contact](/contact/)

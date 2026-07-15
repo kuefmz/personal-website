@@ -2,8 +2,9 @@
 import { getCollection, render } from "astro:content";
 import ContentLayout from "../../layouts/ContentLayout.astro";
 import Icon from "../../components/Icon.astro";
-import { researchProfiles } from "../../data/site";
+import { researchProfiles, site } from "../../data/site";
 import { formatContentDate } from "../../utils/contentDate";
+import { absoluteUrl, breadcrumbSchema } from "../../utils/seo";
 
 export async function getStaticPaths() {
   const publications = await getCollection("publications");
@@ -15,6 +16,45 @@ export async function getStaticPaths() {
 
 const { publication } = Astro.props;
 const { Content } = await render(publication);
+const projects = await getCollection("projects");
+const relatedProject = publication.data.project
+  ? projects.find((project) => project.id === publication.data.project)
+  : undefined;
+const canonicalUrl = absoluteUrl(`/publications/${publication.id}/`);
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", url: site.url },
+    { name: "Publications", url: absoluteUrl("/publications/") },
+    { name: publication.data.title, url: canonicalUrl },
+  ]),
+  {
+    "@type": "ScholarlyArticle",
+    "@id": `${canonicalUrl}#scholarly-article`,
+    headline: publication.data.title,
+    name: publication.data.title,
+    abstract: publication.data.abstract,
+    author: publication.data.authors.map((author) =>
+      author === site.name
+        ? { "@id": `${site.url}/#person` }
+        : { "@type": "Person", name: author },
+    ),
+    datePublished: publication.data.date,
+    isPartOf: {
+      "@type": "CreativeWork",
+      name: publication.data.venue,
+    },
+    keywords: publication.data.keywords,
+    url: canonicalUrl,
+    identifier: publication.data.doi,
+    citation: publication.data.citation,
+    sameAs: [
+      publication.data.doi,
+      publication.data.pdf,
+      publication.data.slides,
+      ...publication.data.links.map((link) => link.href),
+    ].filter(Boolean),
+  },
+];
 ---
 
 <ContentLayout
@@ -22,13 +62,14 @@ const { Content } = await render(publication);
   description={publication.data.abstract}
   eyebrow={`${publication.data.type} · ${formatContentDate(publication.data.date, true)}`}
   meta={`${publication.data.authors.join(", ")} · ${publication.data.venue}`}
+  structuredData={structuredData}
 >
   <div class="resource-links">
-    {publication.data.pdf && <a class="button button-primary" href={publication.data.pdf} target="_blank" rel="noreferrer">Read PDF <Icon name="arrow" /></a>}
-    {publication.data.doi && <a class="button button-quiet" href={publication.data.doi} target="_blank" rel="noreferrer">DOI / record <Icon name="arrow" /></a>}
-    {publication.data.slides && <a class="button button-quiet" href={publication.data.slides} target="_blank" rel="noreferrer">View slides <Icon name="arrow" /></a>}
-    {publication.data.project && <a class="button button-quiet" href={`/projects/${publication.data.project}/`}>Related project <Icon name="arrow" /></a>}
-    {publication.data.links.map((link) => <a class="button button-quiet" href={link.href} target="_blank" rel="noreferrer">{link.label} <Icon name="arrow" /></a>)}
+    {publication.data.pdf && <a class="button button-primary" href={publication.data.pdf} target="_blank" rel="noreferrer" data-analytics-event="publication_click" data-analytics-location="publication_detail">Read PDF <Icon name="arrow" /></a>}
+    {publication.data.doi && <a class="button button-quiet" href={publication.data.doi} target="_blank" rel="noreferrer" data-analytics-event="publication_click" data-analytics-location="publication_detail">DOI / record <Icon name="arrow" /></a>}
+    {publication.data.slides && <a class="button button-quiet" href={publication.data.slides} target="_blank" rel="noreferrer" data-analytics-event="publication_click" data-analytics-location="publication_detail">View slides <Icon name="arrow" /></a>}
+    {relatedProject && <a class="button button-quiet" href={`/projects/${relatedProject.id}/`} data-analytics-event="project_click" data-analytics-location="publication_detail">Related project <Icon name="arrow" /></a>}
+    {publication.data.links.map((link) => <a class="button button-quiet" href={link.href} target="_blank" rel="noreferrer" data-analytics-event="publication_click" data-analytics-location="publication_detail">{link.label} <Icon name="arrow" /></a>)}
   </div>
   <Content />
   <h2>Citation</h2>
@@ -40,7 +81,7 @@ const { Content } = await render(publication);
   <p class="profile-note">
     Find citation updates on
     {researchProfiles.slice(0, 3).map((profile, index) => (
-      <><a href={profile.href} target="_blank" rel="noreferrer">{profile.label}</a>{index < 2 ? ", " : "."}</>
+      <><a href={profile.href} target="_blank" rel="noreferrer" data-analytics-event="research_profile_click" data-analytics-location="publication_detail">{profile.label}</a>{index < 2 ? ", " : "."}</>
     ))}
   </p>
 </ContentLayout>
