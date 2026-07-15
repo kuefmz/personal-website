@@ -5,31 +5,47 @@ import PageHero from "../../components/PageHero.astro";
 import PublicationItem from "../../components/PublicationItem.astro";
 import ContactCTA from "../../components/ContactCTA.astro";
 import Icon from "../../components/Icon.astro";
-import { researchProfiles } from "../../data/site";
+import { researchProfiles, site } from "../../data/site";
 import { contentDateSortValue } from "../../utils/contentDate";
+import { absoluteUrl, breadcrumbSchema, itemListSchema } from "../../utils/seo";
 
 const publications = (await getCollection("publications")).sort(
   (a, b) => contentDateSortValue(b.data.date) - contentDateSortValue(a.data.date)
     || a.data.title.localeCompare(b.data.title),
 );
 const types = ["All", ...new Set(publications.map(({ data }) => data.type))];
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", url: site.url },
+    { name: "Publications", url: absoluteUrl("/publications/") },
+  ]),
+  itemListSchema({
+    name: "Publications by Jenifer Ciuciu-Kiss",
+    items: publications.map((publication) => ({
+      name: publication.data.title,
+      url: absoluteUrl(`/publications/${publication.id}/`),
+    })),
+  }),
+];
 ---
 
 <BaseLayout
   title="Publications"
-  description="Publications by Jenifer Ciuciu-Kiss on research software, scientific knowledge graphs, ontology engineering, NLP, and semantic program analysis."
+  description="Publications by Jenifer Ciuciu-Kiss on research software classification, scientific knowledge graphs, semantic web, ontology engineering, NLP, machine learning, and reproducibility."
+  schemaType="CollectionPage"
+  structuredData={structuredData}
 >
   <PageHero
     eyebrow="Publications"
-    title="Research on software and scientific knowledge."
-    intro="Publications on research software, scientific knowledge graphs, ontology infrastructure, and semantic program analysis."
+    title="Research publications on software and scientific knowledge."
+    intro="Publications, thesis work, and workshop papers on research software classification, scientific knowledge graphs, semantic web infrastructure, NLP methods, and semantic program analysis."
   />
   <section class="section-compact publication-index">
     <div class="shell">
       <div class="profile-links" aria-label="Research profiles">
         <span>Research profiles:</span>
         {researchProfiles.map((profile) => (
-          <a href={profile.href} target="_blank" rel="noreferrer">
+          <a href={profile.href} target="_blank" rel="noreferrer" data-analytics-event="research_profile_click" data-analytics-location="publications">
             {profile.label} <Icon name="arrow" size={14} />
           </a>
         ))}

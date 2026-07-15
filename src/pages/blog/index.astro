@@ -3,6 +3,8 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHero from "../../components/PageHero.astro";
 import ContactCTA from "../../components/ContactCTA.astro";
+import { site } from "../../data/site";
+import { absoluteUrl, breadcrumbSchema, itemListSchema } from "../../utils/seo";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
@@ -10,16 +12,31 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 const categories = ["All", ...new Set(posts.map(({ data }) => data.category))];
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat("en", { day: "numeric", month: "short", year: "numeric" }).format(date);
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", url: site.url },
+    { name: "Blog", url: absoluteUrl("/blog/") },
+  ]),
+  itemListSchema({
+    name: "Blog posts by Jenifer Ciuciu-Kiss",
+    items: posts.map((post) => ({
+      name: post.data.title,
+      url: absoluteUrl(`/blog/${post.id}/`),
+    })),
+  }),
+];
 ---
 
 <BaseLayout
   title="Blog"
-  description="Technical notes by Jenifer Ciuciu-Kiss on AI, knowledge graphs, ontology engineering, document processing, research software, and software quality."
+  description="Blog posts by Jenifer Ciuciu-Kiss on AI engineering, data engineering, LLMs, RAG, document processing, knowledge graphs, semantic web, research software, and software quality."
+  schemaType="CollectionPage"
+  structuredData={structuredData}
 >
   <PageHero
     eyebrow="Blog"
     title="Technical notes and research insights."
-    intro="Short articles on AI, document processing, knowledge graphs, research software, and building dependable systems."
+    intro="Short articles on AI engineering, document processing, knowledge graphs, research software, open-source work, and building dependable systems."
   />
   <section class="section-compact blog-index">
     <div class="shell">
@@ -33,11 +50,11 @@ const formatDate = (date: Date) =>
               <span class="post-index">{String(index + 1).padStart(2, "0")}</span>
               <div>
                 <p class="post-meta">{formatDate(post.data.publishedAt)} · {post.data.category}</p>
-                <h2><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>
+                <h2><a href={`/blog/${post.id}/`} data-analytics-event="article_click" data-analytics-location="writing_index">{post.data.title}</a></h2>
                 <p>{post.data.description}</p>
                 <ul class="tag-list">{post.data.tags.map((tag) => <li class="tag">{tag}</li>)}</ul>
               </div>
-              <a class="post-arrow" href={`/blog/${post.id}/`} aria-label={`Read ${post.data.title}`}>↗</a>
+              <a class="post-arrow" href={`/blog/${post.id}/`} aria-label={`Read ${post.data.title}`} data-analytics-event="article_click" data-analytics-location="writing_index">↗</a>
             </article>
           ))
         }

@@ -1,0 +1,184 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import Icon from "../components/Icon.astro";
+import { education, experience, site, skillGroups } from "../data/site";
+import { absoluteUrl, breadcrumbSchema, itemListSchema } from "../utils/seo";
+
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", url: site.url },
+    { name: "Experience", url: absoluteUrl("/experience/") },
+  ]),
+  itemListSchema({
+    name: "Professional experience",
+    items: experience.map((item) => ({
+      name: `${item.role} at ${item.organization}`,
+      url: absoluteUrl("/experience/"),
+    })),
+  }),
+];
+---
+
+<BaseLayout
+  title="Experience"
+  description="Professional experience of Jenifer Ciuciu-Kiss, an AI and Data Engineer in Zurich working across machine learning, data engineering, automation, research software, and teaching."
+  schemaType="ProfilePage"
+  structuredData={structuredData}
+>
+  <PageHero
+    eyebrow="Experience"
+    title="AI, data engineering, research, and teaching experience."
+    intro="A recruiter-oriented overview of Jenifer's work across production data systems, machine learning, knowledge graphs, semantic web research, and technical education."
+  />
+
+  <section class="section-compact experience-page">
+    <div class="shell timeline">
+      {
+        experience.map((item) => (
+          <article class="timeline-item">
+            <p class="timeline-period">{item.period}</p>
+            <div>
+              <h2>{item.role}</h2>
+              <p class="timeline-org">{item.organization} · {item.location}</p>
+            </div>
+            <p>{item.summary}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-compact surface-section">
+    <div class="shell grid-2">
+      <div>
+        <p class="eyebrow">Education</p>
+        <h2 class="section-title">Computer science, data science, and Artificial Intelligence.</h2>
+      </div>
+      <div class="education-list">
+        {
+          education.map((item) => (
+            <article>
+              <p>{item.period}</p>
+              <h3>{item.degree}</h3>
+              <strong>{item.institution}</strong>
+              <span>{item.detail}</span>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-compact recruiter-scan">
+    <div class="shell scan-layout">
+      <div>
+        <p class="eyebrow">Recruiter scan</p>
+        <h2 class="section-title">Relevant for AI engineering, ML engineering, data engineering, and applied research roles.</h2>
+      </div>
+      <div>
+        <ul class="tag-list" aria-label="Relevant skills">
+          {skillGroups.flatMap((group) => group.skills).map((skill) => <li class="tag">{skill}</li>)}
+        </ul>
+        <div class="button-row">
+          <a class="button button-primary" href="/about/#cv" data-analytics-event="cv_download" data-analytics-location="experience">
+            View CV <Icon name="download" size={17} />
+          </a>
+          <a class="button button-quiet" href="/contact/" data-analytics-event="contact_click" data-analytics-location="experience">
+            Discuss a role <Icon name="arrow" size={17} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ContactCTA />
+</BaseLayout>
+
+<style>
+  .experience-page {
+    border-top: 1px solid var(--line);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 150px minmax(220px, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(22px, 5vw, 64px);
+    padding: 30px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .timeline-item:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .timeline-item h2,
+  .timeline-item p {
+    margin: 0;
+  }
+
+  .timeline-item h2 {
+    font-size: clamp(1.08rem, 1.7vw, 1.42rem);
+    line-height: 1.2;
+  }
+
+  .timeline-item > p:last-child {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .timeline-period,
+  .timeline-org,
+  .education-list article > p {
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 0.67rem;
+    text-transform: uppercase;
+  }
+
+  .timeline-org {
+    margin-top: 7px !important;
+  }
+
+  .surface-section {
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .education-list article {
+    display: flex;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    flex-direction: column;
+  }
+
+  .education-list h3 {
+    margin: 10px 0 4px;
+    font-size: 1.28rem;
+  }
+
+  .education-list span {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .recruiter-scan {
+    border-top: 1px solid var(--line);
+  }
+
+  .scan-layout {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(28px, 5vw, 68px);
+    align-items: start;
+  }
+
+  @media (max-width: 820px) {
+    .timeline-item,
+    .scan-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

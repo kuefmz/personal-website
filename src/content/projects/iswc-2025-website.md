@@ -16,3 +16,24 @@ links:
 ---
 
 I developed the public website for ISWC 2025. The responsive React site organizes the conference program, calls, registration information, venue guidance, and updates for an international research community.
+
+## Context
+
+The International Semantic Web Conference website has to serve researchers, organizers, authors, sponsors, and attendees. Information changes over time, and the structure needs to remain easy to scan across desktop and mobile devices.
+
+## My role
+
+I developed the public website and worked on the information architecture, responsive implementation, and content structure for conference updates.
+
+## Approach
+
+- Organize calls, program information, registration, venue guidance, and updates.
+- Keep navigation predictable for an international research audience.
+- Use a React-based implementation with reusable interface patterns.
+- Support a public semantic web community with clear, maintainable pages.
+
+## Related pages
+
+- [Talks and conferences](/talks/)
+- [Knowledge graph and semantic web research](/projects/knowledge-graphs/)
+- [Research overview](/research/)

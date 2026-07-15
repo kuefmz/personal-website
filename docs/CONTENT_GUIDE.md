@@ -34,7 +34,9 @@ npm exec --package=node@22 -- node node_modules/astro/bin/astro.mjs build
 | Projects and websites | `src/content/projects/` |
 | Publications | `src/content/publications/` |
 | Blog posts | `src/content/blog/` |
-| Biography, experience, and education | `src/pages/about.astro` and `src/data/site.ts` |
+| Biography, experience, education, skills, and CV section | `src/pages/about.astro` and `src/data/site.ts` |
+| Optional standalone profile routes | `src/pages/experience.astro`, `src/pages/skills.astro`, and `src/pages/cv.astro` |
+| Research overview | `src/pages/research.astro` |
 | Homepage introduction | `src/pages/index.astro` |
 | Contact page | `src/pages/contact.astro` |
 | Social links and email | `src/data/site.ts` |
@@ -93,13 +95,14 @@ Create `src/content/projects/my-project.md`:
 ---
 title: "My project"
 description: "A concise explanation of what it is and why it matters."
-year: 2026
+date: "2026-06-14"
 status: "Active project"
 category: "Product"
 tags: ["AI", "Knowledge Graphs"]
 technologies: ["Python", "Astro"]
 featured: false
-order: 10
+previewImage: "/images/projects/my-project-desktop.png"
+previewImageAlt: "Desktop screenshot of the project"
 links:
   - label: "Visit the project"
     href: "https://example.com/"
@@ -107,7 +110,7 @@ links:
     href: "https://github.com/example/repository"
 ---
 
-Explain the problem, your contribution, the approach, and what you learned.
+Explain the problem, context, your role, the approach, technologies, public outcomes, lessons learned, and related links.
 ```
 
 Valid categories are exactly:
@@ -117,7 +120,7 @@ Valid categories are exactly:
 - `Automation`
 - `Website`
 
-Projects are ordered by `year` from newest to oldest. `order` breaks ties between projects from the same year; a lower number appears first.
+Projects are ordered by `date` from newest to oldest, with featured projects shown first on the project index.
 
 For website projects, put the live website URL first in `links`. The project card will display a direct **Visit website** link.
 
@@ -131,8 +134,8 @@ Create `src/content/publications/publication-name.md`:
 ---
 title: "Publication title"
 abstract: "A short abstract for the publication list."
-authors: ["Jenifer Ciuciu-Kiss", "Co-author"]
-year: 2026
+authors: ["Jenifer Tabita Ciuciu-Kiss", "Co-author"]
+date: "2026-06-14"
 venue: "Conference or journal"
 type: "Conference paper"
 keywords: ["Knowledge Graphs", "Research Software"]
@@ -150,7 +153,6 @@ project: "related-project-file-name"
 links:
   - label: "Source repository"
     href: "https://github.com/example/repository"
-order: 1
 ---
 
 Add a plain-language explanation of the publication here.
@@ -159,6 +161,7 @@ Add a plain-language explanation of the publication here.
 Valid publication types are:
 
 - `Conference paper`
+- `Journal article`
 - `Workshop paper`
 - `Thesis`
 - `Report`
@@ -170,7 +173,7 @@ To host a PDF on the website:
 
 The optional `project` value is the related project file name without `.md`. It creates a link from the publication to that project.
 
-Publications are ordered by year, then by `order`. The newest publication automatically appears on the homepage.
+Publications are ordered by `date`. The newest publication automatically appears on the homepage.
 
 ## Edit the About Me Page
 
@@ -242,10 +245,11 @@ The navigation links are in the `navigation` array in `src/data/site.ts`:
 
 ```ts
 export const navigation = [
+  { href: "/about/", label: "About" },
   { href: "/projects/", label: "Projects" },
+  { href: "/research/", label: "Research" },
   { href: "/publications/", label: "Publications" },
   { href: "/blog/", label: "Blog" },
-  { href: "/about/", label: "About me" },
 ] as const;
 ```
 
@@ -271,6 +275,14 @@ print("Code block")
 ````
 
 ## Publish Changes
+
+Before publishing, run:
+
+```bash
+npm test
+```
+
+This builds the site and checks generated metadata, JSON-LD, internal links, sitemap coverage, H1 counts, and key CTA links.
 
 Commit and push changes to `main`:
 

@@ -2,19 +2,25 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "../components/Icon.astro";
+import { site } from "../data/site";
 import { contentDateSortValue, formatContentDate } from "../utils/contentDate";
+import { absoluteUrl, breadcrumbSchema, itemListSchema } from "../utils/seo";
 
-const latestProject = (await getCollection("projects")).sort(
+const projects = (await getCollection("projects")).sort(
   (a, b) => contentDateSortValue(b.data.date) - contentDateSortValue(a.data.date)
     || a.data.title.localeCompare(b.data.title),
-)[0];
-const latestPublication = (await getCollection("publications")).sort(
+);
+const publications = (await getCollection("publications")).sort(
   (a, b) => contentDateSortValue(b.data.date) - contentDateSortValue(a.data.date)
     || a.data.title.localeCompare(b.data.title),
-)[0];
-const latestPost = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+);
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
-)[0];
+);
+
+const latestProject = projects[0];
+const latestPublication = publications[0];
+const latestPost = posts[0];
 
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat("en", { day: "numeric", month: "long", year: "numeric" }).format(date);
@@ -53,10 +59,50 @@ const organizations = [
   { name: "Le Wagon", logo: "/images/organizations/le-wagon.svg" },
   { name: "ELTE", logo: "/images/organizations/elte.jpeg" },
 ] as const;
+
+const primaryPaths = [
+  {
+    eyebrow: "Profile",
+    title: "About, experience, skills, and CV in one place",
+    text: "Review Jenifer's profile, roles, teaching work, education, technical skills, and downloadable CV from a single About page.",
+    href: "/about/#experience",
+    label: "Open About page",
+  },
+  {
+    eyebrow: "Applied work",
+    title: "Projects in ML, RAG, OCR, knowledge graphs, and web systems",
+    text: "See public projects and case studies that connect research software, document automation, semantic web, and product engineering.",
+    href: "/projects/",
+    label: "View project pages",
+  },
+  {
+    eyebrow: "Research",
+    title: "PhD research, publications, and semantic web work",
+    text: "Read about research software classification, scientific knowledge graphs, NLP methods, reproducibility, and workshop papers.",
+    href: "/research/",
+    label: "Read research overview",
+  },
+] as const;
+
+const structuredData = [
+  breadcrumbSchema([{ name: "Home", url: site.url }]),
+  itemListSchema({
+    name: "Featured portfolio paths",
+    items: primaryPaths.map((path) => ({ name: path.title, url: absoluteUrl(path.href) })),
+  }),
+  itemListSchema({
+    name: "Recent work by Jenifer Ciuciu-Kiss",
+    items: latest.map((item) => ({ name: item.title, url: absoluteUrl(item.href) })),
+  }),
+];
 ---
 
 <BaseLayout
-  description="Jenifer Ciuciu-Kiss is an AI engineer and PhD researcher working on knowledge graphs, ontology engineering, data systems, and research software."
+  title={`${site.name} | AI & Data Engineer in Zurich`}
+  titleSuffix={false}
+  description={site.description}
+  schemaType="ProfilePage"
+  structuredData={structuredData}
 >
   <section class="home-hero">
     <div class="network-field" aria-hidden="true">
@@ -72,17 +118,20 @@ const organizations = [
     </div>
     <div class="shell hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow">AI Engineer · PhD Researcher · Product Builder</p>
-        <h1 class="display">Building the knowledge systems behind <em>intelligent products.</em></h1>
+        <p class="eyebrow">AI &amp; Data Engineer · Zurich, Switzerland · PhD in AI</p>
+        <h1 class="display">Jenifer Ciuciu-Kiss is an AI &amp; Data Engineer in Zurich.</h1>
         <p class="hero-intro">
-          I work across AI, knowledge graphs, ontology engineering, data engineering, and
-          research software.
+          I build machine learning, LLM/RAG, document automation, data pipeline, and
+          knowledge graph systems while completing a part-time PhD in Artificial Intelligence.
         </p>
         <div class="button-row">
-          <a class="button button-primary" href="/projects/">
-            View projects <Icon name="arrow" />
+          <a class="button button-primary" href="/contact/" data-analytics-event="contact_click" data-analytics-location="home_hero">
+            Contact Jenifer <Icon name="arrow" />
           </a>
-          <a class="button button-quiet" href="/publications/">View publications</a>
+          <a class="button button-quiet" href="/projects/" data-analytics-event="project_click" data-analytics-location="home_hero">
+            View projects
+          </a>
+          <a class="button button-quiet" href="/about/#cv" data-analytics-event="cv_download" data-analytics-location="home_hero">View CV</a>
         </div>
       </div>
       <aside class="capability-panel" aria-label="Areas of work">
@@ -94,22 +143,22 @@ const organizations = [
           <article class="capability">
             <span class="capability-mark" aria-hidden="true">▣</span>
             <div>
-              <h2>AI &amp; Data Engineering</h2>
-              <p>Data-driven systems and automation.</p>
+              <h2>AI &amp; ML Systems</h2>
+              <p>Machine learning, NLP, LLM applications, RAG, and model evaluation.</p>
             </div>
           </article>
           <article class="capability">
             <span class="capability-mark" aria-hidden="true">↗</span>
             <div>
-              <h2>Products &amp; Websites</h2>
-              <p>Digital products built to last.</p>
+              <h2>Data Engineering &amp; Automation</h2>
+              <p>Python pipelines, OCR workflows, validation, storage, and delivery.</p>
             </div>
           </article>
           <article class="capability">
             <span class="capability-mark capability-code" aria-hidden="true">&lt;/&gt;</span>
             <div>
-              <h2>Research &amp; Innovation</h2>
-              <p>Research translated into practice.</p>
+              <h2>Research Software &amp; NLP</h2>
+              <p>Classification methods, software metadata, taxonomies, and reproducibility.</p>
             </div>
           </article>
           <article class="capability">
@@ -132,7 +181,7 @@ const organizations = [
           {
             organizations.map(({ name, logo }) => (
               <span class="organization-logo">
-                {logo ? <img src={logo} alt={name} loading="lazy" /> : <strong>{name}</strong>}
+                {logo ? <img src={logo} alt={name} width="160" height="48" loading="lazy" decoding="async" /> : <strong>{name}</strong>}
               </span>
             ))
           }
@@ -141,11 +190,37 @@ const organizations = [
           {
             organizations.map(({ name, logo }) => (
               <span class="organization-logo">
-                {logo ? <img src={logo} alt="" loading="lazy" /> : <strong>{name}</strong>}
+                {logo ? <img src={logo} alt="" width="160" height="48" loading="lazy" decoding="async" /> : <strong>{name}</strong>}
               </span>
             ))
           }
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-compact work-paths" aria-labelledby="portfolio-paths">
+    <div class="shell">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">For recruiters and collaborators</p>
+          <h2 id="portfolio-paths" class="section-title">Fast paths through the portfolio.</h2>
+        </div>
+        <p class="lead">
+          Start with the About page for profile, experience, skills, and CV, then move into applied projects or research.
+        </p>
+      </div>
+      <div class="path-grid">
+        {
+          primaryPaths.map((path) => (
+            <article class="path-card">
+              <p class="path-eyebrow">{path.eyebrow}</p>
+              <h3><a href={path.href}>{path.title}</a></h3>
+              <p>{path.text}</p>
+              <a class="latest-link" href={path.href}>{path.label} <Icon name="arrow" size={16} /></a>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -167,8 +242,22 @@ const organizations = [
                 <span>{item.type}</span>
                 <span>{item.date}</span>
               </div>
-              <h3><a href={item.href}>{item.title}</a></h3>
-              <a class="latest-link" href={item.href}>
+              <h3>
+                <a
+                  href={item.href}
+                  data-analytics-event={item.type === "Project" ? "project_click" : item.type === "Publication" ? "publication_click" : "article_click"}
+                  data-analytics-location="home_latest"
+                >
+                  {item.title}
+                </a>
+              </h3>
+              <p>{item.description}</p>
+              <a
+                class="latest-link"
+                href={item.href}
+                data-analytics-event={item.type === "Project" ? "project_click" : item.type === "Publication" ? "publication_click" : "article_click"}
+                data-analytics-location="home_latest"
+              >
                 View {item.type.toLowerCase()} <Icon name="arrow" size={16} />
               </a>
             </article>
@@ -177,6 +266,7 @@ const organizations = [
       </div>
     </div>
   </section>
+</BaseLayout>
 
 <style>
   .home-hero {
@@ -411,6 +501,10 @@ const organizations = [
     background: rgba(9, 13, 36, 0.62);
   }
 
+  .work-paths {
+    border-top: 1px solid var(--line);
+  }
+
   .latest.section {
     padding-block: clamp(44px, 5vw, 68px);
   }
@@ -448,6 +542,51 @@ const organizations = [
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     border: 1px solid var(--line);
+  }
+
+  .path-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .path-card {
+    position: relative;
+    min-height: 315px;
+    padding: clamp(20px, 2vw, 28px);
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+
+  .path-eyebrow {
+    margin: 0 0 24px;
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .path-card h3 {
+    margin: 0 0 16px;
+    font-size: clamp(1.25rem, 1.9vw, 1.85rem);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 1.12;
+  }
+
+  .path-card h3 a {
+    text-decoration: none;
+  }
+
+  .path-card h3 a:hover {
+    color: var(--accent-dark);
+  }
+
+  .path-card > p:not(.path-eyebrow) {
+    margin: 0 0 28px;
+    color: var(--muted);
+    font-size: 0.9rem;
   }
 
   .latest-card {
@@ -528,7 +667,8 @@ const organizations = [
       padding-inline: 20px;
     }
 
-    .latest-grid {
+    .latest-grid,
+    .path-grid {
       grid-template-columns: 1fr;
     }
 

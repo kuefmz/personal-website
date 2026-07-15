@@ -1,0 +1,189 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import { education, experience, site, skillGroups } from "../data/site";
+import { absoluteUrl, breadcrumbSchema } from "../utils/seo";
+
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", url: site.url },
+    { name: "CV", url: absoluteUrl("/cv/") },
+  ]),
+  {
+    "@type": "DigitalDocument",
+    "@id": `${absoluteUrl(site.cv)}#document`,
+    name: `${site.name} CV`,
+    url: absoluteUrl(site.cv),
+    author: { "@id": `${site.url}/#person` },
+    encodingFormat: "application/pdf",
+  },
+];
+---
+
+<BaseLayout
+  title="CV"
+  description="CV page for Jenifer Ciuciu-Kiss, AI and Data Engineer in Zurich with experience in machine learning, data engineering, NLP, LLMs, RAG, knowledge graphs, semantic web, and applied AI research."
+  schemaType="ProfilePage"
+  structuredData={structuredData}
+>
+  <PageHero
+    eyebrow="CV"
+    title="CV for AI, data engineering, and applied research roles."
+    intro="A concise web version of Jenifer's profile with a downloadable PDF CV for recruiters, hiring managers, and research collaborators."
+  />
+
+  <section class="section-compact cv-actions-section">
+    <div class="shell cv-actions">
+      <a
+        class="button button-primary"
+        href={site.cv}
+        target="_blank"
+        rel="noreferrer"
+        data-analytics-event="cv_download"
+        data-analytics-location="cv_page"
+      >
+        Open PDF CV <Icon name="download" size={17} />
+      </a>
+      <a class="button button-quiet" href="/contact/" data-analytics-event="contact_click" data-analytics-location="cv_page">
+        Contact Jenifer <Icon name="arrow" size={17} />
+      </a>
+      <a class="button button-quiet" href={site.linkedin} target="_blank" rel="noreferrer" data-analytics-event="linkedin_click" data-analytics-location="cv_page">
+        LinkedIn <Icon name="arrow" size={17} />
+      </a>
+    </div>
+  </section>
+
+  <section class="section-compact cv-summary">
+    <div class="shell summary-layout">
+      <div>
+        <p class="eyebrow">Profile</p>
+        <h2 class="section-title">AI and Data Engineer based in Zurich.</h2>
+      </div>
+      <p class="lead">
+        Jenifer works across machine learning, NLP, LLM applications, RAG, OCR and document automation, data pipelines, knowledge graphs, semantic web technologies, research software classification, and technical teaching.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-compact surface-section">
+    <div class="shell cv-grid">
+      <div>
+        <p class="eyebrow">Experience</p>
+        {experience.map((item) => (
+          <article class="cv-item">
+            <p>{item.period}</p>
+            <h2>{item.role}</h2>
+            <strong>{item.organization} · {item.location}</strong>
+            <span>{item.summary}</span>
+          </article>
+        ))}
+      </div>
+      <div>
+        <p class="eyebrow">Education</p>
+        {education.map((item) => (
+          <article class="cv-item">
+            <p>{item.period}</p>
+            <h2>{item.degree}</h2>
+            <strong>{item.institution}</strong>
+            <span>{item.detail}</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-compact skills-summary">
+    <div class="shell">
+      <p class="eyebrow">Technical focus</p>
+      <div class="grid-2">
+        {
+          skillGroups.map((group) => (
+            <article class="skill-card">
+              <h2>{group.title}</h2>
+              <ul class="tag-list">{group.skills.map((skill) => <li class="tag">{skill}</li>)}</ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cv-actions-section,
+  .cv-summary,
+  .skills-summary {
+    border-top: 1px solid var(--line);
+  }
+
+  .cv-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .summary-layout {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(28px, 5vw, 68px);
+  }
+
+  .surface-section {
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .cv-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(28px, 5vw, 68px);
+  }
+
+  .cv-item {
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .cv-item p {
+    margin: 0 0 10px;
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+  }
+
+  .cv-item h2 {
+    margin: 0 0 4px;
+    font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+  }
+
+  .cv-item strong,
+  .cv-item span {
+    display: block;
+    font-size: 0.88rem;
+  }
+
+  .cv-item span {
+    margin-top: 9px;
+    color: var(--muted);
+  }
+
+  .skill-card {
+    padding: clamp(20px, 2.4vw, 28px);
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+
+  .skill-card h2 {
+    margin: 0 0 18px;
+    font-size: 1.18rem;
+  }
+
+  @media (max-width: 820px) {
+    .summary-layout,
+    .cv-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

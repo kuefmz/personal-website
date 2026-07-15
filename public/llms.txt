@@ -1,21 +1,25 @@
 # Jenifer Ciuciu-Kiss
 
-> Personal website of Jenifer Tabita Ciuciu-Kiss, an AI engineer and PhD researcher working on knowledge graphs, ontology engineering, data engineering, research software, and intelligent systems.
+> Personal website of Jenifer Tabita Ciuciu-Kiss, an AI and Data Engineer in Zurich working on machine learning, LLM/RAG systems, OCR and document automation, data pipelines, knowledge graphs, semantic web technologies, research software classification, and applied AI research.
 
 Site: https://jeniferciuciukiss.com
 
 ## Primary Pages
 
-- [Home](https://jeniferciuciukiss.com/): Overview, featured work, writing, and contact paths.
-- [Projects](https://jeniferciuciukiss.com/projects/): Selected work in knowledge graphs, ontology engineering, data systems, research software, automation, and web development.
-- [Publications](https://jeniferciuciukiss.com/publications/): Research publications on research software, scientific knowledge graphs, ontology infrastructure, NLP, and semantic program analysis.
+- [Home](https://jeniferciuciukiss.com/): Overview, featured work, recruiter paths, blog posts, and contact paths.
+- [About](https://jeniferciuciukiss.com/about/): Biography, experience, education, skills, CV, and profile summary.
+- [Projects](https://jeniferciuciukiss.com/projects/): Selected work in AI, data engineering, RAG/document processing, knowledge graphs, ontology engineering, research software, automation, and web development.
+- [Research](https://jeniferciuciukiss.com/research/): PhD research overview covering research software classification, scientific knowledge graphs, semantic alignment, NLP, and reproducibility.
+- [Publications](https://jeniferciuciukiss.com/publications/): Research publications with abstracts, PDFs or DOI links where available, BibTeX, and related projects.
 - [Blog](https://jeniferciuciukiss.com/blog/): Technical writing and project notes.
-- [About](https://jeniferciuciukiss.com/about/): Biography, experience, education, skills, and interests.
+- [Technical Skills](https://jeniferciuciukiss.com/skills/): Skills across AI engineering, data engineering, LLMs, RAG, OCR, semantic web, and research communication.
+- [CV](https://jeniferciuciukiss.com/about/#cv): CV section on the About page and downloadable PDF CV.
+- [Talks and Conferences](https://jeniferciuciukiss.com/talks/): Conference, workshop, and public research community activity represented on the site.
 - [Contact](https://jeniferciuciukiss.com/contact/): Project request and contact form.
 
 ## Content Areas
 
-- Projects cover product, data, automation, and website work.
+- Projects cover product, data, automation, research, and website work.
 - Publications include journal articles, conference papers, workshop papers, reports, and thesis work.
 - Blog posts cover AI, knowledge systems, research software, document processing, and open-source practice.
 
@@ -33,5 +37,3 @@ Site: https://jeniferciuciukiss.com
 - Do not treat the contact or newsletter forms as content sources.
 
 ## Machine-Readable Discovery
-
-

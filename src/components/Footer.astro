@@ -12,16 +12,18 @@ import { navigation, site } from "../data/site";
     </div>
     <div class="footer-nav">
       <p class="footer-label">Explore</p>
-      {navigation.map(({ href, label }) => <a href={href}>{label}</a>)}
+      {navigation.map(({ href, label }) => (
+        <a href={href} data-analytics-event="navigation_click" data-analytics-location="footer">{label}</a>
+      ))}
     </div>
     <div class="footer-nav">
       <p class="footer-label">Connect</p>
-      <a href={site.linkedin} target="_blank" rel="noreferrer">LinkedIn <Icon name="arrow" size={14} /></a>
-      <a href={site.github} target="_blank" rel="noreferrer">GitHub <Icon name="arrow" size={14} /></a>
-      <a href={site.orcid} target="_blank" rel="noreferrer">ORCID <Icon name="arrow" size={14} /></a>
-      <a href={site.googleScholar} target="_blank" rel="noreferrer">Google Scholar <Icon name="arrow" size={14} /></a>
-      <a href={site.researchGate} target="_blank" rel="noreferrer">ResearchGate <Icon name="arrow" size={14} /></a>
-      <a href={`mailto:${site.email}`}>Email <Icon name="arrow" size={14} /></a>
+      <a href={site.linkedin} target="_blank" rel="noreferrer" data-analytics-event="linkedin_click" data-analytics-location="footer">LinkedIn <Icon name="arrow" size={14} /></a>
+      <a href={site.github} target="_blank" rel="noreferrer" data-analytics-event="github_click" data-analytics-location="footer">GitHub <Icon name="arrow" size={14} /></a>
+      <a href={site.orcid} target="_blank" rel="noreferrer" data-analytics-event="research_profile_click" data-analytics-location="footer">ORCID <Icon name="arrow" size={14} /></a>
+      <a href={site.googleScholar} target="_blank" rel="noreferrer" data-analytics-event="research_profile_click" data-analytics-location="footer">Google Scholar <Icon name="arrow" size={14} /></a>
+      <a href={site.researchGate} target="_blank" rel="noreferrer" data-analytics-event="research_profile_click" data-analytics-location="footer">ResearchGate <Icon name="arrow" size={14} /></a>
+      <a href={`mailto:${site.email}`} data-analytics-event="email_click" data-analytics-location="footer">Email <Icon name="arrow" size={14} /></a>
     </div>
   </div>
   <div class="shell footer-newsletter">

@@ -14,11 +14,27 @@ const { publication, compact = false } = Astro.props;
   <div class="publication-date">{formatContentDate(publication.data.date)}</div>
   <div>
     <p class="publication-type">{publication.data.type} · {publication.data.venue}</p>
-    <h2><a href={`/publications/${publication.id}/`}>{publication.data.title}</a></h2>
+    <h2>
+      <a
+        href={`/publications/${publication.id}/`}
+        data-analytics-event="publication_click"
+        data-analytics-location="publication_list"
+      >
+        {publication.data.title}
+      </a>
+    </h2>
     {!compact && <p class="publication-abstract">{publication.data.abstract}</p>}
     <p class="publication-authors">{publication.data.authors.join(", ")}</p>
   </div>
-  <a class="publication-arrow" href={`/publications/${publication.id}/`} aria-label={`Read ${publication.data.title}`}>↗</a>
+  <a
+    class="publication-arrow"
+    href={`/publications/${publication.id}/`}
+    aria-label={`Read ${publication.data.title}`}
+    data-analytics-event="publication_click"
+    data-analytics-location="publication_list"
+  >
+    ↗
+  </a>
 </article>
 
 <style>

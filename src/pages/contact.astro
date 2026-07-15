@@ -2,22 +2,32 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
+import { absoluteUrl, breadcrumbSchema } from "../utils/seo";
+
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", url: site.url },
+    { name: "Contact", url: absoluteUrl("/contact/") },
+  ]),
+];
 ---
 
 <BaseLayout
   title="Contact"
-  description="Contact Jenifer Ciuciu-Kiss about research, AI and data engineering, knowledge graphs, publications, and product collaboration."
+  description="Contact Jenifer Ciuciu-Kiss in Zurich about AI engineering, data engineering, machine learning, LLM/RAG systems, OCR workflows, knowledge graphs, research, or collaboration."
+  schemaType="ContactPage"
+  structuredData={structuredData}
 >
   <section id="project-request" class="contact-form-section">
     <div class="shell form-layout">
       <header class="form-heading">
         <p class="eyebrow">Contact</p>
-        <h1 class="section-title">Tell me what you’re working on.</h1>
+        <h1 class="section-title">Start a conversation about AI, data, or research work.</h1>
         <p class="form-intro">
-          Send a project request or start a conversation about research, engineering, or products.
+          Send a project request, discuss an AI or data engineering role, or start a conversation about research and technical collaboration.
         </p>
         <p class="form-note">
-          Prefer writing directly? <a href={`mailto:${site.email}`}>{site.email}</a>
+          Prefer writing directly? <a href={`mailto:${site.email}`} data-analytics-event="email_click" data-analytics-location="contact">{site.email}</a>
         </p>
       </header>
 

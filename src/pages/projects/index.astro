@@ -4,24 +4,40 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHero from "../../components/PageHero.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
 import ContactCTA from "../../components/ContactCTA.astro";
-import { projectCategories } from "../../data/site";
+import { projectCategories, site } from "../../data/site";
 import { contentDateSortValue } from "../../utils/contentDate";
+import { absoluteUrl, breadcrumbSchema, itemListSchema } from "../../utils/seo";
 
 const projects = (await getCollection("projects")).sort(
   (a, b) => Number(b.data.featured) - Number(a.data.featured)
     || contentDateSortValue(b.data.date) - contentDateSortValue(a.data.date)
     || a.data.title.localeCompare(b.data.title),
 );
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", url: site.url },
+    { name: "Projects", url: absoluteUrl("/projects/") },
+  ]),
+  itemListSchema({
+    name: "Projects by Jenifer Ciuciu-Kiss",
+    items: projects.map((project) => ({
+      name: project.data.title,
+      url: absoluteUrl(`/projects/${project.id}/`),
+    })),
+  }),
+];
 ---
 
 <BaseLayout
   title="Projects"
-  description="Products, data and research systems, automation concepts, and websites by AI engineer and knowledge graph specialist Jenifer Ciuciu-Kiss."
+  description="AI, data engineering, machine learning, RAG, OCR, knowledge graph, semantic web, research software, automation, and website projects by Jenifer Ciuciu-Kiss."
+  schemaType="CollectionPage"
+  structuredData={structuredData}
 >
   <PageHero
     eyebrow="Projects"
-    title="Research, engineering, and products."
-    intro="Selected work in knowledge graphs, ontology engineering, data systems, research software, automation, and web development."
+    title="AI, data, research, automation, and product projects."
+    intro="Selected project pages covering research software classification, knowledge graphs, semantic web infrastructure, document automation, RAG patterns, data engineering, and production-ready websites."
   />
   <section class="section-compact project-index">
     <div class="shell">

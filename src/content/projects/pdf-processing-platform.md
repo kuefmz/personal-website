@@ -19,11 +19,15 @@ links:
 
 A production-ready platform for automating the extraction of structured information from complex business documents. The system combines machine-learning models, rule-based validation, and configurable processing pipelines to process large volumes of semi-structured PDF data.
 
+## Problem
+
 Rather than focusing on a single document type, the platform was designed as a reusable framework for document processing. It provides a consistent architecture for extraction, validation, storage, and review workflows while supporting multiple document formats and use cases.
+
+## Approach
 
 The project includes automated testing, containerized deployment, database integration, monitoring, and continuous delivery pipelines to ensure reliability in production environments. By combining machine learning with targeted validation rules, the platform improves extraction quality while reducing manual effort and operational overhead.
 
-Key contributions included:
+## My role and contributions
 
 - Designing and implementing document extraction pipelines
 - Building validation and quality-control mechanisms
@@ -32,3 +36,13 @@ Key contributions included:
 - Containerization and deployment with Docker
 - CI/CD automation using Jenkins
 - Testing, monitoring, and production support
+
+## Architecture
+
+The public version of the architecture centers on ingestion, extraction, validation, storage, and review. Machine-learning components handle document understanding where useful, while deterministic checks protect fields that need stronger guarantees.
+
+## Related pages
+
+- [RAG and document processing systems](/projects/rag-document-processing/)
+- [Where LlamaIndex fits in PDF processing](/blog/llamaindex-for-pdf-processing/)
+- [Technical skills](/skills/)

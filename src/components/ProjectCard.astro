@@ -54,6 +54,8 @@ const techChips = project.data.featured ? project.data.technologies.slice(0, 8) 
               target="_blank"
               rel="noreferrer"
               aria-label={`Open ${project.data.title} website in a new tab`}
+              data-analytics-event="project_click"
+              data-analytics-location="project_card_preview"
             >
               <span>Open website</span>
             </a>
@@ -78,6 +80,8 @@ const techChips = project.data.featured ? project.data.technologies.slice(0, 8) 
           target="_blank"
           rel="noreferrer"
           aria-label={`Open ${project.data.title} website in a new tab`}
+          data-analytics-event="project_click"
+          data-analytics-location="project_card_preview"
         >
           <span>Open website</span>
         </a>
@@ -90,14 +94,22 @@ const techChips = project.data.featured ? project.data.technologies.slice(0, 8) 
       <span>{project.data.category}</span>
       <span>{formatContentDate(project.data.date)}</span>
     </div>
-    <h2><a href={`/projects/${project.id}/`}>{project.data.title}</a></h2>
+    <h2>
+      <a
+        href={`/projects/${project.id}/`}
+        data-analytics-event="project_click"
+        data-analytics-location="project_card"
+      >
+        {project.data.title}
+      </a>
+    </h2>
     <p>{project.data.description}</p>
     <ul class="tag-list" aria-label="Technologies">
       {techChips.map((technology, index) => <li class="tag" style={`--chip-index: ${index}`}>{technology}</li>)}
     </ul>
     {
       websiteLink && (
-        <a class="website-link" href={websiteLink.href} target="_blank" rel="noreferrer">
+        <a class="website-link" href={websiteLink.href} target="_blank" rel="noreferrer" data-analytics-event="project_click" data-analytics-location="project_card_external">
           {websiteLink.label} <span aria-hidden="true">↗</span>
         </a>
       )

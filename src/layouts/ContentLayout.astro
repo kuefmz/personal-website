@@ -8,13 +8,14 @@ interface Props {
   meta?: string;
   image?: string;
   type?: "website" | "article";
+  schemaType?: "WebPage" | "ProfilePage" | "AboutPage" | "CollectionPage" | "ContactPage";
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description, eyebrow, meta, image, type = "article", structuredData } = Astro.props;
+const { title, description, eyebrow, meta, image, type = "article", schemaType, structuredData } = Astro.props;
 ---
 
-<BaseLayout {title} {description} {image} {type} {structuredData}>
+<BaseLayout {title} {description} {image} {type} {schemaType} {structuredData}>
   <header class="content-header section">
     <div class="narrow">
       {eyebrow && <p class="eyebrow">{eyebrow}</p>}
