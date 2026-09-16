@@ -1,7 +1,7 @@
 ---
 title: "Software Taxonomy for Research Software: Why Classification Is Hard"
 description: "A practical look at software taxonomy design, GitHub metadata, scientific categories, and the challenges of classifying research software."
-publishedAt: 2026-09-16
+publishedAt: 2026-09-03
 tags: ["Software Taxonomy", "Research Software", "GitHub", "Machine Learning", "Knowledge Graphs"]
 category: "Research Software"
 draft: false
