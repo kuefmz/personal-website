@@ -1,7 +1,7 @@
 ---
 title: "How to Extract PDF Sections Reliably When Headings Are Missing"
 description: "A robust strategy for PDF section extraction when expected headings are missing, reordered, duplicated, or detected imperfectly."
-publishedAt: 2026-09-16
+publishedAt: 2026-09-05
 tags: ["PDF Processing", "Python", "Text Extraction", "Document Automation"]
 category: "Document AI"
 draft: false

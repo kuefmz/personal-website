@@ -1,7 +1,7 @@
 ---
 title: "PDF Document Processing in Python: OCR, Extraction, Validation and RAG"
 description: "A practical architecture for PDF document processing in Python, from OCR and text extraction to validation, storage, RAG, and human review."
-publishedAt: 2026-09-16
+publishedAt: 2026-09-04
 tags: ["PDF Processing", "Python", "OCR", "RAG", "Document AI", "Data Engineering"]
 category: "Document AI"
 draft: false
