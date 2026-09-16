@@ -10,7 +10,7 @@ featured: true
 links:
   - label: "Read PDF processing project"
     href: "/projects/pdf-processing-platform/"
-  - label: "Read LlamaIndex note"
+  - label: "Read LlamaIndex guide"
     href: "/blog/llamaindex-for-pdf-processing/"
 ---
 
@@ -36,6 +36,12 @@ This page summarizes the public, non-confidential architecture I use when thinki
 ## Technologies
 
 The stack depends on the use case, but relevant tools include Python, OCR engines, LlamaIndex-style retrieval abstractions, LLM APIs or local models, MongoDB or relational storage, Docker, and CI/CD pipelines.
+
+## Related guides
+
+- [PDF Document Processing in Python](/blog/pdf-document-processing-python-pipeline/)
+- [LlamaIndex PDF Querying](/blog/llamaindex-for-pdf-processing/)
+- [Reliable PDF section extraction](/blog/pdf-section-extraction-missing-headings/)
 
 ## Lessons
 

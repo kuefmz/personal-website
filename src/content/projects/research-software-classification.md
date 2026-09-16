@@ -1,10 +1,10 @@
 ---
 title: "Research Software Classification"
-description: "Methods for classifying research software using repository data, machine learning, and scientific taxonomies."
+description: "Research on software taxonomy design and research software classification using GitHub metadata, publication text, machine learning, and knowledge graphs."
 date: "2025-11-04"
 status: "PhD research"
 category: "Data"
-tags: ["Research software", "FAIR", "Taxonomies", "NLP"]
+tags: ["Research software", "Software Taxonomy", "FAIR", "Taxonomies", "NLP"]
 technologies: ["Python", "Transformers", "Knowledge Graphs", "SOMEF"]
 featured: true
 previewImage: "/images/projects/research-software-classification-desktop.png"
@@ -17,7 +17,7 @@ links:
     href: "/publications/automated-research-software-classification/"
 ---
 
-Research software is difficult to discover and compare because repositories often lack consistent metadata and scientific categories.
+Research software is difficult to discover and compare because repositories often lack consistent metadata and scientific categories. My work studies both **research software classification** and the **software taxonomies** used to describe scientific software.
 
 ## Context
 
@@ -30,7 +30,7 @@ I work on the research questions, data preparation, model evaluation, semantic a
 ## Approach
 
 - Link software repositories with publication and metadata signals.
-- Compare textual attributes such as README files, abstracts, and category descriptions.
+- Compare textual attributes such as README files, abstracts, repository descriptions, and category descriptions.
 - Evaluate machine-learning and embedding methods for classification.
 - Inspect taxonomies through semantic alignment with scientific knowledge graphs.
 - Keep the methodology interpretable enough for research software discovery use cases.
@@ -41,6 +41,7 @@ An earlier implementation reached 92% F1 during training and 76% on the test set
 
 ## Related pages
 
+- [Software Taxonomy for Research Software: Why Classification Is Hard](/blog/software-taxonomy-for-research-software/)
 - [Research overview](/research/)
 - [Automated Research Software Classification paper](/publications/automated-research-software-classification/)
 - [Methodology thesis](/publications/research-software-classification-thesis/)

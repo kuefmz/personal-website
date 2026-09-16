@@ -1,10 +1,10 @@
 ---
 title: "PDF Processing Platform"
-description: "An end-to-end document processing platform for extracting, validating, and managing structured information from complex PDF documents."
+description: "End-to-end PDF document processing with Python, OCR, structured extraction, validation, storage, automation, and review workflows."
 date: "2026-02-16"
 status: "Production system"
 category: "Data"
-tags: ["Document AI", "Information Extraction", "MLOps", "Automation"]
+tags: ["PDF Processing", "Document AI", "OCR", "Information Extraction", "Automation"]
 technologies: ["Python", "Machine Learning", "MongoDB", "Docker", "Jenkins"]
 featured: true
 previewImage: "/images/projects/pdf-processing-platform-desktop.png"
@@ -29,8 +29,8 @@ The project includes automated testing, containerized deployment, database integ
 
 ## My role and contributions
 
-- Designing and implementing document extraction pipelines
-- Building validation and quality-control mechanisms
+- Designing and implementing PDF document extraction pipelines
+- Building OCR-aware validation and quality-control mechanisms
 - Developing reusable processing components
 - Maintaining MongoDB-based data storage and retrieval
 - Containerization and deployment with Docker
@@ -39,10 +39,12 @@ The project includes automated testing, containerized deployment, database integ
 
 ## Architecture
 
-The public version of the architecture centers on ingestion, extraction, validation, storage, and review. Machine-learning components handle document understanding where useful, while deterministic checks protect fields that need stronger guarantees.
+The public version of the architecture centers on ingestion, text extraction or OCR, normalization, structured extraction, validation, storage, and review. Machine-learning components handle document understanding where useful, while deterministic checks protect fields that need stronger guarantees.
 
 ## Related pages
 
+- [PDF Document Processing in Python: OCR, Extraction, Validation and RAG](/blog/pdf-document-processing-python-pipeline/)
+- [How to Extract PDF Sections Reliably When Headings Are Missing](/blog/pdf-section-extraction-missing-headings/)
+- [LlamaIndex PDF Querying](/blog/llamaindex-for-pdf-processing/)
 - [RAG and document processing systems](/projects/rag-document-processing/)
-- [Where LlamaIndex fits in PDF processing](/blog/llamaindex-for-pdf-processing/)
 - [Technical skills](/skills/)

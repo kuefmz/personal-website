@@ -1,6 +1,6 @@
 # Jenifer Ciuciu-Kiss
 
-> Personal website of Jenifer Tabita Ciuciu-Kiss, an AI and Data Engineer in Zurich working on machine learning, LLM/RAG systems, OCR and document automation, data pipelines, knowledge graphs, semantic web technologies, research software classification, and applied AI research.
+> Personal website of Jenifer Tabita Ciuciu-Kiss, an AI and Data Engineer in Zurich working on machine learning, LLM/RAG systems, OCR and PDF document automation, data pipelines, knowledge graphs, semantic web technologies, research software classification, software taxonomies, and applied AI research.
 
 Site: https://jeniferciuciukiss.com
 
@@ -17,11 +17,19 @@ Site: https://jeniferciuciukiss.com
 - [Talks and Conferences](https://jeniferciuciukiss.com/talks/): Conference, workshop, and public research community activity represented on the site.
 - [Contact](https://jeniferciuciukiss.com/contact/): Project request and contact form.
 
+## Featured Technical Guides
+
+- [Software Taxonomy for Research Software](https://jeniferciuciukiss.com/blog/software-taxonomy-for-research-software/): Software taxonomy design, GitHub metadata, scientific categories, and research software classification.
+- [PDF Document Processing in Python](https://jeniferciuciukiss.com/blog/pdf-document-processing-python-pipeline/): OCR, extraction, validation, evidence, RAG, human review, and production architecture.
+- [LlamaIndex PDF Querying](https://jeniferciuciukiss.com/blog/llamaindex-for-pdf-processing/): Reliable PDF question answering and where LlamaIndex fits in a document pipeline.
+- [Reliable PDF Section Extraction](https://jeniferciuciukiss.com/blog/pdf-section-extraction-missing-headings/): Handling optional or missing headings without brittle next-section logic.
+- [Building Before You Trust](https://jeniferciuciukiss.com/blog/building-before-you-trust-evidence-first-search/): Evidence-first public-web search, identity resolution, source filtering, and privacy-aware engineering.
+
 ## Content Areas
 
 - Projects cover product, data, automation, research, and website work.
 - Publications include journal articles, conference papers, workshop papers, reports, and thesis work.
-- Blog posts cover AI, knowledge systems, research software, document processing, and open-source practice.
+- Blog posts cover AI, knowledge systems, software taxonomies, research software, PDF document processing, search engineering, and open-source practice.
 
 ## Research Profiles
 
