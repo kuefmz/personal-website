@@ -12,7 +12,8 @@
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
     "test:seo": "node scripts/check-seo.mjs",
-    "test": "npm run build && npm run test:seo"
+    "test:legacy": "node scripts/check-legacy-seo.mjs",
+    "test": "npm run build && npm run test:seo && npm run test:legacy"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.3",
