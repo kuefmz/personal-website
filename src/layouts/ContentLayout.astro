@@ -4,18 +4,41 @@ import BaseLayout from "./BaseLayout.astro";
 interface Props {
   title: string;
   description: string;
+  seoTitle?: string;
+  seoDescription?: string;
   eyebrow?: string;
   meta?: string;
   image?: string;
+  imageAlt?: string;
   type?: "website" | "article";
   schemaType?: "WebPage" | "ProfilePage" | "AboutPage" | "CollectionPage" | "ContactPage";
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description, eyebrow, meta, image, type = "article", schemaType, structuredData } = Astro.props;
+const {
+  title,
+  description,
+  seoTitle,
+  seoDescription,
+  eyebrow,
+  meta,
+  image,
+  imageAlt,
+  type = "article",
+  schemaType,
+  structuredData,
+} = Astro.props;
 ---
 
-<BaseLayout {title} {description} {image} {type} {schemaType} {structuredData}>
+<BaseLayout
+  title={seoTitle ?? title}
+  description={seoDescription ?? description}
+  {image}
+  {imageAlt}
+  {type}
+  {schemaType}
+  {structuredData}
+>
   <header class="content-header section">
     <div class="narrow">
       {eyebrow && <p class="eyebrow">{eyebrow}</p>}
