@@ -1,10 +1,10 @@
 ---
 title: "Websiteli"
-description: "An AI-powered web development platform delivering production-ready websites optimized for SEO, CRO, accessibility, performance, and marketing automation."
+description: "A Swiss small-business website, automation, and AI service built around SEO, conversion, analytics, multilingual content, and maintainable web infrastructure."
 date: "2026-07-01"
 status: "Active"
 category: "Website"
-tags: ["AI", "Web Development", "SEO", "Automation", "Digital Marketing"]
+tags: ["Web Development", "SEO", "Automation", "AI", "Analytics", "Multilingual Websites"]
 technologies:
   - "Astro"
   - "TypeScript"
@@ -19,58 +19,45 @@ technologies:
   - "Cloudflare"
 featured: true
 previewImage: "/images/projects/websiteli-desktop.png"
-previewImageAlt: "Desktop screenshot of the Websiteli homepage"
+previewImageAlt: "Desktop screenshot of the Websiteli homepage for websites, automation, and AI services"
 previewUrl: "https://websiteli.ch"
 links:
-  - label: "Visit Website"
+  - label: "Visit Websiteli"
     href: "https://websiteli.ch"
-  - label: "View GitHub"
+  - label: "View source on GitHub"
     href: "https://github.com/kuefmz/websiteli"
 ---
 
-Websiteli is an AI-powered web development platform that helps businesses launch fast, modern, SEO-optimized websites.
+Websiteli is a Swiss digital service for small and growing businesses that need a professional website and a maintainable technical foundation for SEO, analytics, lead generation, automation, and future AI integrations.
 
 ## Context
 
-Many small businesses need a website that is technically solid, easy to update, measurable, and search-friendly without becoming a long agency project. Websiteli explores how AI-assisted workflows can speed up production while preserving performance, accessibility, and conversion fundamentals.
+A business website has to do more than look polished. It should be discoverable in search, explain the offer clearly, work well on mobile, measure important actions, and remain easy to extend when the business later needs forms, CRM connections, automation, dashboards, or AI-assisted workflows.
+
+Websiteli is built around that wider lifecycle rather than treating the website as a one-off design deliverable.
 
 ## My role
 
-I build the platform, content workflow, analytics setup, and production templates. The work connects web development, SEO, marketing automation, static-site performance, and practical AI assistance.
+I design and develop the website architecture, reusable Astro components, multilingual content system, analytics and conversion tracking, SEO structure, deployment workflows, and supporting automation. I also use the project to test practical AI-assisted development workflows while keeping the resulting websites maintainable and owned by the business.
 
-## Featured Capabilities
+## Engineering and SEO focus
 
-- AI Website Generation
-- SEO Optimized
-- CRO Optimized
-- AI Content Generation
-- Google Analytics 4
-- Google Tag Manager
-- Cookie Consent
-- Responsive Design
-- Multilingual
-- Lead Generation
-- Newsletter Integration
-- Performance Optimized
+- Fast static pages with Astro and minimal client-side JavaScript.
+- Clear service, industry, portfolio, pricing, and contact information architecture.
+- Canonical URLs, structured metadata, sitemaps, internal linking, and search-focused content.
+- Multilingual routes with language-specific content and appropriate search signals.
+- Google Analytics 4, Google Tag Manager, Search Console, and conversion-event tracking.
+- GitHub Actions-based validation and deployment workflows.
+- Forms and integrations that can grow into automation or AI-assisted business workflows.
+- Clear separation between real public work and concept/demo portfolio material.
 
-## What the Platform Delivers
+## What the project demonstrates
 
-- SEO and content architecture tailored for discoverability.
-- Conversion-focused page structure and lead capture workflows.
-- Accessibility-conscious components and responsive layouts.
-- Automated content generation and blog management flows.
-- Integrated analytics dashboards and marketing automation hooks.
-- AI-assisted website maintenance and iterative optimization.
+Websiteli combines product positioning, frontend engineering, SEO, analytics, conversion design, content systems, and automation in one continuously improved public website. It is also the umbrella under which I have built public projects such as Orgelia, Before You Trust, Movere Clinic, and other web products.
 
-## Technology Stack
+## Related writing
 
-- Frontend: Astro, TypeScript, HTML, CSS
-- Automation: GitHub Actions, Python
-- Marketing: Google Analytics 4, Google Tag Manager, Search Console
-- Deployment: GitHub Pages with Cloudflare edge support
-
-## Related pages
-
+- [Building Websiteli with Astro: multilingual SEO for a service website](/blog/websiteli-astro-multilingual-seo/)
+- [Website information architecture for small businesses](/blog/websiteli-information-architecture-small-business/)
 - [Personal research website](/projects/personal-website/)
-- [Blog](/blog/)
 - [Contact](/contact/)
