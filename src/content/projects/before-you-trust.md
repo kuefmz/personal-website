@@ -7,7 +7,7 @@ category: "Product"
 tags: ["Search", "Privacy", "Public Web Research", "Trust", "Web Application"]
 technologies: ["Python", "SearXNG", "YaCy", "AWS EC2", "Caddy", "JavaScript", "Google Analytics 4"]
 featured: true
-previewImage: "https://raw.githubusercontent.com/kuefmz/websiteli/main/public/images/portfolio/before-you-trust.webp"
+previewImage: "/images/projects/before-you-trust-desktop.png"
 previewImageAlt: "Screenshot of the Before You Trust public-web research interface"
 previewUrl: "https://www.beforeyoutrust.org/"
 links:

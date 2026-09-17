@@ -7,7 +7,7 @@ category: "Website"
 tags: ["Healthcare", "Web Development", "SEO", "Responsive Design"]
 technologies: ["Astro", "TypeScript", "HTML", "CSS", "SEO", "Responsive Design"]
 featured: false
-previewImage: "https://raw.githubusercontent.com/kuefmz/websiteli/main/public/images/portfolio/movere-clinic.webp"
+previewImage: "/images/projects/movere-clinic-desktop.png"
 previewImageAlt: "Screenshot of the Movere Clinic homepage"
 previewUrl: "https://movereclinic.com/"
 links:

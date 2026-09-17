@@ -7,7 +7,7 @@ category: "Product"
 tags: ["Product Launch", "Astro", "Conversion", "Analytics", "Static Site"]
 technologies: ["Astro", "HTML", "CSS", "JavaScript", "GitHub Pages", "Google Analytics 4", "Google Tag Manager"]
 featured: false
-previewImage: "https://raw.githubusercontent.com/kuefmz/websiteli/main/public/images/portfolio/slap-ai.webp"
+previewImage: "/images/projects/slap-ai-desktop.png"
 previewImageAlt: "Screenshot of the Slap AI product landing page"
 previewUrl: "https://slap-ai.com/"
 links:

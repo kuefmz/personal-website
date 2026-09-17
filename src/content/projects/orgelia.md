@@ -7,7 +7,7 @@ category: "Product"
 tags: ["Product Discovery", "Data Engineering", "Web Scraping", "Entity Resolution", "Multilingual"]
 technologies: ["Astro", "TypeScript", "Python", "PostgreSQL", "JSONL", "Web Scraping", "AWS"]
 featured: true
-previewImage: "https://raw.githubusercontent.com/kuefmz/websiteli/main/public/images/portfolio/orgelia.webp"
+previewImage: "/images/projects/orgelia-desktop.png"
 previewImageAlt: "Screenshot of the Orgelia product and shop discovery website"
 previewUrl: "https://orgelia.com/"
 links:

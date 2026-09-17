@@ -7,7 +7,7 @@ category: "Website"
 tags: ["Semantic Web", "Association", "Academic Website", "Information Architecture"]
 technologies: ["Drupal", "HTML", "CSS", "Google Analytics 4", "GitHub", "DNS"]
 featured: false
-previewImage: "https://raw.githubusercontent.com/kuefmz/websiteli/main/public/images/portfolio/swsa.webp"
+previewImage: "/images/projects/swsa-desktop.png"
 previewImageAlt: "Screenshot of the Semantic Web Science Association homepage"
 previewUrl: "https://swsa.semanticweb.org/"
 links:
