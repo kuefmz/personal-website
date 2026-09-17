@@ -50,6 +50,16 @@ const assert = (condition, message) => {
   if (!condition) failures.push(message);
 };
 
+const registerUnique = (map, value, route, label) => {
+  if (!value) return;
+  const previous = map.get(value);
+  if (previous && previous !== route) {
+    failures.push(`${route}: duplicate ${label} also used by ${previous}`);
+    return;
+  }
+  map.set(value, route);
+};
+
 if (!fs.existsSync(dist)) {
   throw new Error("dist/ does not exist. Run npm run build before npm run test:seo.");
 }
@@ -61,6 +71,9 @@ const sitemapFiles = files.filter((file) => /sitemap.*\.xml$/.test(path.basename
 const sitemapUrls = new Set(
   sitemapFiles.flatMap((file) => [...read(file).matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])),
 );
+const indexableTitles = new Map();
+const indexableDescriptions = new Map();
+const indexableCanonicals = new Map();
 
 for (const file of htmlFiles) {
   const html = read(file);
@@ -95,6 +108,9 @@ for (const file of htmlFiles) {
 
   if (!noindex && canonical) {
     assert(sitemapUrls.has(canonical), `${route}: canonical URL missing from sitemap (${canonical})`);
+    registerUnique(indexableTitles, title, route, "title");
+    registerUnique(indexableDescriptions, description, route, "meta description");
+    registerUnique(indexableCanonicals, canonical, route, "canonical URL");
   }
 
   for (const match of html.matchAll(/\s(?:href|src)=["']([^"']+)["']/g)) {
@@ -134,6 +150,31 @@ for (const file of htmlFiles) {
         `${route}: missing anchor target ${raw}`,
       );
     }
+  }
+}
+
+const robotsFile = path.join(dist, "robots.txt");
+assert(fs.existsSync(robotsFile), "robots.txt: generated file missing");
+if (fs.existsSync(robotsFile)) {
+  const robots = read(robotsFile);
+  assert(/User-agent:\s*\*/i.test(robots), "robots.txt: missing catch-all user agent");
+  assert(/Allow:\s*\//i.test(robots), "robots.txt: site is not explicitly crawlable");
+  assert(
+    robots.includes(`Sitemap: ${site}/sitemap-index.xml`),
+    "robots.txt: missing sitemap-index.xml declaration",
+  );
+}
+
+const sitemapIndexFile = path.join(dist, "sitemap-index.xml");
+assert(fs.existsSync(sitemapIndexFile), "sitemap-index.xml: generated sitemap index missing");
+if (fs.existsSync(sitemapIndexFile)) {
+  const sitemapIndex = read(sitemapIndexFile);
+  const childSitemaps = [...sitemapIndex.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+  assert(childSitemaps.length > 0, "sitemap-index.xml: no child sitemaps declared");
+  for (const child of childSitemaps) {
+    assert(child.startsWith(`${site}/`), `sitemap-index.xml: child sitemap is outside site (${child})`);
+    const childPath = new URL(child).pathname.replace(/^\/+/, "");
+    assert(fs.existsSync(path.join(dist, childPath)), `sitemap-index.xml: missing child sitemap ${child}`);
   }
 }
 

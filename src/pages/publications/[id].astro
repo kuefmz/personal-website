@@ -21,6 +21,13 @@ const relatedProject = publication.data.project
   ? projects.find((project) => project.id === publication.data.project)
   : undefined;
 const canonicalUrl = absoluteUrl(`/publications/${publication.id}/`);
+const toMetaDescription = (text: string, maxLength = 165) => {
+  const normalized = text.replace(/\s+/g, " ").trim();
+  if (normalized.length <= maxLength) return normalized;
+  const shortened = normalized.slice(0, maxLength - 1).replace(/\s+\S*$/, "").trim();
+  return `${shortened}…`;
+};
+const seoDescription = toMetaDescription(publication.data.abstract);
 const structuredData = [
   breadcrumbSchema([
     { name: "Home", url: site.url },
@@ -38,6 +45,7 @@ const structuredData = [
         ? { "@id": `${site.url}/#person` }
         : { "@type": "Person", name: author },
     ),
+    publisher: { "@id": `${site.url}/#person` },
     datePublished: publication.data.date,
     isPartOf: {
       "@type": "CreativeWork",
@@ -45,6 +53,7 @@ const structuredData = [
     },
     keywords: publication.data.keywords,
     url: canonicalUrl,
+    mainEntityOfPage: `${canonicalUrl}#webpage`,
     identifier: publication.data.doi,
     citation: publication.data.citation,
     sameAs: [
@@ -60,6 +69,7 @@ const structuredData = [
 <ContentLayout
   title={publication.data.title}
   description={publication.data.abstract}
+  seoDescription={seoDescription}
   eyebrow={`${publication.data.type} · ${formatContentDate(publication.data.date, true)}`}
   meta={`${publication.data.authors.join(", ")} · ${publication.data.venue}`}
   structuredData={structuredData}

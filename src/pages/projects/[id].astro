@@ -48,21 +48,22 @@ const structuredData = [
     { name: project.data.title, url: canonicalUrl },
   ]),
   {
-  "@type": "CreativeWork",
-  "@id": `${canonicalUrl}#project`,
-  name: project.data.title,
-  headline: project.data.title,
-  description: project.data.description,
-  url: canonicalUrl,
-  creator: { "@id": `${site.url}/#person` },
-  codeRepository: project.data.links.find((link: { href: string }) => link.href.includes("github.com"))?.href,
-  keywords: project.data.tags,
-  genre: project.data.category,
-  about: project.data.tags,
-  sameAs: project.data.links.map((link: { href: string }) => link.href),
-  image: project.data.previewImage ? absoluteUrl(project.data.previewImage) : undefined,
-  dateCreated: project.data.date,
-  dateModified: project.data.date,
+    "@type": "CreativeWork",
+    "@id": `${canonicalUrl}#project`,
+    name: project.data.title,
+    headline: project.data.title,
+    description: project.data.description,
+    url: canonicalUrl,
+    mainEntityOfPage: `${canonicalUrl}#webpage`,
+    creator: { "@id": `${site.url}/#person` },
+    codeRepository: project.data.links.find((link: { href: string }) => link.href.includes("github.com"))?.href,
+    keywords: project.data.tags,
+    genre: project.data.category,
+    about: project.data.tags,
+    sameAs: project.data.links.map((link: { href: string }) => link.href),
+    image: project.data.previewImage ? absoluteUrl(project.data.previewImage) : undefined,
+    dateCreated: project.data.date,
+    dateModified: project.data.date,
   },
 ];
 ---
@@ -70,6 +71,8 @@ const structuredData = [
 <ContentLayout
   title={project.data.title}
   description={project.data.description}
+  image={project.data.previewImage}
+  imageAlt={project.data.previewImageAlt}
   eyebrow={`${project.data.category} project · ${project.data.status}`}
   meta={`${formatContentDate(project.data.date, true)} · ${project.data.technologies.join(" · ")}`}
   structuredData={structuredData}
