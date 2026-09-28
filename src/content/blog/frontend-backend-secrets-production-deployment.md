@@ -174,4 +174,4 @@ Once that distinction is explicit, decisions around API keys, admin routes, paid
 
 For a broader system-integration pattern, see [How to Connect Business Systems with APIs and Webhooks](/blog/custom-api-integration-business-systems/).
 
-Need to productionize a prototype without exposing its internal credentials? [Share the deployment setup here](/contact/#project-request/).
+Need to productionize a prototype without exposing its internal credentials? [Share the deployment setup here](/contact/#project-request).
