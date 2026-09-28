@@ -167,4 +167,4 @@ When SMTP is blocked, the right response is rarely to keep retrying the same por
 
 For another lightweight integration pattern, see [Static Forms with Google Sheets and Apps Script](/blog/static-form-google-sheets-apps-script/).
 
-Need a web workflow to reliably generate and deliver reports, notifications, or leads? [Describe the flow here](/contact/#project-request/).
+Need a web workflow to reliably generate and deliver reports, notifications, or leads? [Describe the flow here](/contact/#project-request).
