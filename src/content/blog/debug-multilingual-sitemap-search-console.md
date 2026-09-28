@@ -180,4 +180,4 @@ Multilingual SEO becomes much easier when every language version is treated as a
 
 The sitemap should then reflect that architecture rather than compensate for it.
 
-Need help untangling multilingual routes, canonicals, or Search Console coverage? [Share the site and symptoms here](/contact/#project-request/).
+Need help untangling multilingual routes, canonicals, or Search Console coverage? [Share the site and symptoms here](/contact/#project-request).
