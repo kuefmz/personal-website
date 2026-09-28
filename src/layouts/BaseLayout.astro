@@ -55,7 +55,7 @@ const schemaGraph = {
   "@graph": [
     personSchema(),
     websiteSchema(),
-    webPageSchema({ canonical, title: pageTitle, description, schemaType }),
+    webPageSchema({ canonical, title: pageTitle, description, schemaType, language: lang }),
     ...extraStructuredData,
   ].map(compactSchema),
 };
