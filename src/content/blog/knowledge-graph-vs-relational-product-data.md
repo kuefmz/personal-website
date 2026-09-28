@@ -204,4 +204,4 @@ A graph can act as the semantic integration layer while a relational database re
 
 For a research-oriented example of structured concepts, see [Software Taxonomy for Research Software](/blog/software-taxonomy-for-research-software/).
 
-Need to model data that is becoming difficult to connect across sources? [Describe the entities and relationships here](/contact/#project-request/).
+Need to model data that is becoming difficult to connect across sources? [Describe the entities and relationships here](/contact/#project-request).
