@@ -24,6 +24,8 @@ interface Props {
   canonicalUrl?: string;
   schemaType?: "WebPage" | "ProfilePage" | "AboutPage" | "CollectionPage" | "ContactPage";
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  lang?: "en" | "de" | "hu";
+  alternates?: Partial<Record<"en" | "de" | "hu" | "x-default", string>>;
 }
 
 const {
@@ -37,6 +39,8 @@ const {
   canonicalUrl,
   schemaType = "WebPage",
   structuredData,
+  lang = "en",
+  alternates,
 } = Astro.props;
 const pageTitle = title ? (titleSuffix ? `${title} | ${site.shortName}` : title) : `${site.name} | ${site.title}`;
 const canonical = canonicalUrl ? ensureTrailingSlash(canonicalUrl) : buildCanonicalUrl(Astro.url.pathname);
@@ -44,19 +48,21 @@ const imageUrl = new URL(image, site.url);
 const extraStructuredData = structuredData
   ? (Array.isArray(structuredData) ? structuredData : [structuredData]).map(stripSchemaContext)
   : [];
+const ogLocale = lang === "de" ? "de_DE" : lang === "hu" ? "hu_HU" : "en_US";
+const skipLabel = lang === "de" ? "Zum Inhalt springen" : lang === "hu" ? "Ugrás a tartalomra" : "Skip to content";
 const schemaGraph = {
   "@context": "https://schema.org",
   "@graph": [
     personSchema(),
     websiteSchema(),
-    webPageSchema({ canonical, title: pageTitle, description, schemaType }),
+    webPageSchema({ canonical, title: pageTitle, description, schemaType, language: lang }),
     ...extraStructuredData,
   ].map(compactSchema),
 };
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang={lang} data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -101,11 +107,14 @@ const schemaGraph = {
     <meta name="description" content={description} />
     <meta name="p:domain_verify" content="4da6a77cba9a605b2f821a2d71bf138c" />
     <link rel="canonical" href={canonical} />
+    {alternates && Object.entries(alternates).map(([hreflang, href]) => (
+      <link rel="alternate" hreflang={hreflang} href={new URL(href, site.url)} />
+    ))}
     <link rel="icon" href="/favicon.ico?v=3" sizes="any" />
     <meta name="theme-color" content="#f8f5f7" />
     <link rel="alternate" type="application/rss+xml" title={`${site.shortName} RSS`} href="/rss.xml" />
     <meta property="og:type" content={type} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:site_name" content={site.shortName} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -151,7 +160,7 @@ const schemaGraph = {
         });
       })();
     </script>
-    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a class="skip-link" href="#main-content">{skipLabel}</a>
     <Header />
     <main id="main-content">
       <slot />

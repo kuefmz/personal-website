@@ -81,7 +81,7 @@ export const websiteSchema = (): JsonLd => ({
   alternateName: site.shortName,
   url: site.url,
   description: site.description,
-  inLanguage: "en",
+  inLanguage: ["en", "de", "hu"],
   publisher: { "@id": personId },
 });
 
@@ -90,11 +90,13 @@ export const webPageSchema = ({
   title,
   description,
   schemaType = "WebPage",
+  language = "en",
 }: {
   canonical: string;
   title: string;
   description: string;
   schemaType?: string;
+  language?: string;
 }): JsonLd =>
   compactSchema({
     "@type": schemaType,
@@ -102,7 +104,7 @@ export const webPageSchema = ({
     url: canonical,
     name: title,
     description,
-    inLanguage: "en",
+    inLanguage: language,
     isPartOf: { "@id": websiteId },
     about: { "@id": personId },
     mainEntity: schemaType === "ProfilePage" || schemaType === "AboutPage" ? { "@id": personId } : undefined,

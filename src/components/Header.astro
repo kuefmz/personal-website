@@ -1,14 +1,26 @@
 ---
 import Icon from "./Icon.astro";
 import BrandMark from "./BrandMark.astro";
-import { navigation } from "../data/site";
-
 const pathname = Astro.url.pathname;
+const locale = pathname === "/de/" || pathname.startsWith("/de/") ? "de" : pathname === "/hu/" || pathname.startsWith("/hu/") ? "hu" : "en";
+const homeHref = locale === "de" ? "/de/" : locale === "hu" ? "/hu/" : "/";
+const labels = {
+  en: { about: "About", projects: "Projects", research: "Research", publications: "Publications", blog: "Blog", contact: "Contact", nav: "Main navigation" },
+  de: { about: "Über mich", projects: "Projekte", research: "Forschung", publications: "Publikationen", blog: "Blog", contact: "Kontakt", nav: "Hauptnavigation" },
+  hu: { about: "Rólam", projects: "Projektek", research: "Kutatás", publications: "Publikációk", blog: "Blog", contact: "Kapcsolat", nav: "Fő navigáció" },
+}[locale];
+const localizedNavigation = [
+  { href: "/about/", label: labels.about },
+  { href: "/projects/", label: labels.projects },
+  { href: "/research/", label: labels.research },
+  { href: "/publications/", label: labels.publications },
+  { href: "/blog/", label: labels.blog },
+];
 ---
 
 <header class="site-header">
   <div class="shell header-inner">
-    <a class="brand" href="/" aria-label="Jenifer Ciuciu-Kiss, home">
+    <a class="brand" href={homeHref} aria-label="Jenifer Ciuciu-Kiss, home">
       <BrandMark size={36} />
       <span class="brand-name">Jenifer<br />Ciuciu-Kiss</span>
     </a>
@@ -19,9 +31,9 @@ const pathname = Astro.url.pathname;
       <span class="sr-only">Toggle navigation</span>
     </button>
 
-    <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+    <nav id="site-nav" class="site-nav" aria-label={labels.nav}>
       {
-        navigation.map(({ href, label }) => (
+        localizedNavigation.map(({ href, label }) => (
       <a
         href={href}
         aria-current={pathname.startsWith(href) ? "page" : undefined}
@@ -32,6 +44,11 @@ const pathname = Astro.url.pathname;
       </a>
         ))
       }
+      <div class="language-switcher" aria-label="Language">
+        <a href="/" aria-current={locale === "en" ? "page" : undefined}>EN</a>
+        <a href="/de/" aria-current={locale === "de" ? "page" : undefined}>DE</a>
+        <a href="/hu/" aria-current={locale === "hu" ? "page" : undefined}>HU</a>
+      </div>
       <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme">
         <Icon name="bulb" size={18} />
       </button>
@@ -41,7 +58,7 @@ const pathname = Astro.url.pathname;
         data-analytics-event="contact_click"
         data-analytics-location="header"
       >
-        Contact <Icon name="arrow" size={16} />
+        {labels.contact} <Icon name="arrow" size={16} />
       </a>
     </nav>
   </div>
@@ -133,6 +150,27 @@ const pathname = Astro.url.pathname;
   .site-nav > a:hover,
   .site-nav > a[aria-current="page"] {
     color: var(--ink);
+  }
+
+  .language-switcher {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .language-switcher a {
+    padding: 5px 6px;
+    border-radius: 6px;
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-decoration: none;
+  }
+
+  .language-switcher a:hover,
+  .language-switcher a[aria-current="page"] {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
   }
 
   .theme-toggle {
