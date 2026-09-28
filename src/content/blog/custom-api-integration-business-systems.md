@@ -184,4 +184,4 @@ It also scales from a simple form-to-email connection to more complex CRM, repor
 
 For a lightweight version of this pattern, see [Static Forms with Google Sheets and Apps Script](/blog/static-form-google-sheets-apps-script/).
 
-Need several business tools to work as one workflow? [Describe the systems and desired outcome here](/contact/#project-request/).
+Need several business tools to work as one workflow? [Describe the systems and desired outcome here](/contact/#project-request).
