@@ -172,4 +172,4 @@ The core engineering challenge is therefore not "adding an LLM." It is building 
 
 For another document-processing challenge, see [Extracting PDF Sections When Headings Are Missing](/blog/pdf-section-extraction-missing-headings/).
 
-Need to turn a document-heavy workflow into a searchable internal tool? [Start with the project context here](/contact/#project-request/).
+Need to turn a document-heavy workflow into a searchable internal tool? [Start with the project context here](/contact/#project-request).
