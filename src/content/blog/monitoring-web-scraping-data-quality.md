@@ -189,4 +189,4 @@ It is about making failures **visible, diagnosable, and containable**.
 
 Once monitoring is treated as part of the scraper rather than a separate afterthought, maintenance becomes much more predictable.
 
-Need a data-collection pipeline that can run repeatedly without manual checking? [Describe the sources and required output here](/contact/#project-request/).
+Need a data-collection pipeline that can run repeatedly without manual checking? [Describe the sources and required output here](/contact/#project-request).
