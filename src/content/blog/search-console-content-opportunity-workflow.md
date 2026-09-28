@@ -193,4 +193,4 @@ This creates an evidence-based content loop instead of publishing blindly.
 
 For multilingual sites, combine this with [How to Debug a Multilingual Sitemap When Google Is Missing Pages](/blog/debug-multilingual-sitemap-search-console/).
 
-Need help turning search data into a concrete technical and content backlog? [Share the current site and goal here](/contact/#project-request/).
+Need help turning search data into a concrete technical and content backlog? [Share the current site and goal here](/contact/#project-request).
