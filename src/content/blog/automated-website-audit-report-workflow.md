@@ -177,4 +177,4 @@ The biggest improvement usually comes from **making the process explicit before 
 
 For a related example of building lightweight web workflows, see [Static Forms with Google Sheets and Apps Script](/blog/static-form-google-sheets-apps-script/).
 
-Have a similar workflow that is still being handled manually? [A project request can be sent here](/contact/#project-request/).
+Have a similar workflow that is still being handled manually? [A project request can be sent here](/contact/#project-request).
