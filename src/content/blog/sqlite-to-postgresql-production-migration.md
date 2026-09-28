@@ -170,4 +170,4 @@ Migrate when the application needs **durability, concurrency, managed operations
 
 That keeps prototypes simple while giving production systems a clear upgrade path.
 
-Need to move a prototype into a durable production setup? [Share the current architecture here](/contact/#project-request/).
+Need to move a prototype into a durable production setup? [Share the current architecture here](/contact/#project-request).
