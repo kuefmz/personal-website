@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Websiteli browser mockup</title>
+  <desc id="desc">A rounded browser mockup showing a modern landing page for Websiteli.</desc>
+  <defs>
+    <linearGradient id="bg" x1="80" y1="70" x2="1200" y2="680" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F1B3A"/>
+      <stop offset="1" stop-color="#1F5EA8"/>
+    </linearGradient>
+    <linearGradient id="hero" x1="180" y1="220" x2="1100" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3F7FF"/>
+      <stop offset="1" stop-color="#E7F1FF"/>
+    </linearGradient>
+    <linearGradient id="cta" x1="0" y1="0" x2="220" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B4ED8"/>
+      <stop offset="1" stop-color="#1D7FFF"/>
+    </linearGradient>
+    <filter id="shadow" x="70" y="48" width="1140" height="644" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#061127" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="720" fill="#EEF3FA"/>
+  <rect x="78" y="58" width="1124" height="620" rx="24" fill="#FFFFFF" filter="url(#shadow)"/>
+  <rect x="78" y="58" width="1124" height="52" rx="24" fill="#F6F8FC"/>
+  <rect x="78" y="86" width="1124" height="592" rx="0" fill="#FFFFFF"/>
+
+  <circle cx="116" cy="84" r="6" fill="#FF6F61"/>
+  <circle cx="138" cy="84" r="6" fill="#FFB347"/>
+  <circle cx="160" cy="84" r="6" fill="#4CD964"/>
+  <rect x="190" y="72" width="760" height="24" rx="12" fill="#E9EEF7"/>
+
+  <rect x="122" y="140" width="1036" height="492" rx="20" fill="url(#bg)"/>
+  <rect x="156" y="174" width="968" height="312" rx="18" fill="url(#hero)"/>
+
+  <rect x="190" y="214" width="110" height="24" rx="12" fill="#DAE9FF"/>
+  <rect x="190" y="256" width="428" height="24" rx="12" fill="#12366E" fill-opacity="0.16"/>
+  <rect x="190" y="292" width="548" height="24" rx="12" fill="#12366E" fill-opacity="0.12"/>
+  <rect x="190" y="328" width="388" height="24" rx="12" fill="#12366E" fill-opacity="0.12"/>
+
+  <rect x="190" y="382" width="220" height="52" rx="10" fill="url(#cta)"/>
+  <rect x="428" y="382" width="220" height="52" rx="10" fill="#FFFFFF" stroke="#BBD2F7"/>
+
+  <rect x="778" y="214" width="312" height="220" rx="14" fill="#FFFFFF" stroke="#D4E3FB"/>
+  <rect x="804" y="242" width="102" height="16" rx="8" fill="#D5E6FF"/>
+  <rect x="804" y="272" width="190" height="12" rx="6" fill="#E7F1FF"/>
+  <rect x="804" y="296" width="238" height="12" rx="6" fill="#E7F1FF"/>
+  <rect x="804" y="320" width="170" height="12" rx="6" fill="#E7F1FF"/>
+  <rect x="804" y="356" width="132" height="34" rx="8" fill="#0B4ED8"/>
+
+  <rect x="156" y="512" width="300" height="90" rx="12" fill="#FFFFFF" fill-opacity="0.96"/>
+  <rect x="174" y="532" width="84" height="12" rx="6" fill="#D7E8FF"/>
+  <rect x="174" y="556" width="220" height="10" rx="5" fill="#E7F1FF"/>
+  <rect x="174" y="576" width="184" height="10" rx="5" fill="#E7F1FF"/>
+
+  <rect x="478" y="512" width="300" height="90" rx="12" fill="#FFFFFF" fill-opacity="0.96"/>
+  <rect x="496" y="532" width="84" height="12" rx="6" fill="#D7E8FF"/>
+  <rect x="496" y="556" width="220" height="10" rx="5" fill="#E7F1FF"/>
+  <rect x="496" y="576" width="184" height="10" rx="5" fill="#E7F1FF"/>
+
+  <rect x="800" y="512" width="300" height="90" rx="12" fill="#FFFFFF" fill-opacity="0.96"/>
+  <rect x="818" y="532" width="84" height="12" rx="6" fill="#D7E8FF"/>
+  <rect x="818" y="556" width="220" height="10" rx="5" fill="#E7F1FF"/>
+  <rect x="818" y="576" width="184" height="10" rx="5" fill="#E7F1FF"/>
+</svg>

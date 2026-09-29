@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="en" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="index,follow"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XRDRCV5VWZ"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XRDRCV5VWZ");
+    </script><!-- Google Tag Manager --><script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        const f = d.getElementsByTagName(s)[0];
+        const j = d.createElement(s);
+        const dl = l != "dataLayer" ? `&l=${l}` : "";
+        j.async = true;
+        j.src = `https://www.googletagmanager.com/gtm.js?id=${i}${dl}`;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-MVM293DW");
+    </script><!-- End Google Tag Manager --><script>
+      (() => {
+        try {
+          const savedTheme = localStorage.getItem("site-theme-v2");
+          document.documentElement.dataset.theme = savedTheme === "dark" ? "dark" : "light";
+        } catch {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script><meta name="generator" content="Astro v6.4.8"><title>How to Keep API Keys and Admin Secrets Safe in a Frontend + Backend App | Jenifer Ciuciu-Kiss</title><meta name="description" content="A practical deployment pattern for keeping API keys, database credentials, and admin secrets out of public frontend code."><meta name="p:domain_verify" content="4da6a77cba9a605b2f821a2d71bf138c"><link rel="canonical" href="https://jeniferciuciukiss.com/blog/frontend-backend-secrets-production-deployment/"><link rel="icon" href="/favicon.ico?v=3" sizes="any"><meta name="theme-color" content="#f8f5f7"><link rel="alternate" type="application/rss+xml" title="Jenifer Ciuciu-Kiss RSS" href="/rss.xml"><meta property="og:type" content="article"><meta property="og:locale" content="en_US"><meta property="og:site_name" content="Jenifer Ciuciu-Kiss"><meta property="og:title" content="How to Keep API Keys and Admin Secrets Safe in a Frontend + Backend App | Jenifer Ciuciu-Kiss"><meta property="og:description" content="A practical deployment pattern for keeping API keys, database credentials, and admin secrets out of public frontend code."><meta property="og:url" content="https://jeniferciuciukiss.com/blog/frontend-backend-secrets-production-deployment/"><meta property="og:image" content="https://jeniferciuciukiss.com/images/og-default.svg"><meta property="og:image:alt" content="Jenifer Ciuciu-Kiss website preview"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="How to Keep API Keys and Admin Secrets Safe in a Frontend + Backend App | Jenifer Ciuciu-Kiss"><meta name="twitter:description" content="A practical deployment pattern for keeping API keys, database credentials, and admin secrets out of public frontend code."><meta name="twitter:image" content="https://jeniferciuciukiss.com/images/og-default.svg"><meta name="twitter:image:alt" content="Jenifer Ciuciu-Kiss website preview"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://jeniferciuciukiss.com/#person","name":"Jenifer Tabita Ciuciu-Kiss","alternateName":"Jenifer Ciuciu-Kiss","url":"https://jeniferciuciukiss.com","image":"https://jeniferciuciukiss.com/images/jenifer-ciuciu-kiss.jpg","email":"mailto:jenifer.tabita.ciuciu.kiss@gmail.com","jobTitle":["AI Engineer","Data Engineer","Machine Learning Engineer","PhD Candidate in Artificial Intelligence"],"description":"Jenifer Tabita Ciuciu-Kiss is an AI and Data Engineer in Zurich working on machine learning, LLM systems, RAG, data pipelines, knowledge graphs, and applied AI research.","homeLocation":{"@type":"Place","name":"Zurich, Switzerland","address":{"@type":"PostalAddress","addressLocality":"Zurich","addressCountry":"CH"}},"worksFor":{"@type":"Organization","name":"UBS"},"affiliation":[{"@type":"CollegeOrUniversity","name":"Universidad Politecnica de Madrid"},{"@type":"Organization","name":"Ontology Engineering Group"}],"sameAs":["https://www.linkedin.com/in/jenifer-tabita-ciuciu-kiss/","https://github.com/kuefmz","https://orcid.org/0000-0002-3170-6730","https://scholar.google.com/citations?user=G86xVZ0AAAAJ&hl=en","https://www.researchgate.net/profile/Jenifer-Ciuciu-Kiss"],"knowsAbout":["Artificial Intelligence","Data Engineering","Machine Learning","Natural Language Processing","Large Language Models","Retrieval-Augmented Generation","Document AI","OCR","Knowledge Graphs","Ontology Engineering","Semantic Web","Research Software Classification","Scientific Knowledge Graphs","Python","Data Pipelines","Technical Teaching"]},{"@type":"WebSite","@id":"https://jeniferciuciukiss.com/#website","name":"Jenifer Tabita Ciuciu-Kiss","alternateName":"Jenifer Ciuciu-Kiss","url":"https://jeniferciuciukiss.com","description":"Jenifer Tabita Ciuciu-Kiss is an AI and Data Engineer in Zurich working on machine learning, LLM systems, RAG, data pipelines, knowledge graphs, and applied AI research.","inLanguage":["en","de","hu"],"publisher":{"@id":"https://jeniferciuciukiss.com/#person"}},{"@type":"WebPage","@id":"https://jeniferciuciukiss.com/blog/frontend-backend-secrets-production-deployment/#webpage","url":"https://jeniferciuciukiss.com/blog/frontend-backend-secrets-production-deployment/","name":"How to Keep API Keys and Admin Secrets Safe in a Frontend + Backend App | Jenifer Ciuciu-Kiss","description":"A practical deployment pattern for keeping API keys, database credentials, and admin secrets out of public frontend code.","inLanguage":"en","isPartOf":{"@id":"https://jeniferciuciukiss.com/#website"},"about":{"@id":"https://jeniferciuciukiss.com/#person"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jeniferciuciukiss.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://jeniferciuciukiss.com/blog/"},{"@type":"ListItem","position":3,"name":"How to Keep API Keys and Admin Secrets Safe in a Frontend + Backend App","item":"https://jeniferciuciukiss.com/blog/frontend-backend-secrets-production-deployment/"}]},{"@type":"Article","@id":"https://jeniferciuciukiss.com/blog/frontend-backend-secrets-production-deployment/#article","headline":"How to Keep API Keys and Admin Secrets Safe in a Frontend + Backend App","description":"A practical deployment pattern for keeping API keys, database credentials, and admin secrets out of public frontend code.","author":{"@id":"https://jeniferciuciukiss.com/#person"},"publisher":{"@id":"https://jeniferciuciukiss.com/#person"},"datePublished":"2026-09-24T00:00:00.000Z","dateModified":"2026-09-24T00:00:00.000Z","keywords":["API Security","Environment Variables","Frontend","Backend","Deployment"],"articleSection":"Web Engineering","mainEntityOfPage":"https://jeniferciuciukiss.com/blog/frontend-backend-secrets-production-deployment/#webpage","url":"https://jeniferciuciukiss.com/blog/frontend-backend-secrets-production-deployment/"}]}</script><style>.content-header[data-astro-cid-scuu7fyy]{padding-bottom:48px}.content-description[data-astro-cid-scuu7fyy]{max-width:720px;margin:24px 0 0;color:var(--muted);font-size:clamp(1.05rem,1.7vw,1.25rem)}.content-meta[data-astro-cid-scuu7fyy]{margin:22px 0 0;color:var(--faint);font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase}.content-body[data-astro-cid-scuu7fyy]{padding-bottom:clamp(64px,8vw,112px)}
+</style><link rel="stylesheet" href="/_astro/BaseLayout.x8EweME4.css"><style>.toc[data-astro-cid-gsbvazvt]{display:flex;padding:20px 0;margin-bottom:48px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);flex-direction:column;gap:5px}.toc[data-astro-cid-gsbvazvt] p[data-astro-cid-gsbvazvt]{margin:0 0 8px;color:var(--faint);font-family:var(--font-mono);font-size:.65rem;text-transform:uppercase}.toc[data-astro-cid-gsbvazvt] a[data-astro-cid-gsbvazvt]{color:var(--muted);font-size:.82rem;text-decoration:none}.toc[data-astro-cid-gsbvazvt] a[data-astro-cid-gsbvazvt]:hover{color:var(--accent-dark)}.original[data-astro-cid-gsbvazvt]{padding-top:28px;margin-top:64px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}.original[data-astro-cid-gsbvazvt] a[data-astro-cid-gsbvazvt]{display:inline-flex;align-items:center;gap:5px}.related-posts[data-astro-cid-gsbvazvt]{padding-top:28px;margin-top:54px;border-top:1px solid var(--line)}.related-posts[data-astro-cid-gsbvazvt] ul[data-astro-cid-gsbvazvt]{padding:0;margin:18px 0 0;list-style:none}.related-posts[data-astro-cid-gsbvazvt] li[data-astro-cid-gsbvazvt]{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--line)}.related-posts[data-astro-cid-gsbvazvt] span[data-astro-cid-gsbvazvt]{color:var(--faint);font-family:var(--font-mono);font-size:.66rem;text-transform:uppercase}
+</style></head> <body> <!-- Google Tag Manager (noscript) --> <noscript> <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MVM293DW" height="0" width="0" style="display:none;visibility:hidden"></iframe> </noscript> <!-- End Google Tag Manager (noscript) --> <script>
+      (() => {
+        const pushAnalyticsEvent = (target) => {
+          const eventName = target.dataset.analyticsEvent;
+          if (!eventName) return;
+
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: eventName,
+            link_text: target.textContent?.trim() || target.getAttribute("aria-label") || "",
+            link_url: target.href || target.getAttribute("href") || "",
+            location: target.dataset.analyticsLocation || "",
+          });
+        };
+
+        document.addEventListener("click", (event) => {
+          const target = event.target?.closest?.("[data-analytics-event]");
+          if (target) pushAnalyticsEvent(target);
+        });
+      })();
+    </script> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header" data-astro-cid-3ef6ksr2> <div class="shell header-inner" data-astro-cid-3ef6ksr2> <a class="brand" href="/" aria-label="Jenifer Ciuciu-Kiss, home" data-astro-cid-3ef6ksr2> <img class="brand-symbol" src="/images/logo.png" alt="JK Logo" width="36" height="36" data-astro-cid-hwn4xkzs> <span class="brand-name" data-astro-cid-3ef6ksr2>Jenifer<br data-astro-cid-3ef6ksr2>Ciuciu-Kiss</span> </a> <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav" data-astro-cid-3ef6ksr2> <span class="menu-open" data-astro-cid-3ef6ksr2><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 17h16"/></svg></span> <span class="menu-close" data-astro-cid-3ef6ksr2><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12M18 6 6 18"/></svg></span> <span class="sr-only" data-astro-cid-3ef6ksr2>Toggle navigation</span> </button> <nav id="site-nav" class="site-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/about/" data-analytics-event="navigation_click" data-analytics-location="header" data-astro-cid-3ef6ksr2> About </a><a href="/projects/" data-analytics-event="navigation_click" data-analytics-location="header" data-astro-cid-3ef6ksr2> Projects </a><a href="/research/" data-analytics-event="navigation_click" data-analytics-location="header" data-astro-cid-3ef6ksr2> Research </a><a href="/publications/" data-analytics-event="navigation_click" data-analytics-location="header" data-astro-cid-3ef6ksr2> Publications </a><a href="/blog/" aria-current="page" data-analytics-event="navigation_click" data-analytics-location="header" data-astro-cid-3ef6ksr2> Blog </a> <div class="language-switcher" aria-label="Language" data-astro-cid-3ef6ksr2> <a href="/" aria-current="page" data-astro-cid-3ef6ksr2>EN</a> <a href="/de/" data-astro-cid-3ef6ksr2>DE</a> <a href="/hu/" data-astro-cid-3ef6ksr2>HU</a> </div> <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme" data-astro-cid-3ef6ksr2> <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M8.2 14.7A7 7 0 1 1 15.8 14.7C14.7 15.5 14 16.6 14 18h-4c0-1.4-.7-2.5-1.8-3.3Z"/></svg> </button> <a class="nav-contact" href="/contact/" data-analytics-event="contact_click" data-analytics-location="header" data-astro-cid-3ef6ksr2> Contact <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg> </a> </nav> </div> </header> <script type="module">const n=document.querySelector(".menu-toggle"),a=document.querySelector("#site-nav"),e=document.querySelector(".theme-toggle"),c=()=>{const t=document.documentElement.dataset.theme==="light",o=t?"Switch to dark theme":"Switch to light theme";e?.setAttribute("aria-label",o),e?.setAttribute("title",o),e?.classList.toggle("is-light",t)};n?.addEventListener("click",()=>{const t=n.getAttribute("aria-expanded")==="true";n.setAttribute("aria-expanded",String(!t)),a?.classList.toggle("is-open",!t)});e?.addEventListener("click",()=>{const t=document.documentElement.dataset.theme==="light"?"dark":"light";document.documentElement.dataset.theme=t;try{localStorage.setItem("site-theme-v2",t)}catch{}c()});c();</script> <main id="main-content">  <header class="content-header section" data-astro-cid-scuu7fyy> <div class="narrow" data-astro-cid-scuu7fyy> <p class="eyebrow" data-astro-cid-scuu7fyy>Web Engineering</p> <h1 class="page-title" data-astro-cid-scuu7fyy>How to Keep API Keys and Admin Secrets Safe in a Frontend + Backend App</h1> <p class="content-description" data-astro-cid-scuu7fyy>A practical deployment pattern for keeping API keys, database credentials, and admin secrets out of public frontend code.</p> <p class="content-meta" data-astro-cid-scuu7fyy>September 24, 2026 · 4 min read</p> </div> </header> <div class="narrow content-body" data-astro-cid-scuu7fyy> <article class="prose" data-astro-cid-scuu7fyy> <nav class="toc" aria-label="Table of contents" data-astro-cid-gsbvazvt> <p data-astro-cid-gsbvazvt>On this page</p> <a href="#public-and-private-configuration-are-different" data-astro-cid-gsbvazvt>Public and private configuration are different</a><a href="#privileged-operations-belong-behind-the-backend" data-astro-cid-gsbvazvt>Privileged operations belong behind the backend</a><a href="#admin-endpoints-need-more-than-an-obscure-url" data-astro-cid-gsbvazvt>Admin endpoints need more than an obscure URL</a><a href="#never-put-an-admin-secret-in-frontend-code" data-astro-cid-gsbvazvt>Never put an admin secret in frontend code</a><a href="#use-environment-variables-deliberately" data-astro-cid-gsbvazvt>Use environment variables deliberately</a><a href="#cors-is-not-authentication" data-astro-cid-gsbvazvt>CORS is not authentication</a><a href="#validate-every-public-request" data-astro-cid-gsbvazvt>Validate every public request</a><a href="#protect-expensive-operations" data-astro-cid-gsbvazvt>Protect expensive operations</a><a href="#keep-logs-useful-but-sanitized" data-astro-cid-gsbvazvt>Keep logs useful but sanitized</a><a href="#the-deployment-boundary-is-the-key-concept" data-astro-cid-gsbvazvt>The deployment boundary is the key concept</a> </nav><p>Modern small web applications are often split into two deployments:</p>
+<ul>
+<li>a static frontend;</li>
+<li>a hosted backend API.</li>
+</ul>
+<p>This is a clean architecture, but it creates an important security boundary.</p>
+<p><strong>Anything shipped to the browser must be treated as public.</strong></p>
+<p>That includes JavaScript bundles, HTML, network calls, and frontend environment variables that are compiled into the build.</p>
+<h2 id="public-and-private-configuration-are-different">Public and private configuration are different</h2>
+<p>A public frontend may safely contain information such as:</p>
+<ul>
+<li>the backend API URL;</li>
+<li>public analytics IDs;</li>
+<li>public feature flags;</li>
+<li>non-secret application metadata.</li>
+</ul>
+<p>It should not contain:</p>
+<ul>
+<li>database passwords;</li>
+<li>admin tokens;</li>
+<li>private API keys;</li>
+<li>SMTP credentials;</li>
+<li>service-account secrets;</li>
+<li>internal webhook secrets.</li>
+</ul>
+<p>A variable being stored in a deployment dashboard does not automatically make it secret. If the frontend build embeds it in JavaScript, users can inspect it.</p>
+<h2 id="privileged-operations-belong-behind-the-backend">Privileged operations belong behind the backend</h2>
+<p>Suppose a page needs to generate a report using a paid external API.</p>
+<p>The unsafe pattern is:</p>
+<p><code>Browser -> external API with private key</code></p>
+<p>The safer pattern is:</p>
+<p><code>Browser -> application backend -> external API</code></p>
+<p>The backend can then:</p>
+<ul>
+<li>hold the key privately;</li>
+<li>validate requests;</li>
+<li>rate-limit usage;</li>
+<li>sanitize inputs;</li>
+<li>log failures;</li>
+<li>return only the required result.</li>
+</ul>
+<p>This also makes it easier to replace providers later.</p>
+<h2 id="admin-endpoints-need-more-than-an-obscure-url">Admin endpoints need more than an obscure URL</h2>
+<p>An endpoint such as <code>/admin/history</code> is not protected simply because users are unlikely to guess it.</p>
+<p>Administrative operations should require explicit authorization.</p>
+<p>For a small internal tool, this might begin with a strong server-side admin secret.</p>
+<p>More mature systems may use:</p>
+<ul>
+<li>authenticated user accounts;</li>
+<li>OAuth/OIDC;</li>
+<li>role-based permissions;</li>
+<li>signed sessions;</li>
+<li>IP restrictions;</li>
+<li>VPN access.</li>
+</ul>
+<p>The appropriate level depends on the risk and audience.</p>
+<h2 id="never-put-an-admin-secret-in-frontend-code">Never put an admin secret in frontend code</h2>
+<p>If a browser needs to send an admin secret, every person using that page can potentially inspect it.</p>
+<p>A safer admin interface requires an authentication flow that produces a limited session or token rather than exposing the underlying service secret.</p>
+<p>For very small tools, keeping the admin functionality server-side or inaccessible from the public frontend may be simpler.</p>
+<h2 id="use-environment-variables-deliberately">Use environment variables deliberately</h2>
+<p>Backend secrets belong in the hosting platform’s secret/environment configuration.</p>
+<p>Useful practices include:</p>
+<ul>
+<li>different values for development and production;</li>
+<li>no secrets committed to Git;</li>
+<li>no secrets in screenshots or documentation;</li>
+<li>regular rotation;</li>
+<li>least-privilege credentials;</li>
+<li>clear naming.</li>
+</ul>
+<p>A <code>.env.example</code> file can document required variable names without containing real values.</p>
+<h2 id="cors-is-not-authentication">CORS is not authentication</h2>
+<p>Cross-Origin Resource Sharing controls which browser origins may make certain requests.</p>
+<p>It does not prove who the caller is.</p>
+<p>CORS can reduce accidental browser access, but it does not replace:</p>
+<ul>
+<li>authentication;</li>
+<li>authorization;</li>
+<li>request validation;</li>
+<li>rate limiting.</li>
+</ul>
+<p>Server-to-server callers do not need to respect browser CORS rules.</p>
+<h2 id="validate-every-public-request">Validate every public request</h2>
+<p>A public backend endpoint should assume that requests can be manipulated.</p>
+<p>Validate:</p>
+<ul>
+<li>types;</li>
+<li>lengths;</li>
+<li>allowed values;</li>
+<li>URLs;</li>
+<li>required fields;</li>
+<li>file sizes;</li>
+<li>pagination limits.</li>
+</ul>
+<p>This protects both the application and any paid services behind it.</p>
+<h2 id="protect-expensive-operations">Protect expensive operations</h2>
+<p>AI calls, crawlers, report generation, and large database queries can create real cost.</p>
+<p>Useful controls include:</p>
+<ul>
+<li>per-IP or per-user rate limits;</li>
+<li>job quotas;</li>
+<li>maximum input size;</li>
+<li>timeouts;</li>
+<li>caching;</li>
+<li>duplicate-request detection;</li>
+<li>queue limits.</li>
+</ul>
+<p>Security and cost control often overlap.</p>
+<h2 id="keep-logs-useful-but-sanitized">Keep logs useful but sanitized</h2>
+<p>Logs should help answer what happened without leaking private data.</p>
+<p>Avoid writing:</p>
+<ul>
+<li>passwords;</li>
+<li>access tokens;</li>
+<li>complete API keys;</li>
+<li>sensitive form contents;</li>
+<li>database connection strings.</li>
+</ul>
+<p>Structured logs with request IDs and status codes are usually more useful than dumping entire request objects.</p>
+<h2 id="the-deployment-boundary-is-the-key-concept">The deployment boundary is the key concept</h2>
+<p>The frontend is a public client.</p>
+<p>The backend is the trusted execution environment.</p>
+<p>Once that distinction is explicit, decisions around API keys, admin routes, paid services, and database access become much clearer.</p>
+<p>For a broader system-integration pattern, see <a href="/blog/custom-api-integration-business-systems/">How to Connect Business Systems with APIs and Webhooks</a>.</p>
+<p>Need to productionize a prototype without exposing its internal credentials? <a href="/contact/#project-request">Share the deployment setup here</a>.</p> <section class="related-posts" aria-labelledby="related-posts" data-astro-cid-gsbvazvt> <h2 id="related-posts" data-astro-cid-gsbvazvt>Related posts</h2> <ul data-astro-cid-gsbvazvt> <li data-astro-cid-gsbvazvt> <a href="/blog/search-console-content-opportunity-workflow/" data-astro-cid-gsbvazvt>How to Use Google Search Console to Decide What Content to Improve Next</a> <span data-astro-cid-gsbvazvt>Web Engineering</span> </li><li data-astro-cid-gsbvazvt> <a href="/blog/debug-multilingual-sitemap-search-console/" data-astro-cid-gsbvazvt>How to Debug a Multilingual Sitemap When Google Is Missing Pages</a> <span data-astro-cid-gsbvazvt>Web Engineering</span> </li><li data-astro-cid-gsbvazvt> <a href="/blog/transactional-email-when-smtp-is-blocked/" data-astro-cid-gsbvazvt>How to Send Transactional Email When a Hosting Platform Blocks SMTP</a> <span data-astro-cid-gsbvazvt>Web Engineering</span> </li> </ul> </section> </article> </div>  </main> <footer class="footer" data-astro-cid-sz7xmlte> <div class="shell footer-grid" data-astro-cid-sz7xmlte> <div data-astro-cid-sz7xmlte> <p class="footer-kicker" data-astro-cid-sz7xmlte>AI · Knowledge Graphs · Ontology Engineering</p> <p class="footer-title" data-astro-cid-sz7xmlte>Building intelligent systems from complex knowledge.</p> </div> <div class="footer-nav" data-astro-cid-sz7xmlte> <p class="footer-label" data-astro-cid-sz7xmlte>Explore</p> <a href="/about/" data-analytics-event="navigation_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>About</a><a href="/projects/" data-analytics-event="navigation_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>Projects</a><a href="/research/" data-analytics-event="navigation_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>Research</a><a href="/publications/" data-analytics-event="navigation_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>Publications</a><a href="/blog/" data-analytics-event="navigation_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>Blog</a> </div> <div class="footer-nav" data-astro-cid-sz7xmlte> <p class="footer-label" data-astro-cid-sz7xmlte>Connect</p> <a href="https://www.linkedin.com/in/jenifer-tabita-ciuciu-kiss/" target="_blank" rel="noreferrer" data-analytics-event="linkedin_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>LinkedIn <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a> <a href="https://github.com/kuefmz" target="_blank" rel="noreferrer" data-analytics-event="github_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>GitHub <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a> <a href="https://orcid.org/0000-0002-3170-6730" target="_blank" rel="noreferrer" data-analytics-event="research_profile_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>ORCID <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a> <a href="https://scholar.google.com/citations?user=G86xVZ0AAAAJ&amp;hl=en" target="_blank" rel="noreferrer" data-analytics-event="research_profile_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>Google Scholar <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a> <a href="https://www.researchgate.net/profile/Jenifer-Ciuciu-Kiss" target="_blank" rel="noreferrer" data-analytics-event="research_profile_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>ResearchGate <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a> <a href="mailto:jenifer.tabita.ciuciu.kiss@gmail.com" data-analytics-event="email_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>Email <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a> </div> </div> <div class="shell footer-newsletter" data-astro-cid-sz7xmlte> <div data-astro-cid-sz7xmlte> <p class="footer-label" data-astro-cid-sz7xmlte>Stay in the loop</p> <p data-astro-cid-sz7xmlte>Occasional notes. No noise.</p> </div> <form class="newsletter-form compact" data-newsletter-form data-endpoint="https://script.google.com/macros/s/AKfycbzCQhX3feFHTrNC-tqTxZ0P5hO2TdaTqY36rb-gK-Sv_q-3YkI-Jr_WKlfTKf2p_rOAhw/exec" data-event-name="newsletter_signup" data-source data-audience data-astro-cid-nbvfnxgh> <input type="hidden" name="type" value="newsletter" data-astro-cid-nbvfnxgh>   <label class="form-honeypot" aria-hidden="true" data-astro-cid-nbvfnxgh> <span data-astro-cid-nbvfnxgh>Website</span> <input type="text" name="website" tabindex="-1" autocomplete="off" data-astro-cid-nbvfnxgh> </label>  <div class="newsletter-fields" data-astro-cid-nbvfnxgh> <label data-astro-cid-nbvfnxgh> <span class="sr-only" data-astro-cid-nbvfnxgh>Email address</span> <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required data-astro-cid-nbvfnxgh> </label> <button class="button button-light" type="submit" data-astro-cid-nbvfnxgh> Join by email </button> </div> <label class="consent" data-astro-cid-nbvfnxgh> <input type="checkbox" name="consent" value="Yes" required data-astro-cid-nbvfnxgh> <span data-astro-cid-nbvfnxgh>
+I would like to receive occasional emails and agree that my address may be stored for this purpose.
+</span> </label> <p class="form-status email-note" aria-live="polite" data-astro-cid-nbvfnxgh> Your address will be added to the private newsletter list. </p> </form> <script type="module">document.querySelectorAll("[data-newsletter-form]").forEach(e=>{e.addEventListener("submit",async d=>{if(d.preventDefault(),!e.reportValidity())return;const t=e.querySelector('button[type="submit"]'),n=e.querySelector(".form-status"),i=e.dataset.endpoint,c=t?.textContent??"Join newsletter",u=e.dataset.eventName||"newsletter_signup",o=e.dataset.source||"",r=e.dataset.audience||"";if(!(!i||!t||!n)){t.disabled=!0,t.textContent="Joining…",n.textContent="Submitting your email address…";try{const a=new FormData(e),l={type:"newsletter",email:String(a.get("email")??"").trim(),website:String(a.get("website")??""),source:String(a.get("source")??o),audience:String(a.get("audience")??r)};await fetch(i,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify(l)}),e.reset(),n.textContent="Thank you. Your subscription request has been received.";const s=window;s.dataLayer=s.dataLayer||[],s.dataLayer.push({event:u,source:o,audience:r})}catch{n.textContent="The request could not be sent. Please try again."}finally{t.disabled=!1,t.textContent=c}}})});</script> </div> <div class="shell footer-bottom" data-astro-cid-sz7xmlte> <span data-astro-cid-sz7xmlte>© 2026 Jenifer Ciuciu-Kiss</span> <span data-astro-cid-sz7xmlte>Designed and built in Zurich.</span> </div> </footer> </body></html>

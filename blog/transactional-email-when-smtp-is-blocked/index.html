@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en" data-theme="light"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="index,follow"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XRDRCV5VWZ"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XRDRCV5VWZ");
+    </script><!-- Google Tag Manager --><script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        const f = d.getElementsByTagName(s)[0];
+        const j = d.createElement(s);
+        const dl = l != "dataLayer" ? `&l=${l}` : "";
+        j.async = true;
+        j.src = `https://www.googletagmanager.com/gtm.js?id=${i}${dl}`;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-MVM293DW");
+    </script><!-- End Google Tag Manager --><script>
+      (() => {
+        try {
+          const savedTheme = localStorage.getItem("site-theme-v2");
+          document.documentElement.dataset.theme = savedTheme === "dark" ? "dark" : "light";
+        } catch {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script><meta name="generator" content="Astro v6.4.8"><title>How to Send Transactional Email When a Hosting Platform Blocks SMTP | Jenifer Ciuciu-Kiss</title><meta name="description" content="Practical alternatives for sending transactional emails from deployed applications when outbound SMTP is restricted or unreliable."><meta name="p:domain_verify" content="4da6a77cba9a605b2f821a2d71bf138c"><link rel="canonical" href="https://jeniferciuciukiss.com/blog/transactional-email-when-smtp-is-blocked/"><link rel="icon" href="/favicon.ico?v=3" sizes="any"><meta name="theme-color" content="#f8f5f7"><link rel="alternate" type="application/rss+xml" title="Jenifer Ciuciu-Kiss RSS" href="/rss.xml"><meta property="og:type" content="article"><meta property="og:locale" content="en_US"><meta property="og:site_name" content="Jenifer Ciuciu-Kiss"><meta property="og:title" content="How to Send Transactional Email When a Hosting Platform Blocks SMTP | Jenifer Ciuciu-Kiss"><meta property="og:description" content="Practical alternatives for sending transactional emails from deployed applications when outbound SMTP is restricted or unreliable."><meta property="og:url" content="https://jeniferciuciukiss.com/blog/transactional-email-when-smtp-is-blocked/"><meta property="og:image" content="https://jeniferciuciukiss.com/images/og-default.svg"><meta property="og:image:alt" content="Jenifer Ciuciu-Kiss website preview"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="How to Send Transactional Email When a Hosting Platform Blocks SMTP | Jenifer Ciuciu-Kiss"><meta name="twitter:description" content="Practical alternatives for sending transactional emails from deployed applications when outbound SMTP is restricted or unreliable."><meta name="twitter:image" content="https://jeniferciuciukiss.com/images/og-default.svg"><meta name="twitter:image:alt" content="Jenifer Ciuciu-Kiss website preview"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://jeniferciuciukiss.com/#person","name":"Jenifer Tabita Ciuciu-Kiss","alternateName":"Jenifer Ciuciu-Kiss","url":"https://jeniferciuciukiss.com","image":"https://jeniferciuciukiss.com/images/jenifer-ciuciu-kiss.jpg","email":"mailto:jenifer.tabita.ciuciu.kiss@gmail.com","jobTitle":["AI Engineer","Data Engineer","Machine Learning Engineer","PhD Candidate in Artificial Intelligence"],"description":"Jenifer Tabita Ciuciu-Kiss is an AI and Data Engineer in Zurich working on machine learning, LLM systems, RAG, data pipelines, knowledge graphs, and applied AI research.","homeLocation":{"@type":"Place","name":"Zurich, Switzerland","address":{"@type":"PostalAddress","addressLocality":"Zurich","addressCountry":"CH"}},"worksFor":{"@type":"Organization","name":"UBS"},"affiliation":[{"@type":"CollegeOrUniversity","name":"Universidad Politecnica de Madrid"},{"@type":"Organization","name":"Ontology Engineering Group"}],"sameAs":["https://www.linkedin.com/in/jenifer-tabita-ciuciu-kiss/","https://github.com/kuefmz","https://orcid.org/0000-0002-3170-6730","https://scholar.google.com/citations?user=G86xVZ0AAAAJ&hl=en","https://www.researchgate.net/profile/Jenifer-Ciuciu-Kiss"],"knowsAbout":["Artificial Intelligence","Data Engineering","Machine Learning","Natural Language Processing","Large Language Models","Retrieval-Augmented Generation","Document AI","OCR","Knowledge Graphs","Ontology Engineering","Semantic Web","Research Software Classification","Scientific Knowledge Graphs","Python","Data Pipelines","Technical Teaching"]},{"@type":"WebSite","@id":"https://jeniferciuciukiss.com/#website","name":"Jenifer Tabita Ciuciu-Kiss","alternateName":"Jenifer Ciuciu-Kiss","url":"https://jeniferciuciukiss.com","description":"Jenifer Tabita Ciuciu-Kiss is an AI and Data Engineer in Zurich working on machine learning, LLM systems, RAG, data pipelines, knowledge graphs, and applied AI research.","inLanguage":["en","de","hu"],"publisher":{"@id":"https://jeniferciuciukiss.com/#person"}},{"@type":"WebPage","@id":"https://jeniferciuciukiss.com/blog/transactional-email-when-smtp-is-blocked/#webpage","url":"https://jeniferciuciukiss.com/blog/transactional-email-when-smtp-is-blocked/","name":"How to Send Transactional Email When a Hosting Platform Blocks SMTP | Jenifer Ciuciu-Kiss","description":"Practical alternatives for sending transactional emails from deployed applications when outbound SMTP is restricted or unreliable.","inLanguage":"en","isPartOf":{"@id":"https://jeniferciuciukiss.com/#website"},"about":{"@id":"https://jeniferciuciukiss.com/#person"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jeniferciuciukiss.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://jeniferciuciukiss.com/blog/"},{"@type":"ListItem","position":3,"name":"How to Send Transactional Email When a Hosting Platform Blocks SMTP","item":"https://jeniferciuciukiss.com/blog/transactional-email-when-smtp-is-blocked/"}]},{"@type":"Article","@id":"https://jeniferciuciukiss.com/blog/transactional-email-when-smtp-is-blocked/#article","headline":"How to Send Transactional Email When a Hosting Platform Blocks SMTP","description":"Practical alternatives for sending transactional emails from deployed applications when outbound SMTP is restricted or unreliable.","author":{"@id":"https://jeniferciuciukiss.com/#person"},"publisher":{"@id":"https://jeniferciuciukiss.com/#person"},"datePublished":"2026-09-23T00:00:00.000Z","dateModified":"2026-09-23T00:00:00.000Z","keywords":["Transactional Email","SMTP","Serverless","Backend Deployment","Automation"],"articleSection":"Web Engineering","mainEntityOfPage":"https://jeniferciuciukiss.com/blog/transactional-email-when-smtp-is-blocked/#webpage","url":"https://jeniferciuciukiss.com/blog/transactional-email-when-smtp-is-blocked/"}]}</script><style>.content-header[data-astro-cid-scuu7fyy]{padding-bottom:48px}.content-description[data-astro-cid-scuu7fyy]{max-width:720px;margin:24px 0 0;color:var(--muted);font-size:clamp(1.05rem,1.7vw,1.25rem)}.content-meta[data-astro-cid-scuu7fyy]{margin:22px 0 0;color:var(--faint);font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase}.content-body[data-astro-cid-scuu7fyy]{padding-bottom:clamp(64px,8vw,112px)}
+</style><link rel="stylesheet" href="/_astro/BaseLayout.x8EweME4.css"><style>.toc[data-astro-cid-gsbvazvt]{display:flex;padding:20px 0;margin-bottom:48px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);flex-direction:column;gap:5px}.toc[data-astro-cid-gsbvazvt] p[data-astro-cid-gsbvazvt]{margin:0 0 8px;color:var(--faint);font-family:var(--font-mono);font-size:.65rem;text-transform:uppercase}.toc[data-astro-cid-gsbvazvt] a[data-astro-cid-gsbvazvt]{color:var(--muted);font-size:.82rem;text-decoration:none}.toc[data-astro-cid-gsbvazvt] a[data-astro-cid-gsbvazvt]:hover{color:var(--accent-dark)}.original[data-astro-cid-gsbvazvt]{padding-top:28px;margin-top:64px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}.original[data-astro-cid-gsbvazvt] a[data-astro-cid-gsbvazvt]{display:inline-flex;align-items:center;gap:5px}.related-posts[data-astro-cid-gsbvazvt]{padding-top:28px;margin-top:54px;border-top:1px solid var(--line)}.related-posts[data-astro-cid-gsbvazvt] ul[data-astro-cid-gsbvazvt]{padding:0;margin:18px 0 0;list-style:none}.related-posts[data-astro-cid-gsbvazvt] li[data-astro-cid-gsbvazvt]{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--line)}.related-posts[data-astro-cid-gsbvazvt] span[data-astro-cid-gsbvazvt]{color:var(--faint);font-family:var(--font-mono);font-size:.66rem;text-transform:uppercase}
+</style></head> <body> <!-- Google Tag Manager (noscript) --> <noscript> <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MVM293DW" height="0" width="0" style="display:none;visibility:hidden"></iframe> </noscript> <!-- End Google Tag Manager (noscript) --> <script>
+      (() => {
+        const pushAnalyticsEvent = (target) => {
+          const eventName = target.dataset.analyticsEvent;
+          if (!eventName) return;
+
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: eventName,
+            link_text: target.textContent?.trim() || target.getAttribute("aria-label") || "",
+            link_url: target.href || target.getAttribute("href") || "",
+            location: target.dataset.analyticsLocation || "",
+          });
+        };
+
+        document.addEventListener("click", (event) => {
+          const target = event.target?.closest?.("[data-analytics-event]");
+          if (target) pushAnalyticsEvent(target);
+        });
+      })();
+    </script> <a class="skip-link" href="#main-content">Skip to content</a> <header class="site-header" data-astro-cid-3ef6ksr2> <div class="shell header-inner" data-astro-cid-3ef6ksr2> <a class="brand" href="/" aria-label="Jenifer Ciuciu-Kiss, home" data-astro-cid-3ef6ksr2> <img class="brand-symbol" src="/images/logo.png" alt="JK Logo" width="36" height="36" data-astro-cid-hwn4xkzs> <span class="brand-name" data-astro-cid-3ef6ksr2>Jenifer<br data-astro-cid-3ef6ksr2>Ciuciu-Kiss</span> </a> <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav" data-astro-cid-3ef6ksr2> <span class="menu-open" data-astro-cid-3ef6ksr2><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 17h16"/></svg></span> <span class="menu-close" data-astro-cid-3ef6ksr2><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12M18 6 6 18"/></svg></span> <span class="sr-only" data-astro-cid-3ef6ksr2>Toggle navigation</span> </button> <nav id="site-nav" class="site-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2> <a href="/about/" data-analytics-event="navigation_click" data-analytics-location="header" data-astro-cid-3ef6ksr2> About </a><a href="/projects/" data-analytics-event="navigation_click" data-analytics-location="header" data-astro-cid-3ef6ksr2> Projects </a><a href="/research/" data-analytics-event="navigation_click" data-analytics-location="header" data-astro-cid-3ef6ksr2> Research </a><a href="/publications/" data-analytics-event="navigation_click" data-analytics-location="header" data-astro-cid-3ef6ksr2> Publications </a><a href="/blog/" aria-current="page" data-analytics-event="navigation_click" data-analytics-location="header" data-astro-cid-3ef6ksr2> Blog </a> <div class="language-switcher" aria-label="Language" data-astro-cid-3ef6ksr2> <a href="/" aria-current="page" data-astro-cid-3ef6ksr2>EN</a> <a href="/de/" data-astro-cid-3ef6ksr2>DE</a> <a href="/hu/" data-astro-cid-3ef6ksr2>HU</a> </div> <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme" data-astro-cid-3ef6ksr2> <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M8.2 14.7A7 7 0 1 1 15.8 14.7C14.7 15.5 14 16.6 14 18h-4c0-1.4-.7-2.5-1.8-3.3Z"/></svg> </button> <a class="nav-contact" href="/contact/" data-analytics-event="contact_click" data-analytics-location="header" data-astro-cid-3ef6ksr2> Contact <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg> </a> </nav> </div> </header> <script type="module">const n=document.querySelector(".menu-toggle"),a=document.querySelector("#site-nav"),e=document.querySelector(".theme-toggle"),c=()=>{const t=document.documentElement.dataset.theme==="light",o=t?"Switch to dark theme":"Switch to light theme";e?.setAttribute("aria-label",o),e?.setAttribute("title",o),e?.classList.toggle("is-light",t)};n?.addEventListener("click",()=>{const t=n.getAttribute("aria-expanded")==="true";n.setAttribute("aria-expanded",String(!t)),a?.classList.toggle("is-open",!t)});e?.addEventListener("click",()=>{const t=document.documentElement.dataset.theme==="light"?"dark":"light";document.documentElement.dataset.theme=t;try{localStorage.setItem("site-theme-v2",t)}catch{}c()});c();</script> <main id="main-content">  <header class="content-header section" data-astro-cid-scuu7fyy> <div class="narrow" data-astro-cid-scuu7fyy> <p class="eyebrow" data-astro-cid-scuu7fyy>Web Engineering</p> <h1 class="page-title" data-astro-cid-scuu7fyy>How to Send Transactional Email When a Hosting Platform Blocks SMTP</h1> <p class="content-description" data-astro-cid-scuu7fyy>Practical alternatives for sending transactional emails from deployed applications when outbound SMTP is restricted or unreliable.</p> <p class="content-meta" data-astro-cid-scuu7fyy>September 23, 2026 · 4 min read</p> </div> </header> <div class="narrow content-body" data-astro-cid-scuu7fyy> <article class="prose" data-astro-cid-scuu7fyy> <nav class="toc" aria-label="Table of contents" data-astro-cid-gsbvazvt> <p data-astro-cid-gsbvazvt>On this page</p> <a href="#first-identify-the-actual-failure" data-astro-cid-gsbvazvt>First identify the actual failure</a><a href="#prefer-https-apis-when-available" data-astro-cid-gsbvazvt>Prefer HTTPS APIs when available</a><a href="#a-serverless-relay-can-also-work" data-astro-cid-gsbvazvt>A serverless relay can also work</a><a href="#do-not-expose-the-relay-publicly-without-controls" data-astro-cid-gsbvazvt>Do not expose the relay publicly without controls</a><a href="#separate-email-generation-from-transport" data-astro-cid-gsbvazvt>Separate email generation from transport</a><a href="#treat-delivery-as-an-asynchronous-boundary" data-astro-cid-gsbvazvt>Treat delivery as an asynchronous boundary</a><a href="#log-delivery-states" data-astro-cid-gsbvazvt>Log delivery states</a><a href="#watch-deliverability-too" data-astro-cid-gsbvazvt>Watch deliverability too</a><a href="#keep-a-fallback-path" data-astro-cid-gsbvazvt>Keep a fallback path</a><a href="#the-broader-lesson" data-astro-cid-gsbvazvt>The broader lesson</a> </nav><p>A web application can work perfectly in local development and still fail at one surprisingly basic task after deployment:</p>
+<p><strong>sending an email</strong>.</p>
+<p>Some hosting platforms restrict outbound SMTP connections. Others allow them only on certain plans or ports. Network policies can also make direct SMTP unreliable.</p>
+<p>The application therefore needs a delivery method that matches the hosting environment.</p>
+<h2 id="first-identify-the-actual-failure">First identify the actual failure</h2>
+<p>Email problems can come from several layers:</p>
+<ul>
+<li>DNS configuration;</li>
+<li>invalid credentials;</li>
+<li>blocked network ports;</li>
+<li>TLS errors;</li>
+<li>sender verification;</li>
+<li>provider rate limits;</li>
+<li>spam filtering;</li>
+<li>application bugs.</li>
+</ul>
+<p>Before replacing the whole email stack, verify whether the deployed application can establish a connection to the SMTP server at all.</p>
+<p>A local success does not prove that the cloud environment permits the same network traffic.</p>
+<h2 id="prefer-https-apis-when-available">Prefer HTTPS APIs when available</h2>
+<p>Many email providers expose an HTTPS API in addition to SMTP.</p>
+<p>This is often easier to use from modern hosting environments because normal outbound HTTPS traffic is expected.</p>
+<p>The architecture becomes:</p>
+<p><code>Application -> HTTPS API -> Email provider -> Recipient</code></p>
+<p>Advantages include:</p>
+<ul>
+<li>fewer port restrictions;</li>
+<li>structured error responses;</li>
+<li>easier authentication;</li>
+<li>provider-level delivery tracking;</li>
+<li>simpler retries.</li>
+</ul>
+<p>If a provider supports both SMTP and an API, the API is often the better choice for application-generated email.</p>
+<h2 id="a-serverless-relay-can-also-work">A serverless relay can also work</h2>
+<p>Sometimes the application cannot call the preferred mail provider directly, or an existing serverless endpoint already owns the email workflow.</p>
+<p>A small relay endpoint can accept a validated request and perform the privileged email operation.</p>
+<p>The backend sends:</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E6EDF3">{</span></span>
+<span class="line"><span style="color:#7EE787">  "template"</span><span style="color:#E6EDF3">: </span><span style="color:#A5D6FF">"report_ready"</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#7EE787">  "recipient"</span><span style="color:#E6EDF3">: </span><span style="color:#A5D6FF">"person@example.com"</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#7EE787">  "reportId"</span><span style="color:#E6EDF3">: </span><span style="color:#A5D6FF">"..."</span></span>
+<span class="line"><span style="color:#E6EDF3">}</span></span></code></pre>
+<p>The relay handles the credentials and provider-specific request.</p>
+<p>This pattern is useful when the main application is deployed on constrained infrastructure.</p>
+<h2 id="do-not-expose-the-relay-publicly-without-controls">Do not expose the relay publicly without controls</h2>
+<p>An open email endpoint can become a spam service.</p>
+<p>At minimum, validate:</p>
+<ul>
+<li>allowed templates;</li>
+<li>recipient format;</li>
+<li>required fields;</li>
+<li>payload size;</li>
+<li>origin where appropriate;</li>
+<li>request frequency.</li>
+</ul>
+<p>For higher-risk cases, require a server-side shared secret or signed request.</p>
+<p>Secrets should never be embedded in public browser JavaScript.</p>
+<h2 id="separate-email-generation-from-transport">Separate email generation from transport</h2>
+<p>The application should not mix business logic with SMTP-specific code.</p>
+<p>A useful interface is:</p>
+<pre class="astro-code github-dark-default" style="background-color:#0d1117;color:#e6edf3; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="text"><code><span class="line"><span>sendReportEmail(recipient, report)</span></span></code></pre>
+<p>The implementation behind that function can use:</p>
+<ul>
+<li>SMTP;</li>
+<li>an email API;</li>
+<li>a serverless relay;</li>
+<li>a queue.</li>
+</ul>
+<p>This makes infrastructure changes much less disruptive.</p>
+<h2 id="treat-delivery-as-an-asynchronous-boundary">Treat delivery as an asynchronous boundary</h2>
+<p>An application should not always make the user wait for an email provider to respond.</p>
+<p>For non-critical email, a good flow is:</p>
+<ol>
+<li>finish the main application action;</li>
+<li>record that an email needs to be sent;</li>
+<li>trigger delivery;</li>
+<li>retry temporary failures;</li>
+<li>store delivery status.</li>
+</ol>
+<p>This prevents a slow provider from making the entire user interaction feel broken.</p>
+<h2 id="log-delivery-states">Log delivery states</h2>
+<p>Useful states include:</p>
+<ul>
+<li>queued;</li>
+<li>sent to provider;</li>
+<li>delivered;</li>
+<li>bounced;</li>
+<li>failed;</li>
+<li>suppressed.</li>
+</ul>
+<p>Not every provider exposes every event, but tracking what is available makes support much easier.</p>
+<p>Avoid logging full email bodies or secrets unnecessarily.</p>
+<h2 id="watch-deliverability-too">Watch deliverability too</h2>
+<p>Successfully calling an API is not the same as reaching the inbox.</p>
+<p>Production email should also consider:</p>
+<ul>
+<li>SPF;</li>
+<li>DKIM;</li>
+<li>DMARC;</li>
+<li>verified sender domains;</li>
+<li>consistent From addresses;</li>
+<li>unsubscribe handling for marketing email;</li>
+<li>separation of transactional and promotional flows.</li>
+</ul>
+<p>A technically successful send can still land in spam if the domain setup is weak.</p>
+<h2 id="keep-a-fallback-path">Keep a fallback path</h2>
+<p>For high-value workflows, it can be useful to provide an on-screen confirmation or downloadable result even if email delivery fails.</p>
+<p>Email should improve the workflow, not become a single point of failure.</p>
+<h2 id="the-broader-lesson">The broader lesson</h2>
+<p>Infrastructure constraints are part of application design.</p>
+<p>When SMTP is blocked, the right response is rarely to keep retrying the same port. The better approach is to choose a transport that the deployment environment supports and isolate it behind a stable application interface.</p>
+<p>For another lightweight integration pattern, see <a href="/blog/static-form-google-sheets-apps-script/">Static Forms with Google Sheets and Apps Script</a>.</p>
+<p>Need a web workflow to reliably generate and deliver reports, notifications, or leads? <a href="/contact/#project-request">Describe the flow here</a>.</p> <section class="related-posts" aria-labelledby="related-posts" data-astro-cid-gsbvazvt> <h2 id="related-posts" data-astro-cid-gsbvazvt>Related posts</h2> <ul data-astro-cid-gsbvazvt> <li data-astro-cid-gsbvazvt> <a href="/blog/search-console-content-opportunity-workflow/" data-astro-cid-gsbvazvt>How to Use Google Search Console to Decide What Content to Improve Next</a> <span data-astro-cid-gsbvazvt>Web Engineering</span> </li><li data-astro-cid-gsbvazvt> <a href="/blog/debug-multilingual-sitemap-search-console/" data-astro-cid-gsbvazvt>How to Debug a Multilingual Sitemap When Google Is Missing Pages</a> <span data-astro-cid-gsbvazvt>Web Engineering</span> </li><li data-astro-cid-gsbvazvt> <a href="/blog/frontend-backend-secrets-production-deployment/" data-astro-cid-gsbvazvt>How to Keep API Keys and Admin Secrets Safe in a Frontend + Backend App</a> <span data-astro-cid-gsbvazvt>Web Engineering</span> </li> </ul> </section> </article> </div>  </main> <footer class="footer" data-astro-cid-sz7xmlte> <div class="shell footer-grid" data-astro-cid-sz7xmlte> <div data-astro-cid-sz7xmlte> <p class="footer-kicker" data-astro-cid-sz7xmlte>AI · Knowledge Graphs · Ontology Engineering</p> <p class="footer-title" data-astro-cid-sz7xmlte>Building intelligent systems from complex knowledge.</p> </div> <div class="footer-nav" data-astro-cid-sz7xmlte> <p class="footer-label" data-astro-cid-sz7xmlte>Explore</p> <a href="/about/" data-analytics-event="navigation_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>About</a><a href="/projects/" data-analytics-event="navigation_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>Projects</a><a href="/research/" data-analytics-event="navigation_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>Research</a><a href="/publications/" data-analytics-event="navigation_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>Publications</a><a href="/blog/" data-analytics-event="navigation_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>Blog</a> </div> <div class="footer-nav" data-astro-cid-sz7xmlte> <p class="footer-label" data-astro-cid-sz7xmlte>Connect</p> <a href="https://www.linkedin.com/in/jenifer-tabita-ciuciu-kiss/" target="_blank" rel="noreferrer" data-analytics-event="linkedin_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>LinkedIn <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a> <a href="https://github.com/kuefmz" target="_blank" rel="noreferrer" data-analytics-event="github_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>GitHub <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a> <a href="https://orcid.org/0000-0002-3170-6730" target="_blank" rel="noreferrer" data-analytics-event="research_profile_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>ORCID <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a> <a href="https://scholar.google.com/citations?user=G86xVZ0AAAAJ&amp;hl=en" target="_blank" rel="noreferrer" data-analytics-event="research_profile_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>Google Scholar <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a> <a href="https://www.researchgate.net/profile/Jenifer-Ciuciu-Kiss" target="_blank" rel="noreferrer" data-analytics-event="research_profile_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>ResearchGate <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a> <a href="mailto:jenifer.tabita.ciuciu.kiss@gmail.com" data-analytics-event="email_click" data-analytics-location="footer" data-astro-cid-sz7xmlte>Email <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a> </div> </div> <div class="shell footer-newsletter" data-astro-cid-sz7xmlte> <div data-astro-cid-sz7xmlte> <p class="footer-label" data-astro-cid-sz7xmlte>Stay in the loop</p> <p data-astro-cid-sz7xmlte>Occasional notes. No noise.</p> </div> <form class="newsletter-form compact" data-newsletter-form data-endpoint="https://script.google.com/macros/s/AKfycbzCQhX3feFHTrNC-tqTxZ0P5hO2TdaTqY36rb-gK-Sv_q-3YkI-Jr_WKlfTKf2p_rOAhw/exec" data-event-name="newsletter_signup" data-source data-audience data-astro-cid-nbvfnxgh> <input type="hidden" name="type" value="newsletter" data-astro-cid-nbvfnxgh>   <label class="form-honeypot" aria-hidden="true" data-astro-cid-nbvfnxgh> <span data-astro-cid-nbvfnxgh>Website</span> <input type="text" name="website" tabindex="-1" autocomplete="off" data-astro-cid-nbvfnxgh> </label>  <div class="newsletter-fields" data-astro-cid-nbvfnxgh> <label data-astro-cid-nbvfnxgh> <span class="sr-only" data-astro-cid-nbvfnxgh>Email address</span> <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required data-astro-cid-nbvfnxgh> </label> <button class="button button-light" type="submit" data-astro-cid-nbvfnxgh> Join by email </button> </div> <label class="consent" data-astro-cid-nbvfnxgh> <input type="checkbox" name="consent" value="Yes" required data-astro-cid-nbvfnxgh> <span data-astro-cid-nbvfnxgh>
+I would like to receive occasional emails and agree that my address may be stored for this purpose.
+</span> </label> <p class="form-status email-note" aria-live="polite" data-astro-cid-nbvfnxgh> Your address will be added to the private newsletter list. </p> </form> <script type="module">document.querySelectorAll("[data-newsletter-form]").forEach(e=>{e.addEventListener("submit",async d=>{if(d.preventDefault(),!e.reportValidity())return;const t=e.querySelector('button[type="submit"]'),n=e.querySelector(".form-status"),i=e.dataset.endpoint,c=t?.textContent??"Join newsletter",u=e.dataset.eventName||"newsletter_signup",o=e.dataset.source||"",r=e.dataset.audience||"";if(!(!i||!t||!n)){t.disabled=!0,t.textContent="Joining…",n.textContent="Submitting your email address…";try{const a=new FormData(e),l={type:"newsletter",email:String(a.get("email")??"").trim(),website:String(a.get("website")??""),source:String(a.get("source")??o),audience:String(a.get("audience")??r)};await fetch(i,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify(l)}),e.reset(),n.textContent="Thank you. Your subscription request has been received.";const s=window;s.dataLayer=s.dataLayer||[],s.dataLayer.push({event:u,source:o,audience:r})}catch{n.textContent="The request could not be sent. Please try again."}finally{t.disabled=!1,t.textContent=c}}})});</script> </div> <div class="shell footer-bottom" data-astro-cid-sz7xmlte> <span data-astro-cid-sz7xmlte>© 2026 Jenifer Ciuciu-Kiss</span> <span data-astro-cid-sz7xmlte>Designed and built in Zurich.</span> </div> </footer> </body></html>
