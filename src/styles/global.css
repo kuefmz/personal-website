@@ -401,6 +401,28 @@ select {
   border-radius: var(--radius);
 }
 
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin-block: 24px;
+  font-size: 0.9rem;
+}
+
+.prose th,
+.prose td {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  min-width: 130px;
+}
+
+.prose th {
+  background: var(--panel);
+}
+
 .prose img {
   width: 100%;
   margin-block: 40px;

@@ -1,13 +1,15 @@
 ---
 title: "How to Connect Business Systems with APIs, Webhooks and Reliable Data Sync"
-description: "A practical guide to custom API integration between forms, CRMs, databases, email tools, and internal systems with validation, retries, and observability."
+description: "Connect business systems through APIs and webhooks with explicit data ownership, retry-safe operations, reconciliation, useful logs, and protected credentials."
+seoTitle: "API Integration: Webhooks and Sync"
 publishedAt: 2026-09-21
+updatedAt: 2026-10-12
 tags: ["API Integration", "Webhooks", "Automation", "FastAPI", "System Integration"]
 category: "Automation"
 draft: false
 ---
 
-Many small software projects are not really about building a new application.
+A reliable custom API integration connects systems through explicit ownership, validated data contracts, retry-safe operations, and reconciliation. Decide which system owns each field before choosing webhooks, polling, or middleware.
 
 They are about getting **existing systems to exchange data reliably**.
 
@@ -100,6 +102,24 @@ Without idempotency, this can create:
 Use a stable request ID, event ID, or business key to recognize repeated operations.
 
 This is one of the differences between a demo integration and a production integration.
+
+Use an atomic uniqueness constraint rather than a separate check followed by a write. Scope an event identity by provider and account, and record completion in the same transaction as database-only effects. External actions need their own stable idempotency keys or reconciliation. See the [durable webhook inbox example](/blog/webhook-idempotency-durable-inbox/).
+
+## Reconcile even when webhooks work
+
+Webhooks reduce latency, but missed events, expired permissions, or provider outages can leave systems out of sync. A periodic reconciliation should compare authoritative state and repair differences without overwriting newer destination changes.
+
+Track update versions, deletions, and the last successful synchronization boundary. The [incremental API sync guide](/blog/incremental-api-sync-cursors-checkpoints/) shows how to commit a page and checkpoint together so an interrupted run can resume safely.
+
+| Failure | Appropriate next step |
+| --- | --- |
+| Duplicate event | Recognize the existing scoped event identity |
+| Rate limit | Apply the provider's documented wait and retry policy |
+| Invalid payload | Quarantine with sanitized evidence; fix the contract |
+| Expired credentials | Restore authorization before replaying pending work |
+| Timeout after a write | Reconcile or reuse a supported idempotency key |
+
+Provider-specific behavior matters. For an authoritative example of duplicate and unordered event handling, see [Stripe webhook documentation](https://docs.stripe.com/webhooks).
 
 ## Retries should be selective
 

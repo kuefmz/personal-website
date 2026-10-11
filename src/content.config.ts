@@ -32,6 +32,8 @@ const publications = defineCollection({
   schema: z.object({
     title: z.string(),
     abstract: z.string(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
     authors: z.array(z.string()),
     date: z.string().regex(/^\d{4}-\d{2}(?:-\d{2})?$/),
     venue: z.string(),
@@ -55,6 +57,8 @@ const blog = defineCollection({
       title: z.string(),
       description: z.string(),
       publishedAt: z.coerce.date(),
+      seoTitle: z.string().optional(),
+      seoDescription: z.string().optional(),
       updatedAt: z.coerce.date().optional(),
       tags: z.array(z.string()),
       category: z.string(),

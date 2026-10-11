@@ -53,11 +53,16 @@ const structuredData = [
 <ContentLayout
   title={post.data.title}
   description={post.data.description}
+  seoTitle={post.data.seoTitle}
+  seoDescription={post.data.seoDescription}
   eyebrow={post.data.category}
   meta={`${published} · ${readingTime} min read`}
   type="article"
   structuredData={structuredData}
 >
+  <p class="article-author">By <a href="/about/">{site.shortName}</a>
+    {post.data.updatedAt && <> · Updated {new Intl.DateTimeFormat("en", { dateStyle: "long", timeZone: "UTC" }).format(post.data.updatedAt)}</>}
+  </p>
   {headings.length > 1 && (
     <nav class="toc" aria-label="Table of contents">
       <p>On this page</p>
@@ -88,6 +93,11 @@ const structuredData = [
 </ContentLayout>
 
 <style>
+  .article-author {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: 0 0 24px;
+  }
   .toc {
     display: flex;
     padding: 20px 0;

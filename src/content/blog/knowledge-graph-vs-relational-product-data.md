@@ -1,13 +1,15 @@
 ---
-title: "When to Use a Knowledge Graph Instead of Only a Relational Database"
-description: "How to decide when RDF and knowledge graphs add value for complex product, research, metadata, or multi-source data systems."
+title: "Knowledge Graph vs Relational Database: When a Hybrid Model Helps"
+description: "Compare knowledge graphs and relational databases for multi-source data, identity, provenance, validation, and queries with a practical decision table."
+seoTitle: "Knowledge Graph vs Relational Database"
 publishedAt: 2026-09-27
+updatedAt: 2026-10-12
 tags: ["Knowledge Graph", "RDF", "PostgreSQL", "Data Modeling", "Semantic Web"]
 category: "Knowledge Graphs"
 draft: false
 ---
 
-Relational databases are excellent.
+For a knowledge graph versus relational database decision, start with the integration requirements. Relational databases support transactions, joins, constraints, and provenance models. An RDF knowledge graph becomes useful when shared vocabularies, heterogeneous relationships, and semantic interoperability justify the additional engineering cost.
 
 A knowledge graph should not be introduced simply because the data contains relationships.
 
@@ -36,6 +38,21 @@ Foreign keys represent the important relationships clearly.
 This model is efficient, familiar, and easy to operate.
 
 A knowledge graph becomes valuable when the system needs to express relationships that are **heterogeneous, evolving, or shared across several domains**.
+
+## Compare the requirements, not just the diagram
+
+| Requirement | Relational approach | RDF knowledge graph approach |
+| --- | --- | --- |
+| Operational writes | Transactions and schema constraints | Depends on the store and application design |
+| Shared meaning | Mapping tables and application contracts | Reusable vocabularies and globally named entities |
+| Provenance | Claim/source tables or audit records | Named graphs or an explicit provenance vocabulary |
+| Identity resolution | Matching pipeline and identifier tables | Matching pipeline and explicit identity links |
+| New relationship types | Schema or association-table changes | New predicates, with governance and validation |
+| Team operation | Familiar SQL tooling | RDF, SPARQL, shapes, and graph-store expertise |
+
+Neither model performs entity resolution automatically. A graph can retain conflicting claims and match evidence, but the decision that two records describe the same entity still needs a defensible rule. Avoid asserting strong equivalence for a merely probable match.
+
+Likewise, provenance is possible in SQL. The advantage of RDF is a shared semantic representation when several systems need to interpret the claims, not an exclusive ability to record sources.
 
 ## The challenge of multi-source meaning
 
@@ -171,6 +188,16 @@ Useful approaches include:
 - provenance requirements.
 
 Flexibility should not mean accepting arbitrary data.
+
+The [SHACL validation tutorial](/blog/shacl-validation-python-rdf-data/) provides a runnable Python example for checking a staged RDF graph before publication.
+
+## Rehearse a hybrid architecture before migrating
+
+Take one representative query and one integration requirement. Model them in SQL and in a small RDF projection. Compare query clarity, update behavior, validation, and operational effort using the same source records.
+
+Keep ownership explicit: for example, PostgreSQL owns transactional records, while a versioned graph projection owns semantic links derived from them. If both stores can independently edit the same fact, synchronization complexity grows quickly. Define refresh timing, stale-data behavior, and how corrections reach both representations.
+
+For standards-based context, see the [W3C RDF primer](https://www.w3.org/TR/rdf11-primer/) and [SHACL Recommendation](https://www.w3.org/TR/shacl/). Do not assume that a graph database and an RDF knowledge graph are interchangeable: graph databases include other data models, while a knowledge graph also involves identity, meaning, and governance.
 
 ## A practical decision checklist
 

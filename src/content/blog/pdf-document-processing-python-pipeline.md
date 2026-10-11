@@ -1,13 +1,15 @@
 ---
 title: "PDF Document Processing in Python: OCR, Extraction, Validation and RAG"
-description: "A practical architecture for PDF document processing in Python, from OCR and text extraction to validation, storage, RAG, and human review."
+description: "Build a Python PDF processing pipeline with native text extraction, page-level OCR, layout evidence, field validation, and a deliberate human-review path."
+seoTitle: "Python PDF Processing: OCR and Validation"
 publishedAt: 2026-09-04
+updatedAt: 2026-10-12
 tags: ["PDF Processing", "Python", "OCR", "RAG", "Document AI", "Data Engineering"]
 category: "Document AI"
 draft: false
 ---
 
-Reliable **PDF document processing** is not one extraction function. In production, it is a pipeline.
+For PDF processing in Python, try native text extraction first, route pages that need OCR separately, preserve layout evidence, and validate the fields before loading them into another system. Mixed PDFs can require both native parsing and OCR within the same document.
 
 A document can contain embedded text, scanned pages, tables, repeated headers, broken reading order, missing sections, or fields that only make sense in context. If the output is used by another system, the pipeline also needs validation, traceability, retries, monitoring, and a way to handle uncertain cases.
 
@@ -43,6 +45,20 @@ A practical pipeline can therefore perform a lightweight first pass:
 4. keep page boundaries and coordinates when layout matters.
 
 The goal is not merely to obtain characters. It is to preserve enough structure for the downstream task.
+
+### Choose the extraction output deliberately
+
+| Input or requirement | Starting point | Limitation to check |
+| --- | --- | --- |
+| Native text, simple layout | Text-layer extraction | Font encodings and reading order |
+| Native text with coordinates | Word/block extraction | Geometric order is not semantic order |
+| Scanned page | OCR with an appropriate language model | Recognition errors and layout quality |
+| Tables | Layout-aware table extraction | Headers and values can become misassociated |
+| Mixed PDF | Per-page routing | OCR can duplicate a usable text layer |
+
+For native text, [pypdf's extraction documentation](https://pypdf.readthedocs.io/en/stable/user/extract-text.html) explains text and layout-oriented extraction and its limitations; it does not perform OCR. [PyMuPDF's text recipes](https://pymupdf.readthedocs.io/en/latest/recipes-text.html) describe word and block outputs with coordinates.
+
+Layout-preserving output is useful evidence, but should not be mistaken for a guarantee of correct reading order. Test multi-column pages and table associations. Route decisions should combine text coverage, document type, and sampled quality checks rather than a character-count threshold alone: sparse text can be legitimate, while a broken text layer can still contain many characters.
 
 ## 3. Normalize before extracting business fields
 
@@ -131,6 +147,8 @@ Useful production metrics include:
 - processing time by stage;
 - extraction accuracy on a maintained evaluation set.
 
+The [Python extraction evaluation guide](/blog/evaluate-pdf-extraction-accuracy-python/) includes a runnable field scorer and explains why schema-valid output can still contain incorrect values.
+
 These metrics reveal whether a new document template, OCR issue, or upstream change is degrading the system.
 
 ## A reusable PDF processing architecture
@@ -142,3 +160,5 @@ A simple mental model is:
 The exact tools can change. The architecture matters more.
 
 I use the same principle in my [PDF Processing Platform](/projects/pdf-processing-platform/): combine automation with explicit validation and review boundaries rather than treating document intelligence as a single model call.
+
+Need to extract dependable information from mixed or scanned PDFs? [Describe the documents, target fields, and review requirements](/contact/#project-request).
