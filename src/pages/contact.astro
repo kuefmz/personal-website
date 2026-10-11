@@ -148,11 +148,11 @@ const structuredData = [
         body: JSON.stringify(payload),
       });
       projectForm.reset();
-      status.textContent = "Thank you. Your project request has been received.";
+      status.textContent = "Your request was sent. If you do not hear back, please email me directly; this form cannot confirm receipt.";
       const dataLayerWindow = window as Window & { dataLayer?: unknown[] };
       dataLayerWindow.dataLayer = dataLayerWindow.dataLayer || [];
       dataLayerWindow.dataLayer.push({
-        event: "contact_form_submit",
+        event: "contact_form_submit_attempt",
       });
     } catch {
       status.textContent = "The request could not be sent. Please try again or email me directly.";

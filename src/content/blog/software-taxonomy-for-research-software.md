@@ -1,7 +1,9 @@
 ---
 title: "Software Taxonomy for Research Software: Why Classification Is Hard"
-description: "A practical look at software taxonomy design, GitHub metadata, scientific categories, and the challenges of classifying research software."
+description: "Understand software taxonomy for research repositories: separate functional and scientific categories, compare metadata, and evaluate classification clearly."
+seoTitle: "Software Taxonomy for Research Software"
 publishedAt: 2026-09-03
+updatedAt: 2026-10-12
 tags: ["Software Taxonomy", "Research Software", "GitHub", "Machine Learning", "Knowledge Graphs"]
 category: "Research Software"
 draft: false
@@ -88,3 +90,7 @@ My PhD work studies research software classification across repository metadata,
 You can read the broader project page on [Research Software Classification](/projects/research-software-classification/) or the publication page for [Automated Research Software Classification](/publications/automated-research-software-classification/).
 
 The goal is not just to predict a category. It is to make research software easier to discover, compare, and connect to the scientific context in which it is used.
+
+For validation of the metadata around those categories, see the [SHACL and Python example](/blog/shacl-validation-python-rdf-data/). It checks explicit data requirements; it does not decide whether a scientific category is semantically correct.
+
+Working on research software discovery or metadata classification? [Describe the dataset and classification question](/contact/#project-request).

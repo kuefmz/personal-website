@@ -1,8 +1,9 @@
 ---
 title: "LlamaIndex PDF Querying: Where It Fits in a Reliable Document Pipeline"
-description: "How to use LlamaIndex for PDF querying and RAG, where it helps, and why OCR, chunking, citations, validation, and deterministic extraction still matter."
+description: "Use LlamaIndex for PDF querying with a clear parsing boundary, structured metadata, source evidence, and evaluation of retrieval, answers, and citations."
+seoTitle: "LlamaIndex PDF Querying: Reliable RAG"
 publishedAt: 2026-02-16
-updatedAt: 2026-09-16
+updatedAt: 2026-10-12
 tags: ["LlamaIndex", "PDF Processing", "RAG", "LLMs", "Document AI", "Data Engineering"]
 category: "Document AI"
 draft: false
@@ -169,6 +170,8 @@ I would evaluate at least:
 
 This makes improvements measurable instead of anecdotal.
 
+When the workflow also extracts fixed fields, use a separate evaluation set and scorer for that output. The [PDF extraction accuracy guide](/blog/evaluate-pdf-extraction-accuracy-python/) demonstrates field-level matching without confusing extraction accuracy with retrieval quality.
+
 ## LlamaIndex in my document-processing work
 
 I see LlamaIndex as one component in a broader document intelligence stack. It helps make unstructured content queryable, but reliable automation still depends on the engineering around it.
@@ -176,3 +179,5 @@ I see LlamaIndex as one component in a broader document intelligence stack. It h
 For the full pipeline, read [PDF Document Processing in Python](/blog/pdf-document-processing-python-pipeline/). If your problem is section-based extraction rather than question answering, I also wrote about [handling missing PDF headings reliably](/blog/pdf-section-extraction-missing-headings/).
 
 My project pages cover the broader [PDF Processing Platform](/projects/pdf-processing-platform/) and [RAG and Document Processing Systems](/projects/rag-document-processing/).
+
+Need evidence-backed querying over a document collection? [Describe the PDFs, expected questions, and access requirements](/contact/#project-request).

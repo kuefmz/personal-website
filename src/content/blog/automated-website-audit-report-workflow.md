@@ -1,15 +1,17 @@
 ---
-title: "How to Automate a Website Audit and Generate Client-Ready Reports"
-description: "A practical architecture for turning website audit checks into an automated workflow with scoring, recommendations, report generation, and email delivery."
+title: "Automated Website Reports by Email: Audit, Schedule and Deliver"
+description: "Build automated website reports by email with scheduled audits, useful change summaries, retry-safe delivery, and clear handling of incomplete checks."
+seoTitle: "Automated Website Reports by Email"
 publishedAt: 2026-09-19
+updatedAt: 2026-10-12
 tags: ["Website Audit Automation", "Python Automation", "FastAPI", "Lead Generation", "Web Development"]
 category: "Automation"
 draft: false
 ---
 
-A website audit is easy to perform once. The harder problem is making it **repeatable, consistent, and useful without turning every report into a manual consulting task**.
+To send automated website reports by email, schedule an audit, store structured findings, compare them with the previous completed run, render a useful summary, and queue delivery through an email provider. Track incomplete checks separately from failures and distinguish provider acceptance from recipient delivery.
 
-This pattern appears in many client projects: a process starts as a checklist, grows into a spreadsheet, and eventually becomes valuable enough that it should be automated.
+This is a common engineering pattern: a process starts as a checklist, grows into a spreadsheet, and eventually becomes useful enough to automate.
 
 A reliable website-audit workflow can be treated as a small data product.
 
@@ -117,6 +119,40 @@ This is easier to maintain than hard-coding presentation logic inside the audit 
 
 ## Add delivery only after the audit is stable
 
+### Choose between an existing reporting tool and a custom workflow
+
+If you only need standard analytics summaries or a routine technical audit, an existing scheduled-report feature may be sufficient. A custom pipeline is more useful when reports must combine website checks with your own rules, business context, or delivery systems. This article explains that implementation approach; it is not a hosted report-generator service.
+
+For analytics-only reporting, see [Google Analytics scheduled reports](https://support.google.com/analytics/answer/13722168). Analytics reports and technical website audits answer different questions: visits and engagement do not establish whether canonical URLs or crawl directives are correct.
+
+### Define the schedule and comparison baseline
+
+Store the website, reporting interval, configured time zone, permitted recipients, and audit-rule version. Use a stable run key such as `website-id:reporting-period:rules-version` so a scheduler retry does not create another logical report.
+
+Compare each run with the previous completed run using the same scope and rules. A crawl of ten pages should not be presented as a deterioration from a previous crawl of one hundred pages without explaining the coverage difference. Show unavailable checks explicitly.
+
+The [idempotent Python jobs guide](/blog/idempotent-python-scheduled-jobs/) includes a runnable transaction example and recovery tests.
+
+### Send a short summary with a useful report link
+
+An email can lead with new critical issues, resolved issues, and the next action. Include the audited URL, reporting period, coverage, and a link to an accessible HTML report. A PDF attachment can be optional; large attachments and image-only reports make the result harder to use on mobile.
+
+Escape website-derived text when rendering HTML and limit excerpts. If a report includes private observations, use authenticated access or expiring links rather than treating an unguessable URL as permanent access control.
+
+### Queue delivery and record its state
+
+Store a pending delivery alongside the completed report. A dispatcher can retry recoverable provider errors with bounded backoff and a stable delivery key. If the provider supports idempotency, follow its documented key lifetime; otherwise a timeout after acceptance can still produce duplicate email.
+
+| State | What it establishes |
+| --- | --- |
+| Report completed | Findings and report artifact were stored |
+| Delivery queued | There is a durable intention to send |
+| Provider accepted | The provider accepted the request |
+| Delivered | A provider event reports recipient-server acceptance |
+| Bounced or failed | Delivery needs investigation or correction |
+
+Even a delivered event does not prove inbox placement or that the recipient read the report. Keep the HTML result available when email is delayed. The [SMTP-blocked email guide](/blog/transactional-email-when-smtp-is-blocked/) explains transport alternatives.
+
 Once the core workflow works, it can be connected to:
 
 - an email service;
@@ -144,6 +180,8 @@ Useful controls include:
 - background-job limits;
 - logging;
 - protected admin endpoints.
+
+For user-supplied URLs, protect against server-side request forgery: block private, loopback, link-local, and metadata-service destinations, validate every redirect, and enforce outbound network controls. A hostname check before the first request alone is insufficient when DNS or redirects can change the destination. Only audit sites you are authorized to access and respect crawl limits.
 
 A free public tool can otherwise become an expensive open proxy for arbitrary work.
 

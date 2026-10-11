@@ -84,6 +84,9 @@ Notes:
 - Posts are automatically ordered by `publishedAt`, newest first.
 - The newest published post automatically appears on the homepage.
 - Use `##` and `###` headings to generate a table of contents on longer posts.
+- Optional `seoTitle` and `seoDescription` fields control the search metadata separately from the visible title and summary. Keep both accurate to the article; the author suffix is appended to the SEO title.
+- Add `updatedAt: YYYY-MM-DD` for substantive revisions. The article displays that date and uses it for `dateModified`; preserve the original `publishedAt`.
+- Link contextual inquiry CTAs to `/contact/#project-request`. Markdown article-body links to the contact route emit `inquiry_cta_click` with `article_path` and `location` in the existing data layer.
 
 ## Add a Project or Website
 
@@ -160,6 +163,8 @@ Add a plain-language explanation of the publication here.
 
 Valid publication types are:
 
+Publication metadata may also specify `seoTitle` and `seoDescription` for a concise search summary without changing the paper's official title or abstract.
+
 - `Conference paper`
 - `Journal article`
 - `Workshop paper`
@@ -233,6 +238,8 @@ The static website submits both forms to the Google Apps Script URL configured a
   Pages without an Apps Script CORS preflight.
 - The Apps Script routes submissions based on `type`.
 - The website displays a success message after the browser completes the request.
+- The browser uses `no-cors`, so its opaque response cannot confirm server acceptance. The status message describes an attempted send and offers direct email as a fallback. `contact_form_submit_attempt` is an attempt event, not a verified inquiry conversion.
+- Configure and verify the corresponding GTM/GA4 tags before using the new data-layer events in reports. Review any existing trigger named `contact_form_submit` when adopting the attempt event. A future confirmed-submission event must come from a readable, validated server acknowledgement or server-side tracking after acceptance.
 
 The Google Sheet stores the subscriber list, but it does not send newsletters unless the Apps
 Script also implements sending. Newsletter delivery, unsubscribe handling, and address deletion

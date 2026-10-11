@@ -1,5 +1,7 @@
 ---
 title: "Attributes, Taxonomies and Semantic alignment for Automated Research Software Classification"
+seoTitle: "Research Software Classification: ISWC 2025"
+seoDescription: "Read the ISWC 2025 study of research software classification using repository attributes, publication abstracts, taxonomies, and semantic alignment."
 abstract: "Research software (RS) plays a critical role in computational science, yet remains poorly categorized and difficult to discover or reuse. This research explores RS classification by investigating how textual and metadata attributes can be leveraged to develop scalable, interpretable classification methodologies. Existing taxonomies are evaluated through alignment with scientific knowledge graphs to identify redundancies and structural gaps. Labeled datasets are constructed by linking publications to software repositories, and RS attributes, such as README files, abstracts, and source code features are benchmarked using multiple machine learning models and embedding strategies. A methodology that integrates semantic enrichment and transformer-based models is proposed for robust RS classification. Preliminary findings highlight the informativeness of publication abstracts for classification tasks and expose limitations in current community-defined taxonomies."
 authors: ["Jenifer Tabita Ciuciu-Kiss"]
 date: "2025-10-26"
@@ -54,3 +56,7 @@ The preliminary results reported in the paper indicate that publication abstract
 ## Related work on this site
 
 For the broader research context, see the [Research Software Classification project](/projects/research-software-classification/) and my article on [software taxonomy design for research software](/blog/software-taxonomy-for-research-software/). The [research overview](/research/) links this work to my other knowledge-graph and software-metadata research.
+
+This page provides an HTML summary of the [ISWC 2025 research software classification paper](/assets/iswc25-research-software-classification.pdf). Consult the paper for its methodology and reported preliminary findings; the summary does not establish results beyond that work.
+
+Interested in research software metadata or classification collaboration? [Send a research inquiry](/contact/#project-request).

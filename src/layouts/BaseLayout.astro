@@ -156,7 +156,21 @@ const schemaGraph = {
 
         document.addEventListener("click", (event) => {
           const target = event.target?.closest?.("[data-analytics-event]");
-          if (target) pushAnalyticsEvent(target);
+          if (target) {
+            pushAnalyticsEvent(target);
+            return;
+          }
+          const link = event.target?.closest?.("article a[href]");
+          if (!link) return;
+          const destination = new URL(link.href, window.location.href);
+          if (destination.origin === window.location.origin && destination.pathname === "/contact/") {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: "inquiry_cta_click",
+              article_path: window.location.pathname,
+              location: "article_body",
+            });
+          }
         });
       })();
     </script>
