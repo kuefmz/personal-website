@@ -1,9 +1,10 @@
+import { isBlogPublished } from "../utils/blogPublication";
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 import { site } from "../data/site";
 
 export async function GET(context) {
-  const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  const posts = (await getCollection("blog", isBlogPublished)).sort(
     (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
   );
 

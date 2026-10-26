@@ -82,6 +82,7 @@ Notes:
 - Remove `linkedin` when the post was not originally published on LinkedIn.
 - Set `draft: true` to keep an unfinished post out of the website and RSS feed.
 - Posts are automatically ordered by `publishedAt`, newest first.
+- Future-dated posts are excluded from article routes, the homepage, blog lists, related posts, RSS, and the generated sitemap until their UTC publication date. The deployment workflow rebuilds daily at approximately 06:17 UTC (GitHub schedules can be delayed). A main-branch push or manual workflow run also rebuilds the site. Keep links to scheduled posts out of already-published article bodies until the target is available.
 - The newest published post automatically appears on the homepage.
 - Use `##` and `###` headings to generate a table of contents on longer posts.
 - Optional `seoTitle` and `seoDescription` fields control the search metadata separately from the visible title and summary. Keep both accurate to the article; the author suffix is appended to the SEO title.

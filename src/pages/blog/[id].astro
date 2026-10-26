@@ -1,4 +1,5 @@
 ---
+import { isBlogPublished } from "../../utils/blogPublication";
 import { getCollection, render } from "astro:content";
 import ContentLayout from "../../layouts/ContentLayout.astro";
 import Icon from "../../components/Icon.astro";
@@ -6,13 +7,13 @@ import { site } from "../../data/site";
 import { absoluteUrl, breadcrumbSchema } from "../../utils/seo";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  const posts = await getCollection("blog", isBlogPublished);
   return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
 }
 
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
-const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+const allPosts = await getCollection("blog", isBlogPublished);
 const words = (post.body ?? "").split(/\s+/).length;
 const readingTime = Math.max(1, Math.ceil(words / 220));
 const tocHeadings = headings.filter((heading) => heading.depth <= 3);

@@ -1,4 +1,5 @@
 ---
+import { isBlogPublished } from "../../utils/blogPublication";
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHero from "../../components/PageHero.astro";
@@ -6,7 +7,7 @@ import ContactCTA from "../../components/ContactCTA.astro";
 import { site } from "../../data/site";
 import { absoluteUrl, breadcrumbSchema, itemListSchema } from "../../utils/seo";
 
-const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+const posts = (await getCollection("blog", isBlogPublished)).sort(
   (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
 );
 const categories = ["All", ...new Set(posts.map(({ data }) => data.category))];
