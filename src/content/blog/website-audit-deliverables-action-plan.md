@@ -17,7 +17,11 @@ The report should identify the audited domain, date, page sample, and exclusions
 
 Each finding needs an affected URL and reproducible evidence. “Improve conversion” is too broad. “The mobile contact button leads to a missing page on these three service pages” is a task someone can investigate.
 
-## Use a finding format that becomes a ticket
+See how an audit finding becomes a prioritized fix with an owner and a verification step.
+
+<a class="button button-quiet" href="#sample-action-plan" data-analytics-event="cta_click" data-analytics-cta-id="audit_sample" data-analytics-location="article_body">See a sample audit action plan</a>
+
+<h2 id="sample-action-plan">Sample audit action plan</h2>
 
 Here is an illustrative deliverable for a service website:
 
@@ -26,12 +30,15 @@ Here is an illustrative deliverable for a service website:
 | Finding | Primary enquiry link returns a missing page |
 | Affected area | Mobile service-page header |
 | Evidence | URL, timestamp, response, and screenshot |
+| Priority | High, because the primary enquiry route is blocked |
 | Business relevance | Visitors cannot follow this enquiry route |
 | Proposed change | Point the link to the approved contact destination |
 | Owner | Website maintainer |
 | Acceptance | Link opens the intended page on mobile and desktop |
 
 This does not estimate lost revenue. It explains a concrete obstacle and a testable repair.
+
+<a href="/contact/#project-request" data-analytics-event="cta_click" data-analytics-cta-id="audit_sample_contact" data-analytics-location="article_sample">Discuss your audit workflow</a>
 
 ## Prioritize with the owner
 
@@ -47,4 +54,4 @@ Decide whether the engagement ends with a report or includes implementation and 
 
 Google's [people-first content guidance](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) is a useful reference when reviewing content quality. Automated checks still need editorial judgment about whether a page answers a real visitor's question.
 
-My [audit automation article](/blog/automated-website-audit-report-workflow/) covers how findings can be generated and assembled. The [Websiteli project](/projects/websiteli/) provides context for my work on service websites and conversion paths. To discuss an audit workflow or report generator, [share an example of the deliverable you need](/contact/#project-request).
+My [audit automation article](/blog/automated-website-audit-report-workflow/) covers how findings can be generated and assembled. The [Websiteli project](/projects/websiteli/) provides context for my work on service websites and conversion paths.

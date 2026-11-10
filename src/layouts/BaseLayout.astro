@@ -146,6 +146,16 @@ const schemaGraph = {
           if (!eventName) return;
 
           window.dataLayer = window.dataLayer || [];
+          if (eventName === "cta_click") {
+            window.dataLayer.push({
+              event: eventName,
+              cta_id: target.dataset.analyticsCtaId,
+              placement: target.dataset.analyticsLocation,
+              destination: target.getAttribute("href"),
+            });
+            return;
+          }
+
           window.dataLayer.push({
             event: eventName,
             link_text: target.textContent?.trim() || target.getAttribute("aria-label") || "",
