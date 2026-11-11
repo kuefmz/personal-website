@@ -69,4 +69,28 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { projects, publications, blog };
+const funnel = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/funnel" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    route: z.string().regex(/^\/(?:work-with-me|examples)(?:\/[a-z0-9-]+)*\/$/),
+    publishedAt: z.coerce.date(),
+    category: z.enum(["Working together", "Automation", "Document AI", "Example"]),
+  }),
+});
+
+const projectUpdates = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/projectUpdates" }),
+  schema: z.object({
+    projectId: z.string(),
+    title: z.string(),
+    description: z.string(),
+    status: z.string(),
+    technologies: z.array(z.string()),
+    tags: z.array(z.string()),
+    publishedAt: z.coerce.date(),
+  }),
+});
+
+export const collections = { projects, publications, blog, funnel, projectUpdates };

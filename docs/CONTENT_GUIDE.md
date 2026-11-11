@@ -341,3 +341,45 @@ Open **Actions**, select the failed workflow, and inspect the **Build** step. Mo
 5. Commit and push to `main`.
 
 This keeps content changes small and makes errors easy to identify.
+
+## Scheduled project and example content
+
+The November 2026 sequence releases at 09:00 Europe/Zurich each day.
+
+| Date | Destination |
+| --- | --- |
+| November 11 | `/work-with-me/` |
+| November 12 | `/work-with-me/website-audit-automation/` |
+| November 13 | `/examples/website-audit-report/` |
+| November 14 | `/work-with-me/pdf-automation/` |
+| November 15 | `/examples/pdf-extraction/` |
+| November 16 | Updated `/projects/pdf-processing-platform/` |
+
+New pages live in `src/content/funnel/`. Frontmatter supplies the route and an explicit
+ISO publication timestamp with offset. `src/content/projectUpdates/` holds the delayed
+PDF project replacement. The existing project stays available until that update is due.
+The project helper applies the released title, description, status, tags, technologies,
+and body to the existing canonical route and relevant project listings.
+
+The publication predicate freezes one timestamp for each build. Routes, contextual links,
+the footer link, the blog guide listing, and RSS use the same predicate. Future pages are
+excluded from generated output and the generated sitemap. The source repository is public,
+so scheduled Markdown is visible there before publication on the website.
+
+The deploy workflow runs daily with `cron: "0 9 * * *"` and `timezone: "Europe/Zurich"`,
+which adjusts the UTC build trigger when daylight saving changes. GitHub Actions schedules
+are best effort. Queue time and build/deploy time can delay the live page after 09:00.
+A push or manual deploy also includes any entries whose publication timestamp has passed.
+If a scheduled run is dropped, the next successful build catches up on due content.
+See [GitHub scheduling documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+
+Run `node scripts/check-scheduled-content.mjs` to build just before and at all six release
+boundaries and check routes, output leaks, sitemap, RSS, guide listings, project replacement,
+and internal links. This takes multiple builds. `CONTENT_BUILD_TIME` is a local verification
+override. Do not set it in the deployment environment. Run `npm test` afterward to restore
+output built for the current time.
+
+Examples are synthetic and must stay labeled. The PDF case study reflects the public
+browser editor source, rather than claiming extraction benchmarks or client outcomes.
+New CTAs use the existing `cta_click` data-layer convention. GTM/GA4 delivery and confirmed
+contact acceptance still need their separate configuration and verification.

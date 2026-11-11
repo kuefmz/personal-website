@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from "astro:content";
+import ContentLayout from "../layouts/ContentLayout.astro";
+import FunnelLinks from "../components/FunnelLinks.astro";
+import { isScheduledPublished } from "../utils/scheduledPublication";
+import { absoluteUrl, breadcrumbSchema } from "../utils/seo";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("funnel", isScheduledPublished);
+  return entries.map((entry) => ({
+    params: { path: entry.data.route.slice(1, -1) },
+    props: { entry },
+  }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", url: absoluteUrl("/") },
+    { name: entry.data.title, url: absoluteUrl(entry.data.route) },
+  ]),
+];
+---
+<ContentLayout title={entry.data.title} description={entry.data.description} eyebrow={entry.data.category} type="website" structuredData={structuredData}>
+  <Content />
+  <FunnelLinks context="guide" currentRoute={entry.data.route} />
+</ContentLayout>

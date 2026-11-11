@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import { isScheduledPublished } from "../utils/scheduledPublication";
+interface Props {
+  context: "audit" | "pdf" | "guide";
+  currentRoute?: string;
+}
+const { context, currentRoute } = Astro.props;
+const pages = (await getCollection("funnel", isScheduledPublished))
+  .filter(({ data }) => data.route !== currentRoute)
+  .filter(({ id }) => context === "guide" || id === "working-together" || id.includes(context))
+  .sort((a, b) => a.data.publishedAt.valueOf() - b.data.publishedAt.valueOf());
+---
+{pages.length > 0 && (
+  <section class="funnel-links" aria-label="Examples and project scope">
+    <h2>Examples and project scope</h2>
+    <ul>
+      {pages.map(({ id, data }) => (
+        <li><a href={data.route} data-analytics-event="cta_click" data-analytics-cta-id={`related_${id}`} data-analytics-location="related_scope">{data.title}</a></li>
+      ))}
+    </ul>
+  </section>
+)}
+<style>
+  .funnel-links { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+</style>

@@ -1,7 +1,10 @@
 ---
+import { getCollection } from "astro:content";
+import { isScheduledPublished } from "../utils/scheduledPublication";
 import Icon from "./Icon.astro";
 import NewsletterForm from "./NewsletterForm.astro";
 import { navigation, site } from "../data/site";
+const workingTogether = (await getCollection("funnel", isScheduledPublished)).find(({ id }) => id === "working-together");
 ---
 
 <footer class="footer">
@@ -12,6 +15,7 @@ import { navigation, site } from "../data/site";
     </div>
     <div class="footer-nav">
       <p class="footer-label">Explore</p>
+      {workingTogether && <a href={workingTogether.data.route}>Work with me</a>}
       {navigation.map(({ href, label }) => (
         <a href={href} data-analytics-event="navigation_click" data-analytics-location="footer">{label}</a>
       ))}

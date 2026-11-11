@@ -1,6 +1,7 @@
 ---
 import { isBlogPublished } from "../../utils/blogPublication";
 import { getCollection, render } from "astro:content";
+import FunnelLinks from "../../components/FunnelLinks.astro";
 import ContentLayout from "../../layouts/ContentLayout.astro";
 import Icon from "../../components/Icon.astro";
 import { site } from "../../data/site";
@@ -71,6 +72,7 @@ const structuredData = [
     </nav>
   )}
   <Content />
+  {post.data.tags.includes("Website Audit Automation") ? <FunnelLinks context="audit" /> : post.data.tags.includes("PDF Processing") ? <FunnelLinks context="pdf" /> : null}
   {post.data.linkedin && (
     <p class="original">
       Originally shared on <a href={post.data.linkedin} target="_blank" rel="noreferrer" data-analytics-event="linkedin_click" data-analytics-location="article_detail">LinkedIn <Icon name="arrow" size={15} /></a>.
