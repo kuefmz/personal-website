@@ -1,5 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
+import { getProjects } from "../../utils/projectContent";
+import FunnelLinks from "../../components/FunnelLinks.astro";
 import ContentLayout from "../../layouts/ContentLayout.astro";
 import Icon from "../../components/Icon.astro";
 import { site } from "../../data/site";
@@ -21,12 +23,12 @@ const withProjectUtm = (href: string, content: string) => {
 };
 
 export async function getStaticPaths() {
-  const projects = await getCollection("projects");
-  return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+  const projects = await getProjects();
+  return projects.map(({ project, content }) => ({ params: { id: project.id }, props: { project, content } }));
 }
 
-const { project } = Astro.props;
-const { Content } = await render(project);
+const { project, content } = Astro.props;
+const { Content } = await render(content);
 const relatedPublications = (await getCollection("publications")).filter(
   (publication) => publication.data.project === project.id,
 );
@@ -63,7 +65,7 @@ const structuredData = [
     sameAs: project.data.links.map((link: { href: string }) => link.href),
     image: project.data.previewImage ? absoluteUrl(project.data.previewImage) : undefined,
     dateCreated: project.data.date,
-    dateModified: project.data.date,
+    dateModified: content.collection === "projectUpdates" ? content.data.publishedAt.toISOString() : project.data.date,
   },
 ];
 ---
@@ -95,6 +97,7 @@ const structuredData = [
     }
   </div>
   <Content />
+  {project.id === "pdf-processing-platform" || project.id === "rag-document-processing" ? <FunnelLinks context="pdf" /> : project.id === "websiteli" ? <FunnelLinks context="audit" /> : null}
   {
     relatedPublications.length > 0 && (
       <section class="related-publications" aria-labelledby="related-publications">

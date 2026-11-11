@@ -28,3 +28,6 @@ jobs:
 
       - name: Build and test SEO
         run: npm test
+
+      - name: Verify scheduled publication boundaries
+        run: npm run test:scheduled

@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getProjects } from "../../utils/projectContent";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHero from "../../components/PageHero.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
@@ -8,7 +8,7 @@ import { projectCategories, site } from "../../data/site";
 import { contentDateSortValue } from "../../utils/contentDate";
 import { absoluteUrl, breadcrumbSchema, itemListSchema } from "../../utils/seo";
 
-const projects = (await getCollection("projects")).sort(
+const projects = (await getProjects()).map(({ project }) => project).sort(
   (a, b) => Number(b.data.featured) - Number(a.data.featured)
     || contentDateSortValue(b.data.date) - contentDateSortValue(a.data.date)
     || a.data.title.localeCompare(b.data.title),
