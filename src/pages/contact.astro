@@ -112,6 +112,20 @@ const structuredData = [
 <script>
   const projectForm = document.querySelector<HTMLFormElement>("[data-project-form]");
 
+  const pushFormEvent = (event: string) => {
+    const analytics = window as Window & { dataLayer?: unknown[] };
+    analytics.dataLayer ??= [];
+    analytics.dataLayer.push({ event, form_id: "project-request" });
+  };
+
+  let formStarted = false;
+  projectForm?.addEventListener("input", (event) => {
+    if (formStarted || !(event.target instanceof HTMLElement) || event.target.closest(".form-honeypot")) return;
+
+    formStarted = true;
+    pushFormEvent("form_start");
+  });
+
   projectForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!projectForm.reportValidity()) return;
@@ -120,7 +134,7 @@ const structuredData = [
     const status = projectForm.querySelector<HTMLElement>(".form-status");
     const endpoint = projectForm.dataset.endpoint;
 
-    if (!button || !status || !endpoint) return;
+    if (!button || button.disabled || !status || !endpoint) return;
 
     button.disabled = true;
     status.textContent = "Sending your request…";
@@ -149,11 +163,8 @@ const structuredData = [
       });
       projectForm.reset();
       status.textContent = "Your request was sent. If you do not hear back, please email me directly; this form cannot confirm receipt.";
-      const dataLayerWindow = window as Window & { dataLayer?: unknown[] };
-      dataLayerWindow.dataLayer = dataLayerWindow.dataLayer || [];
-      dataLayerWindow.dataLayer.push({
-        event: "contact_form_submit_attempt",
-      });
+      formStarted = false;
+      pushFormEvent("contact_form_submit_attempt");
     } catch {
       status.textContent = "The request could not be sent. Please try again or email me directly.";
     } finally {
